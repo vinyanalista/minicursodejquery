@@ -1,0 +1,167 @@
+html, body {
+	-webkit-font-smoothing: antialiased;
+	color: #333;
+	font: 15px/22.5px "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+h2 {
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 15px;
+}
+p {
+	margin-bottom: 10px;
+}
+b, strong {
+	font-weight: bold;
+}
+
+/*  */
+
+#container {
+	background-color: #0769AD;
+	margin: 0 auto;
+    padding: 20px 20px 0px 20px;
+}
+
+#content-wrapper {
+	background: white;
+	-webkit-box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
+	box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
+	-webkit-box-shadow: 0 0 3px rgba(1, 1, 1, 0.7);
+	box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);
+	margin: 0 auto;
+	min-height: 390px;
+	position: relative;
+}
+#content-wrapper h1 a {
+	background-image: url('../images/agenda.png');
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: contain;
+	float: left;
+	font-size: 20px;
+	line-height: 48px;
+	margin-bottom: 5px;
+	padding-left: 58px;
+	text-decoration: none;
+}
+
+.tab {
+	background-position: 10px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	padding-left: 50px !important;
+}
+
+#tab-contatos {
+	background-image: url('../images/contatos.png');
+}
+
+#tab-categorias {
+	background-image: url('../images/categorias.png');
+}
+
+#tab-email {
+	background-image: url('../images/email.png');
+}
+
+/* Footer */
+
+footer {
+	background: url(../images/bg-footer-noise.jpg) repeat;
+	background-image: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url(../images/bg-footer-noise.jpg);
+	background-image: linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,0)), url(../images/bg-footer-noise.jpg);
+	background-repeat: repeat-x, repeat;
+	background-size: 100px 15px, 140px 140px;
+	border-top: 1px solid #7ACEF4;
+	display: block;
+	height: 60px;
+	margin-top: -20px;
+	padding-top: 40px;
+	padding-bottom: 10px;
+}
+footer, footer a {
+	color: #fff;
+	text-decoration: none;
+}
+footer a:hover {
+	text-decoration: underline;
+}
+.constrain {
+	margin: 0 auto;
+	padding: 0px 20px;
+}
+
+#autor {
+	background-image: url('../images/autor.jpg');
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: 50px;
+	float: left;
+	line-height: 50px;
+	padding-left: 58px;
+}
+
+#redes_sociais {
+	float: right;
+	margin-top: 10px;
+}
+/*#redes_sociais_flutuante {
+ position: absolute;
+ float: left;
+ width: 245px;
+ height: 32px;
+ z-index: 1000;
+ }*/
+
+/* Forms */
+
+table.form td {
+	vertical-align: middle;
+}
+table.form td.label {
+	padding-right: 10px;
+	text-align: right;
+}
+table.form td.label label {
+	font-weight: bold;
+}
+table.form td.field {
+	padding-bottom: 10px;
+}
+table.form input[type=text].error, table.form input[type=password].error {
+	background: #FFF999;
+	border-color: #D47E8A !important;
+}
+table.form input[type=button], table.form input[type=submit] {
+	float: right;
+	margin-top: 10px;
+}
+table.form span.required {
+	color: red;
+	font-weight: bold;
+}
+
+/* Other */
+
+.clear {
+	clear: both;
+}
+label.success, label.error {
+	display: block;
+	font-style: italic;
+	font-weight: normal;
+}
+label.success {
+	color: green;
+}
+label.error {
+	color: red;
+}
+
+.ui-tabs .ui-tabs-nav li {
+	float: right !important;
+	top: 13px;
+}

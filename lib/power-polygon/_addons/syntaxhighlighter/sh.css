@@ -52,7 +52,7 @@ pre:not(.no-numbers) .ppw-sh-line:before{
 }
 
 .ppw-sh-line:hover{
-    background-color: #f5f5f5 !IMPORTANT;
+    background-color: #D5D5D5 !IMPORTANT;
 }
 
 pre:not(.no-numbers) .ppw-sh-focused-line:before{

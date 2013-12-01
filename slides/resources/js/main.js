@@ -3,7 +3,7 @@ PPW.init({
 		name : "Antônio Vinícius Menezes Medeiros",
 		email : "vinyanalista@gmail.com",
 		twitter : "@vinyanalista",
-		picture : "resources/images/author.jpg"
+		picture : "resources/images/autor.jpg"
 	}],
 	defaultLanguage : "PT",
 	languages : ['PT'],
@@ -13,12 +13,12 @@ PPW.init({
 });
 
 $(document).ready(function() {
-	$("pre.javascript").snippet("javascript", {
+	/*$("pre.javascript").snippet("javascript", {
 		style : "ide-eclipse"
 	});
 
 	$("pre#exemplo01").snippet("javascript", {
 		style : "ide-eclipse",
 		'box' : '2'
-	});
+	});*/
 });
