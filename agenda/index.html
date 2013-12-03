@@ -17,11 +17,13 @@
 		<link rel="apple-touch-icon" href="resources/images/agenda.png" />
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="resources/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../lib/formee/css/formee-structure.css" />
 		<link rel="stylesheet" type="text/css" href="../lib/jquery-ui/css/cupertino/jquery-ui-1.10.3.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="../lib/datatables/css/demo_table_jui.css" />
 		<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
 		<!-- Scripts -->
 		<script type="text/javascript" src="../lib/jquery/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="../lib/formee/js/formee.js"></script>
 		<script type="text/javascript" src="../lib/jquery-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="../lib/jquery-validate/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="../lib/jquery-validate/messages_pt_BR.js"></script>
@@ -47,15 +49,53 @@
 				</ul>
 				<!-- Contatos -->
 				<div id="page-contatos">
-					<p>
-						Aqui virá a página de contatos
-					</p>
+					<div class="grid-12-12">
+						<button>Novo contato</button>
+					</div>
+					<div class="grid-12-12">
+						<table id="table_contato" class="display">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Telefone</th>
+									<th>E-mail</th>
+									<th class="table_contato_acoes">Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Antônio</td>
+									<td>(79)8825-2334</td>
+									<td>vinyanalista@gmail.com</td>
+									<td class="table_contato_acoes">Ações</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<!-- Categorias -->
 				<div id="page-categorias">
-					<p>
-						Aqui virá a página de categorias
-					</p>
+					<div class="grid-12-12">
+						<button>Nova categoria</button>
+					</div>
+					<div class="grid-12-12">
+						<table id="table_categoria" class="display">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Contatos</th>
+									<th class="table_categoria_acoes">Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Amigos</td>
+									<td>1</td>
+									<td class="table_categoria_acoes">Ações</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<!-- E-mail -->
 				<div id="page-email">
@@ -71,6 +111,7 @@
 				<div id="autor">
 					Criada por <a href="mailto:vinyanalista@gmail.com">Antônio Vinícius</a> para o <a href="https://github.com/vinyanalista/minicurso_jquery">minicurso de jQuery</a>.
 				</div>
+				<!-- AddThis -->
 				<div id="redes_sociais">
 					<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 						<a class="addthis_button_facebook"></a>
