@@ -109,13 +109,16 @@ footer a:hover {
 	margin-top: 10px;
 	width: 250px;
 }
-/*#redes_sociais_flutuante {
- position: absolute;
- float: left;
- width: 245px;
- height: 32px;
- z-index: 1000;
- }*/
+
+/* Data tables */
+
+.dataTables_filter input {
+	background: white url(../images/icons/pesquisar.png) left 5px center no-repeat !important;
+	padding-left: 26px !important;
+}
+.acoes_wrapper {
+	text-align: center !important;
+}
 
 /* Forms */
 
@@ -165,4 +168,37 @@ label.error {
 .ui-tabs .ui-tabs-nav li {
 	float: right !important;
 	top: 13px;
+}
+
+/* Ícones */
+
+.icone{background: no-repeat 0 center; display: inline-block;}
+.icone_16x16{background-size: 16px 16px; width: 16px; height: 16px;}
+.icone_22x22{background-size: 22px 22px; width: 22px; height: 22px;}
+.icone_24x24{background-size: 24px 24px; width: 24px; height: 24px;}
+
+.icone_novo_contato{background-image: url(../images/icons/novo_contato.png);}
+.icone_salvar_azul{background-image: url(../images/icons/icon_salvar_azul.png);}
+.icone_voltar_azul{background-image: url(../images/icons/icon_voltar_azul.png);}
+.icone_importar_azul{background-image: url(../images/icons/icon_importar_azul.png);}
+.icone_enviar_azul{background-image: url(../images/icons/icon_enviar_azul.png);}
+
+.icone_editar{background-image: url(../images/icons/editar.png);}
+.icone_excluir{background-image: url(../images/icons/excluir.png);}
+.icone_download{background-image: url(../images/icons/icon_download.png) !important;}
+.icone_play{background-image: url(../images/icons/icon_play.png) !important;}
+.icone_cancelar{background-image: url(../images/icons/icon_cancelar.png) !important;}
+
+.icone_categoria{background-image: url(../images/icons/icon_categoria.png) !important;}
+.icone_contato{background-image: url(../images/icons/icon_contato.png) !important;}
+.icone_grupo{background-image: url(../images/icons/icon_grupo.png) !important;}
+.icone_conteudos{background-image: url(../images/icons/icon_conteudos.png) !important;}
+.icone_conteudo{background-image: url(../images/icons/icon_conteudo.png) !important;}
+.icone_images{background-image: url(../images/icons/icon_images.png) !important;}
+.icone_arquivos{background-image: url(../images/icons/icon_conteudos.png) !important;}
+
+.botao_com_icone span {
+	line-height: 22px;
+	padding-left: 30px;
+	width: auto;
 }

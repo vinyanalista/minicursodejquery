@@ -27,21 +27,31 @@ if (getInternetExplorerVersion() >= 10) {
 
 /* jQuery UI */
 
-function initializeTooltips() {
-	//Renders tooltips based on the tooltip attribute
-	$('[tooltip]').tooltip({
-		content : function () {
-			return $(this).attr('tooltip');
-		},
-		items : "[tooltip]"
-	});
-	//The tooltip will follow the mouse around
-	$('[tooltip]').mousemove(function(e) {
-        var mousex = e.pageX + 20;
-        var mousey = e.pageY + 10;
-        $('.ui-tooltip').css({ top: mousey, left: mousex });
-    });
-}
+$ = $.extend($, {
+	confirmacao : function(mensagem, callbackSim, callbackNao) {
+		$('div.dialogo_confirmacao').remove();
+		$('#conteudo').append('<div class="dialogo_confirmacao" title="Confirmação">'+mensagem+'</div>');
+		$('div.dialogo_confirmacao').dialog({
+			autoOpen: false,
+			closeOnEscape: true,
+			modal: true,
+			buttons: {
+				'Sim': function() {
+					if (callbackSim != undefined) {
+						callbackSim();
+					}
+					$(this).dialog('close');
+				},
+				'Não' : function() {
+					if (callbackNao != undefined) {
+						callbackNao();
+					}
+					$(this).dialog('close');
+				}
+			}
+		}).dialog('open');
+	}
+});
 
 $(document).ready(function() {
 	/*$("#content-wrapper").tabs({
@@ -51,7 +61,23 @@ $(document).ready(function() {
 	$("body").addClass("ui-form");
 	$("button, input[type=button], input[type=submit], a.button").button();
 	$("h2:first").after("<div class='clear' />");
-	initializeTooltips();
+});
+
+/* Tooltipster */
+
+function inicializarTooltips() {
+	$('.tooltipster').tooltipster();
+	// Exibir tooltip em eventos onfocus
+	$('.tooltipster').focusin(function(){
+		$(this).tooltipster('show');
+	});
+	$('.tooltipster').focusout(function(){
+		$(this).tooltipster('hide');
+	});	
+}
+
+$(document).ready(function() {
+	inicializarTooltips();
 });
 
 /* Data tables */

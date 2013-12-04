@@ -19,12 +19,14 @@
 		<link rel="stylesheet" type="text/css" href="../resources/css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/formee/css/formee-structure.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/jquery-ui/css/cupertino/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/tooltipster/css/tooltipster.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/datatables/css/demo_table_jui.css" />
 		<link rel="stylesheet" type="text/css" href="../resources/css/comum.css" />
 		<!-- Scripts -->
 		<script type="text/javascript" src="../../lib/jquery/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="../../lib/formee/js/formee.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="../../lib/tooltipster/js/jquery.tooltipster.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-validate/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-validate/messages_pt_BR.js"></script>
 		<script type="text/javascript" src="../../lib/datatables/js/jquery.dataTables.min.js"></script>
