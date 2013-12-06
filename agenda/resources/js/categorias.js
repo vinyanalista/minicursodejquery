@@ -3,8 +3,12 @@ var categoria_a_excluir = 0;
 $(document).ready(function() {
 	$('#tab-categorias').parent('li').addClass('ui-tabs-active ui-state-active');
 	
+	$('#btn_nova_categoria').click(function(event){
+		$('#editor_de_categoria').dialog('open');
+	});
+	
 	$('#table_categoria').dataTable({
-		"sAjaxSource": "../ajax/listar_categorias.php",
+		"sAjaxSource": "../ajax/categoria_listar.php",
 		"aoColumns": [
 		    null,
 		    null,
@@ -33,9 +37,26 @@ $(document).ready(function() {
 			$('.link_excluir_categoria').click(function(event){
 				event.preventDefault();
 				event.stopPropagation();
-				categoria_a_excluir = $(this).data('categoria_id');
-				$.confirmacao('Tem certeza?', function(){
-					alert('Ainda não implementado!');
+				categoria_a_excluir = $(this).data('id');
+				$.confirmacao('Tem certeza de que deseja excluir essa categoria?<br><br>Esta ação não poderá ser desfeita!', function(){
+					$.ajax({
+						url: "../ajax/categoria_excluir.php",
+						data: {
+							id: categoria_a_excluir
+						},
+						success: function(data) {
+							if (data == '1') {
+								$.notify('Categoria excluída com sucesso!', 'success');
+								$("#table_categoria").dataTable().fnReloadAjax();
+								// TODO Carregando tabela de um jeito estranho se não há categorias
+							} else {
+								$.notify('Houve um erro ao tentar excluir a categoria.', 'error');
+							}
+						},
+						error: function() {
+							$.notify('Houve um erro ao tentar excluir a categoria.', 'error');
+						}
+					});
 				});
 			});
 			
@@ -43,7 +64,21 @@ $(document).ready(function() {
 		},
 	});
 	
-	$('#btn_nova_categoria').click(function(event){
-		alert('Ainda não implementado!');
+	$('#editor_de_categoria').dialog({
+		autoOpen: false,
+		modal: true,
+		show: {
+			effect: "blind",
+	        duration: 400
+	    },
+	    buttons: {
+	        'Cancelar': function() {
+	        	$(this).dialog("close");
+	        },
+		    'Salvar': function() {
+		    	$.notify('Ainda não implementado!', 'info');
+		    	$(this).dialog("close");
+		    }
+	    }
 	});
 });

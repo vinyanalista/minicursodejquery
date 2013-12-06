@@ -18,6 +18,12 @@ require_once '../includes/header.php';
 		</tbody>
 	</table>
 </div>
+<div id="editor_de_categoria" title="Editor de categoria">
+	<div class="grid-12-12">
+		<label for="nome">Nome</label>
+		<input id="nome" name="nome" type="text" placeholder="Nome" />
+	</div>
+</div>
 <link rel="stylesheet" type="text/css" href="../resources/css/categorias.css" />
 <script type="text/javascript" src="../resources/js/categorias.js"></script>
 <?php
