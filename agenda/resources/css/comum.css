@@ -178,6 +178,7 @@ label.error {
 .icone_24x24{background-size: 24px 24px; width: 24px; height: 24px;}
 
 .icone_novo_contato{background-image: url(../images/icons/novo_contato.png);}
+.icone_nova_categoria{background-image: url(../images/icons/nova_categoria.png);}
 .icone_salvar_azul{background-image: url(../images/icons/icon_salvar_azul.png);}
 .icone_voltar_azul{background-image: url(../images/icons/icon_voltar_azul.png);}
 .icone_importar_azul{background-image: url(../images/icons/icon_importar_azul.png);}

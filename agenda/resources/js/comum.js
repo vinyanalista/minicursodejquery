@@ -84,6 +84,30 @@ $(document).ready(function() {
 
 $.extend($.fn.dataTable.defaults, {
 	"bJQueryUI": true,
+	"aLengthMenu": [10, 20, 50, 100],
+	"iDisplayLength": 10,
+	"bPaginate" : true,
+	"sPaginationType" : "full_numbers",
+	"bServerSide": true,
+	"bDeferRender": true,
+	"sServerMethod": "POST",
+	"fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+		oSettings.jqXHR = $.ajax({
+			async: false,
+			dataType: 'json',
+		    type: 'POST',
+		    url: sSource,
+		    data: aoData,
+		    success: fnCallback
+	    });
+    },
+	"fnPreDrawCallback": function() {
+		showLoading();
+	},
+	"fnDrawCallback": function() {
+		inicializarTooltips();
+		hideLoading();
+	},
 	"oLanguage": {
 	    "sProcessing":   "Processando...",
 	    "sLengthMenu":   "Mostrar _MENU_ registros",
@@ -94,6 +118,11 @@ $.extend($.fn.dataTable.defaults, {
 	    "sInfoPostFix":  "",
 	    "sSearch":       "Buscar:",
 	    "sUrl":          "",
+	    // TODO Sugerir atualização de tradução no site do Data Tables
+	    "oAria": {
+	    	"sSortAscending": ": activate to sort column ascending",
+	    	"sSortDescending": ": activate to sort column descending"
+	    },
 	    "oPaginate": {
 	        "sFirst":    "Primeiro",
 	        "sPrevious": "Anterior",
@@ -142,7 +171,7 @@ function showDebugger() {
 /* Loading */
 
 function showLoading() {
-	if ($(".blockOverlay").length == 0) {
+	/*if ($(".blockOverlay").length == 0) {
 		$.blockUI({
 			message : $('#loading'),
 			css : {
@@ -153,13 +182,13 @@ function showLoading() {
 				width : '173px'
 			}
 		});
-	}
+	}*/
 }
 
 function hideLoading() {
-	if ($(".blockOverlay").length > 0) {
+	/*if ($(".blockOverlay").length > 0) {
 		$.unblockUI();
-	}
+	}*/
 }
 
 /* Other */

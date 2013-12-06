@@ -3,7 +3,7 @@ require_once '../includes/comum.php';
 require_once '../includes/header.php';
 ?>
 <div class="grid-12-12">
-	<button>Nova categoria</button>
+	<button class="botao_com_icone" id="btn_nova_categoria"><span class='icone icone_22x22 icone_nova_categoria'>Nova categoria</span></button>
 </div>
 <div class="grid-12-12">
 	<table id="table_categoria" class="display">
@@ -15,11 +15,6 @@ require_once '../includes/header.php';
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Amigos</td>
-				<td>1</td>
-				<td class="table_categoria_acoes">Ações</th>
-			</tr>
 		</tbody>
 	</table>
 </div>

@@ -16,7 +16,6 @@ $(document).ready(function() {
 	$('.link_excluir_contato').click(function(event){
 		event.preventDefault();
 		event.stopPropagation();
-		console.log('Chamado 1');
 		contato_a_excluir = $(this).data('contato_id');
 		$.confirmacao('Tem certeza?', function(){
 			alert('Ainda não implementado!');
