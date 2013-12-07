@@ -4,15 +4,17 @@ $(document).ready(function() {
 	$('#tab-categorias').parent('li').addClass('ui-tabs-active ui-state-active');
 	
 	$('#btn_nova_categoria').click(function(event){
-		$('#editor_de_categoria').dialog('open');
+		$('#acao').val('inserir');
+		$('#nome').val('');
+		$('#editor_de_categoria').attr('title', 'Nova categoria').dialog('open');
 	});
 	
 	$('#table_categoria').dataTable({
 		"sAjaxSource": "ajax/listar.php",
 		"aoColumns": [
 		    null,
-		    null,
-		    {"bSortable": false}
+		    {"sWidth": "100px"},
+		    {"bSortable": false, "sWidth": "70px"}
 		],
 		"aoColumnDefs": [{
 			aTargets: [2],
@@ -28,10 +30,31 @@ $(document).ready(function() {
 			[0, "asc"],
 		],
 		"fnDrawCallback": function() {
+			$('#table_categoria tr:not([role=row])').each(function(){
+				$(this).find('td:eq(1)').addClass('table_categoria_contatos');
+			});
+			
 			inicializarTooltips();
 			
 			$('.link_editar_categoria').click(function(event){
-				alert('Ainda não implementado!');
+				$.ajax({
+					async: false,
+					url: "ajax/consultar.php",
+					data: {
+						id: $(this).data('id')
+					},
+					dataType : 'json',
+					success: function(data) {
+						$('#acao').val('atualizar');
+						$('#id').val(data.id);
+						$('#nome').val(data.nome);
+						$('#editor_de_categoria').attr('title', 'Editar categoria').dialog('open');
+						// TODO Marcar contatos na tabela
+					},
+					error: function() {
+						$.notify('Houve um erro ao tentar carregar a categoria para edição.', 'error');
+					}
+				});
 			});
 			
 			$('.link_excluir_categoria').click(function(event){
@@ -40,7 +63,7 @@ $(document).ready(function() {
 				categoria_a_excluir = $(this).data('id');
 				$.confirmacao('Tem certeza de que deseja excluir essa categoria?<br><br>Esta ação não poderá ser desfeita!', function(){
 					$.ajax({
-						url: "../ajax/categoria_excluir.php",
+						url: "ajax/excluir.php",
 						data: {
 							id: categoria_a_excluir
 						},
@@ -67,6 +90,8 @@ $(document).ready(function() {
 	$('#editor_de_categoria').dialog({
 		autoOpen: false,
 		modal: true,
+		width: 800,
+		height: 600,
 		show: {
 			effect: "blind",
 	        duration: 400
@@ -76,9 +101,45 @@ $(document).ready(function() {
 	        	$(this).dialog("close");
 	        },
 		    'Salvar': function() {
-		    	$.notify('Ainda não implementado!', 'info');
-		    	$(this).dialog("close");
+		    	if ($('#form_categoria').valid()) {
+		    		showLoading();
+		    		$.ajax({
+		    			async: false,
+		    			url: "ajax/salvar.php",
+		    			data: $("#form_categoria").serialize(),
+		    			success: function(data) {
+		    				hideLoading();
+							if (data == '1') {
+								$('#editor_de_categoria').dialog("close");
+								$("#table_categoria").dataTable().fnReloadAjax();
+								$.notify('Categoria cadastrada com sucesso!', 'success');
+							} else {
+								$.notify('Houve um erro ao tentar cadastrar a categoria.', 'error');
+							}
+						},
+						error: function() {
+							$.notify('Houve um erro ao tentar cadastrar a categoria.', 'error');
+						}
+		    		});
+		    	}
 		    }
 	    }
+	});
+	
+	$('#table_contato_categoria').dataTable({
+		"sAjaxSource": "../contatos/ajax/listar.php",
+		"aoColumns": [
+		    null,
+		    {"bSortable": false}
+		],
+		"aoColumnDefs": [{
+			aTargets: [1],
+			mRender: function(data, type, full) {
+				return '<input type="checkbox" name="contato_id" value="'+full.contato_id+'">';
+			}
+		}],
+		"aaSorting": [
+			[0, "asc"],
+		]
 	});
 });

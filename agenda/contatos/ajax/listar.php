@@ -7,7 +7,14 @@ require_once '../../comum.php';
 $colunas = array('nome', 'id');
 
 // TODO Tentar montar consulta com Respect
-$contatos_sql = 'SELECT nome, id FROM contato';
+$contatos_sql = 'SELECT nome, id';
+if (isset($_POST['categoria_id'])) {
+	$contatos_sql .= ', COUNT(categoria_id) AS pertence';
+}
+$contatos_sql .= ' FROM contato';
+if (isset($_POST['categoria_id'])) {
+	$contatos_sql .= ' LEFT JOIN contato_categoria ON contato_categoria.contato_id = contato.id';
+}
 
 // Busca
 $where = '';

@@ -18,6 +18,8 @@ if ($where != '') {
 	$categorias_sql .= ' WHERE '.$where;
 }
 
+$categorias_sql .= ' GROUP BY id';
+
 // Ordenação
 $order_by = '';
 if (isset($_POST['iSortCol_0'])) {
@@ -46,8 +48,6 @@ if (isset($_POST['iDisplayLength'])) {
 	$categorias_por_pagina = intval(10);
 }
 $categorias_sql .= ' LIMIT '.$primeira_categoria.', '.$categorias_por_pagina;
-
-echo $categorias_sql; exit;
 
 // Obtém as categorias
 if (!$categorias = $mysqli->query($categorias_sql)) {

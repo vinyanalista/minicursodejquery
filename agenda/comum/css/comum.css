@@ -116,8 +116,26 @@ footer a:hover {
 	background: white url(../imagens/icones/pesquisar.png) left 5px center no-repeat !important;
 	padding-left: 26px !important;
 }
+.dataTable tr:not([role=row]):hover {
+	opacity: 0.65;
+	-moz-opacity: 0.65;
+	filter: alpha(opacity=65);
+	border: 1px solid white; /* fix for IE < 9 */
+}	
 .acoes_wrapper {
 	text-align: center !important;
+}
+tr.even {
+	background-color: #F2F8FC;
+}
+tr.even td[class*="sorting"] {
+	background-color: #DEEDF7;
+}
+tr.odd {
+	background-color: #D8ECFA;
+}
+tr.odd td[class*="sorting"] {
+	background-color: #CADDEA;
 }
 
 /* Forms */

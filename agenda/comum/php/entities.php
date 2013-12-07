@@ -4,7 +4,7 @@ namespace Agenda\Entities;
 /* Entidades */
 
 class Categoria {
-	public $id, $nome, $contato_id;
+	public $id, $nome;
 }
 
 class Contato {
