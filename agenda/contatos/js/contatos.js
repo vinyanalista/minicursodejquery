@@ -1,13 +1,20 @@
 var contato_a_excluir = 0;
 
+function selecionarEstado(sigla) {
+	if (sigla == undefined) {
+		sigla = 'SE';
+	}
+	$('#estado option').removeAttr('selected');
+	$('#estado option[value="'+sigla+'"]').attr('selected', 'selected');
+}
+
 $(document).ready(function() {
 	$('#tab-contatos').parent('li').addClass('ui-tabs-active ui-state-active');
 	
 	$('#btn_novo_contato').click(function(event){
-		$('#acao').val('inserir');
+		$('#acao').val('cadastrar');
 		$('#form_contato input[type=text]').val('');
-		$('#estado option').removeAttr('selected');
-		$('#estado option[value="SE"]').attr('selected', 'selected');
+		selecionarEstado();
 		$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
 	});
 	
@@ -15,7 +22,7 @@ $(document).ready(function() {
 		"sAjaxSource": "ajax/listar.php",
 		"aoColumns": [
 		    null,
-		    {"bSortable": false}
+		    {"bSortable": false, "sWidth": "70px"}
 		],
 		"aoColumnDefs": [{
 			aTargets: [1],
@@ -31,10 +38,39 @@ $(document).ready(function() {
 			[0, "asc"],
 		],
 		"fnDrawCallback": function() {
+			$('#table_contato tr:not([role=row])').each(function(){
+				$(this).find('td:eq(1)').addClass('table_contato_acoes');
+			});
+			
 			inicializarTooltips();
 			
 			$('.link_editar_contato').click(function(event){
-				alert('Ainda não implementado!');
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					async: false,
+					url: "ajax/consultar.php",
+					data: {
+						id: $(this).data('id')
+					},
+					dataType : 'json',
+					success: function(data) {
+						$('#acao').val('atualizar');
+						$('#id').val(data.id);
+						$('#nome').val(data.nome);
+						$('#apelido').val(data.apelido);
+						$('#data_nascimento').val(data.data_nascimento);
+						$('#logradouro').val(data.logradouro);
+						$('#numero').val(data.numero);
+						$('#bairro').val(data.bairro);
+						$('#cidade').val(data.cidade);
+						selecionarEstado(data.estado);
+						$('#editor_de_contato').dialog('option', 'title', 'Editar contato').dialog('open');
+					},
+					error: function() {
+						$.notify('Houve um erro ao tentar carregar o contato para edição.', 'error');
+					}
+				});
 			});
 			
 			$('.link_excluir_contato').click(function(event){
@@ -51,7 +87,6 @@ $(document).ready(function() {
 							if (data == '1') {
 								$.notify('Contato excluído com sucesso!', 'success');
 								$("#table_contato").dataTable().fnReloadAjax();
-								// TODO Carregando tabela de um jeito estranho se não há contatos
 							} else {
 								$.notify('Houve um erro ao tentar excluir o contato.', 'error');
 							}
@@ -80,6 +115,7 @@ $(document).ready(function() {
 	    	$('#editor_de_contato_tabs').tabs('option', 'active', 0);
 	    	$('#form_contato input[type=text]').removeClass('error');
 			$('#form_contato label.error').remove();
+			$('#table_contato_categoria').dataTable().fnReloadAjax();
 			$('#nome').focus();
 	    },
 	    buttons: {
@@ -98,14 +134,14 @@ $(document).ready(function() {
 							if (data == '1') {
 								$('#editor_de_contato').dialog("close");
 								$("#table_contato").dataTable().fnReloadAjax();
-								$.notify('Contato cadastrado com sucesso!', 'success');
+								$.notify('Contato ' + ($('#acao').val() == 'cadastrar' ? 'cadastrado' : 'atualizado') + ' com sucesso!', 'success');
 							} else {
-								$.notify('Houve um erro ao tentar cadastrar o contato.', 'error');
+								$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' o contato.', 'error');
 							}
 						},
 						error: function() {
 							hideLoading();
-							$.notify('Houve um erro ao tentar cadastrar o contato.', 'error');
+							$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' o contato.', 'error');
 						}
 		    		});
 		    	}
@@ -114,4 +150,33 @@ $(document).ready(function() {
 	});
 	
 	$('#editor_de_contato_tabs').tabs();
+	
+	$('#table_contato_categoria').dataTable({
+		"sAjaxSource": "../categorias/ajax/listar.php",
+		"fnServerParams": function (aoData) {
+			if ($('#acao').val() == 'atualizar') {
+				aoData.push({ name: "contato_id", value: $('#id').val() });
+			}	
+		},
+		"aoColumns": [
+		    null,
+		    {"sWidth": "100px"},
+		    {"bSortable": false, "sWidth": "60px"}
+		],
+		"aoColumnDefs": [{
+			aTargets: [2],
+			mRender: function(data, type, full) {
+				return '<input type="checkbox" name="categoria_id[]" value="'+full.id+'"'+(full.pertence == '1' ? ' checked="checked"' : '')+'>';
+			}
+		}],
+		"aaSorting": [
+			[0, "asc"],
+		],
+		"fnDrawCallback": function() {
+			$('#table_contato_categoria tr:not([role=row])').each(function(){
+				$(this).find('td:eq(1)').addClass('table_contato_categoria_contatos');
+				$(this).find('td:eq(2)').addClass('table_contato_categoria_pertence');
+			});
+		}
+	});
 });

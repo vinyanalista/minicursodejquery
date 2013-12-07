@@ -1,3 +1,6 @@
+.table_contato_acoes, .table_contato_categoria_contatos, .table_contato_categoria_pertence {
+	text-align: center;
+}
 .link_excluir_contato {
 	margin-left: 10px;
 }

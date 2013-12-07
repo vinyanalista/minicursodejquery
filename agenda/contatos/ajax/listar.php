@@ -9,12 +9,9 @@ $colunas = array('nome', 'id');
 // TODO Tentar montar consulta com Respect
 $contatos_sql = 'SELECT nome, id';
 if (isset($_POST['categoria_id'])) {
-	$contatos_sql .= ', COUNT(categoria_id) AS pertence';
+	$contatos_sql .= ', (SELECT COUNT(contato_id) FROM contato_categoria WHERE contato_categoria.contato_id = contato.id AND categoria_id = ' . $_POST['categoria_id'] . ' LIMIT 1) AS pertence';
 }
 $contatos_sql .= ' FROM contato';
-if (isset($_POST['categoria_id'])) {
-	$contatos_sql .= ' LEFT JOIN contato_categoria ON contato_categoria.contato_id = contato.id';
-}
 
 // Busca
 $where = '';

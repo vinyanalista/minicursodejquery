@@ -1,7 +1,9 @@
 <?php
 require_once '../../comum/php/comum.php';
 
-$cadastro = ($_POST['acao'] == 'inserir');
+/* Contato */
+
+$cadastro = ($_POST['acao'] == 'cadastrar');
 if ($cadastro) {
 	$contato = new Contato();
 } else {
@@ -17,5 +19,17 @@ $contato -> cidade = $_POST['cidade'];
 $contato -> estado = $_POST['estado'];
 $db -> contato -> persist($contato);
 $db -> flush();
+
+/* Contato - categoria */
+
+if (!$cadastro) {
+	$mysqli -> query('DELETE FROM contato_categoria WHERE contato_id = ' . $contato -> id);
+}
+if (!empty($_POST['categoria_id'])) {
+	foreach ($_POST['categoria_id'] as $categoria_id) {
+		$mysqli -> query('INSERT INTO contato_categoria (contato_id, categoria_id) VALUES (' . $contato -> id . ', ' . $categoria_id . ');');
+	}
+}
+
 echo TRUE;
 ?>

@@ -19,7 +19,7 @@ require_once '../comum/php/header.php';
 </div>
 <div id="editor_de_contato" title="Editor de contato">
 	<form class="formee" id="form_contato">
-		<input id="acao" name="acao" type="hidden" value="inserir" />
+		<input id="acao" name="acao" type="hidden" value="cadastrar" />
 		<input id="id" name="id" type="hidden" />
 		<div id="editor_de_contato_tabs">
 			<ul>
@@ -28,6 +28,9 @@ require_once '../comum/php/header.php';
 				</li>
 				<li>
 					<a href="#tab-fotos">Fotos</a>
+				</li>
+				<li>
+					<a href="#tab-contato_categoria">Categorias</a>
 				</li>
 			</ul>
 			<div id="tab-informacoes-pessoais">
@@ -96,6 +99,21 @@ require_once '../comum/php/header.php';
 				<p>
 					Ainda não implementado.
 				</p>
+			</div>
+			<div id="tab-contato_categoria">
+				<div class="grid-12-12">
+					<table id="table_contato_categoria" class="display">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Contatos</th>
+								<th class="table_contato_categoria_pertence">Pertence</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</form>

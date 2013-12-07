@@ -17,6 +17,7 @@ CREATE  TABLE IF NOT EXISTS `agenda`.`contato` (
   `apelido` VARCHAR(50) NULL ,
   `data_nascimento` DATE NULL ,
   `logradouro` VARCHAR(200) NULL ,
+  `numero` TINYINT NULL ,
   `bairro` VARCHAR(50) NULL ,
   `cidade` VARCHAR(50) NULL ,
   `estado` VARCHAR(2) NULL ,
@@ -49,8 +50,8 @@ CREATE  TABLE IF NOT EXISTS `agenda`.`telefone` (
   CONSTRAINT `fk_telefone_contato`
     FOREIGN KEY (`contato_id` )
     REFERENCES `agenda`.`contato` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_telefone_contato_idx` ON `agenda`.`telefone` (`contato_id` ASC) ;
@@ -66,14 +67,14 @@ CREATE  TABLE IF NOT EXISTS `agenda`.`email` (
   `endereco` VARCHAR(100) NOT NULL ,
   `contato_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_email_contato1`
+  CONSTRAINT `fk_email_contato`
     FOREIGN KEY (`contato_id` )
     REFERENCES `agenda`.`contato` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_email_contato1_idx` ON `agenda`.`email` (`contato_id` ASC) ;
+CREATE INDEX `fk_email_contato_idx` ON `agenda`.`email` (`contato_id` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -87,14 +88,14 @@ CREATE  TABLE IF NOT EXISTS `agenda`.`foto` (
   `descricao` VARCHAR(100) NULL ,
   `contato_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_foto_contato1`
+  CONSTRAINT `fk_foto_contato`
     FOREIGN KEY (`contato_id` )
     REFERENCES `agenda`.`contato` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_foto_contato1_idx` ON `agenda`.`foto` (`contato_id` ASC) ;
+CREATE INDEX `fk_foto_contato_idx` ON `agenda`.`foto` (`contato_id` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -106,21 +107,21 @@ CREATE  TABLE IF NOT EXISTS `agenda`.`contato_categoria` (
   `contato_id` INT UNSIGNED NOT NULL ,
   `categoria_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`categoria_id`, `contato_id`) ,
-  CONSTRAINT `fk_contato_has_categoria_contato1`
+  CONSTRAINT `fk_contato_categoria_contato`
     FOREIGN KEY (`contato_id` )
     REFERENCES `agenda`.`contato` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contato_has_categoria_categoria1`
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_contato_categoria_categoria`
     FOREIGN KEY (`categoria_id` )
     REFERENCES `agenda`.`categoria` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_contato_has_categoria_categoria1_idx` ON `agenda`.`contato_categoria` (`categoria_id` ASC) ;
+CREATE INDEX `fk_contato_categoria_categoria_idx` ON `agenda`.`contato_categoria` (`categoria_id` ASC) ;
 
-CREATE INDEX `fk_contato_has_categoria_contato1_idx` ON `agenda`.`contato_categoria` (`contato_id` ASC) ;
+CREATE INDEX `fk_contato_categoria_contato_idx` ON `agenda`.`contato_categoria` (`contato_id` ASC) ;
 
 
 

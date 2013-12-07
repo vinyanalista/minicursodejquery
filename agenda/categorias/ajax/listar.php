@@ -4,10 +4,14 @@ require_once '../../comum/php/comum.php';
 /* Lista todas as categorias. */
 
 // Correspondência entre as colunas do data tables e as colunas do banco de dados
-$colunas = array('nome', 'COUNT(contato_id) AS contatos', 'id');
+$colunas = array('nome', 'contatos', 'id');
 
 // TODO Tentar montar consulta com Respect
-$categorias_sql = 'SELECT nome, COUNT(contato_id) AS contatos, id FROM categoria LEFT JOIN contato_categoria ON contato_categoria.categoria_id = categoria.id';
+$categorias_sql = 'SELECT nome, COUNT(contato_id) AS contatos, id';
+if (isset($_POST['contato_id'])) {
+	$categorias_sql .= ', (SELECT COUNT(categoria_id) FROM contato_categoria WHERE contato_categoria.categoria_id = categoria.id AND contato_id = ' . $_POST['contato_id'] . ' LIMIT 1) AS pertence';
+}
+$categorias_sql .= ' FROM categoria LEFT JOIN contato_categoria ON contato_categoria.categoria_id = categoria.id';
 
 // Busca
 $where = '';

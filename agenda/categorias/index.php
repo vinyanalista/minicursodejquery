@@ -20,7 +20,7 @@ require_once '../comum/php/header.php';
 </div>
 <div id="editor_de_categoria" title="Editor de categoria">
 	<form class="formee" id="form_categoria">
-		<input id="acao" name="acao" type="hidden" value="inserir" />
+		<input id="acao" name="acao" type="hidden" value="cadastrar" />
 		<input id="id" name="id" type="hidden" />
 		<div class="grid-12-12">
 			<label for="nome">Nome</label>

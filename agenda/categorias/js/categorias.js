@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('#tab-categorias').parent('li').addClass('ui-tabs-active ui-state-active');
 	
 	$('#btn_nova_categoria').click(function(event){
-		$('#acao').val('inserir');
+		$('#acao').val('cadastrar');
 		$('#nome').val('');
 		$('#editor_de_categoria').dialog('option', 'title', 'Nova categoria').dialog('open');
 	});
@@ -32,11 +32,14 @@ $(document).ready(function() {
 		"fnDrawCallback": function() {
 			$('#table_categoria tr:not([role=row])').each(function(){
 				$(this).find('td:eq(1)').addClass('table_categoria_contatos');
+				$(this).find('td:eq(2)').addClass('table_categoria_acoes');
 			});
 			
 			inicializarTooltips();
 			
 			$('.link_editar_categoria').click(function(event){
+				event.preventDefault();
+				event.stopPropagation();
 				$.ajax({
 					async: false,
 					url: "ajax/consultar.php",
@@ -49,7 +52,6 @@ $(document).ready(function() {
 						$('#id').val(data.id);
 						$('#nome').val(data.nome);
 						$('#editor_de_categoria').dialog('option', 'title', 'Editar categoria').dialog('open');
-						// TODO Marcar contatos na tabela
 					},
 					error: function() {
 						$.notify('Houve um erro ao tentar carregar a categoria para edição.', 'error');
@@ -71,7 +73,6 @@ $(document).ready(function() {
 							if (data == '1') {
 								$.notify('Categoria excluída com sucesso!', 'success');
 								$("#table_categoria").dataTable().fnReloadAjax();
-								// TODO Carregando tabela de um jeito estranho se não há categorias
 							} else {
 								$.notify('Houve um erro ao tentar excluir a categoria.', 'error');
 							}
@@ -96,6 +97,12 @@ $(document).ready(function() {
 			effect: "blind",
 	        duration: 400
 	    },
+	    open: function() {
+	    	$('#form_categoria input[type=text]').removeClass('error');
+			$('#form_categoria label.error').remove();
+			$('#table_contato_categoria').dataTable().fnReloadAjax();
+			$('#nome').focus();
+	    },
 	    buttons: {
 	        'Cancelar': function() {
 	        	$(this).dialog("close");
@@ -112,14 +119,14 @@ $(document).ready(function() {
 							if (data == '1') {
 								$('#editor_de_categoria').dialog("close");
 								$("#table_categoria").dataTable().fnReloadAjax();
-								$.notify('Categoria cadastrada com sucesso!', 'success');
+								$.notify('Categoria ' + ($('#acao').val() == 'cadastrar' ? 'cadastrada' : 'atualizada') + ' com sucesso!', 'success');
 							} else {
-								$.notify('Houve um erro ao tentar cadastrar a categoria.', 'error');
+								$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' a categoria.', 'error');
 							}
 						},
 						error: function() {
 							hideLoading();
-							$.notify('Houve um erro ao tentar cadastrar a categoria.', 'error');
+							$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' a categoria.', 'error');
 						}
 		    		});
 		    	}
@@ -129,18 +136,28 @@ $(document).ready(function() {
 	
 	$('#table_contato_categoria').dataTable({
 		"sAjaxSource": "../contatos/ajax/listar.php",
+		"fnServerParams": function (aoData) {
+			if ($('#acao').val() == 'atualizar') {
+				aoData.push({ name: "categoria_id", value: $('#id').val() });
+			}	
+		},
 		"aoColumns": [
 		    null,
-		    {"bSortable": false}
+		    {"bSortable": false, "sWidth": "60px"}
 		],
 		"aoColumnDefs": [{
 			aTargets: [1],
 			mRender: function(data, type, full) {
-				return '<input type="checkbox" name="contato_id" value="'+full.contato_id+'">';
+				return '<input type="checkbox" name="contato_id[]" value="'+full.id+'"'+(full.pertence == '1' ? ' checked="checked"' : '')+'>';
 			}
 		}],
 		"aaSorting": [
 			[0, "asc"],
-		]
+		],
+		"fnDrawCallback": function() {
+			$('#table_contato_categoria tr:not([role=row])').each(function(){
+				$(this).find('td:eq(1)').addClass('table_contato_categoria_pertence');
+			});
+		}
 	});
 });
