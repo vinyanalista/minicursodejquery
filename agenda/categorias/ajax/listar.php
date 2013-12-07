@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/comum.php';
+require_once '../../comum.php';
 
 /* Lista todas as categorias. */
 
@@ -47,6 +47,8 @@ if (isset($_POST['iDisplayLength'])) {
 }
 $categorias_sql .= ' LIMIT '.$primeira_categoria.', '.$categorias_por_pagina;
 
+echo $categorias_sql; exit;
+
 // Obtém as categorias
 if (!$categorias = $mysqli->query($categorias_sql)) {
 	echo 'Houve um erro durante a execução da query:<br><br>' . $categorias_sql . '<br><br>';
@@ -81,7 +83,7 @@ $total_de_categorias = $total_de_categorias_linha[0];
 ini_set('default_charset','utf8');
 header("Content-Type: application/json; charset=UTF-8", true);
 
-$output = array(
+$resposta = array(
 	'sEcho' => $_POST['sEcho'],
 	'iTotalRecords' => $total_de_categorias,
 	'iTotalDisplayRecords' => $categorias_a_exibir,
@@ -89,8 +91,8 @@ $output = array(
 );
 
 while ($categoria = $categorias->fetch_array()) {
-	$output['aaData'][] = $categoria;
+	$resposta['aaData'][] = $categoria;
 }
 
-echo json_encode($output);
+echo json_encode($resposta);
 ?>

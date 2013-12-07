@@ -1,18 +1,18 @@
 <?php
 /* Respect */
 
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Styles/Stylable.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Styles/AbstractStyle.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Styles/Standard.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/CollectionIterator.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Collections/Collection.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Collections/Typable.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Collections/Mixable.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/Collections/Filterable.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Data/AbstractMapper.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Relational/Db.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Relational/Sql.php';
-require_once dirname(__FILE__) . '/../../lib/respect/Relational/Mapper.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Styles/Stylable.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Styles/AbstractStyle.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Styles/Standard.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/CollectionIterator.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Collections/Collection.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Collections/Typable.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Collections/Mixable.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/Collections/Filterable.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Data/AbstractMapper.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Relational/Db.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Relational/Sql.php';
+require_once dirname(__FILE__) . '/../../../lib/respect/Relational/Mapper.php';
 
 require_once dirname(__FILE__) . '/entities.php';
 

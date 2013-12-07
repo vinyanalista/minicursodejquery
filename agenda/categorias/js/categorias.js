@@ -8,7 +8,7 @@ $(document).ready(function() {
 	});
 	
 	$('#table_categoria').dataTable({
-		"sAjaxSource": "../ajax/categoria_listar.php",
+		"sAjaxSource": "ajax/listar.php",
 		"aoColumns": [
 		    null,
 		    null,

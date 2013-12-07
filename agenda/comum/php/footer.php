@@ -22,7 +22,7 @@
 			</div>
 		</footer>
 		<!-- Loading -->
-		<img id="loading" src="../resources/images/loading.gif" width="173" height="125" style="display:none" /></div>
+		<img id="loading" src="../comum/imagens/loading.gif" width="173" height="125" style="display:none" /></div>
 		<!-- Debugger -->
 		<div id="debugger" title="Debugger">
 			<iframe name="debug" id="debug" width="640" height="480"></iframe>
