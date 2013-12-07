@@ -12,9 +12,9 @@
 		<meta property="og:image:height" content="200" />
 		<meta property="og:type" content="website"/>-->
 		<!-- Favicons -->
-		<link rel="shortcut icon" href="../comum/imagens/agenda.png" />
-		<link rel="icon" href="../comum/imagens/agenda.png" />
-		<link rel="apple-touch-icon" href="../comum/imagens/agenda.png" />
+		<link rel="shortcut icon" href="../comum/imagens/icones/agenda.png" />
+		<link rel="icon" href="../comum/imagens/icones/agenda.png" />
+		<link rel="apple-touch-icon" href="../comum/imagens/icones/agenda.png" />
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="../comum/css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/formee/css/formee-structure.css" />
@@ -30,6 +30,7 @@
 		<script type="text/javascript" src="../../lib/tooltipster/js/jquery.tooltipster.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-validate/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-validate/messages_pt_BR.js"></script>
+		<script type="text/javascript" src="../../lib/jquery-mask/jquery.mask.min.js"></script>
 		<script type="text/javascript" src="../../lib/datatables/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7774466af48b4f"></script>
 		<script type="text/javascript" src="../comum/js/comum.js"></script>

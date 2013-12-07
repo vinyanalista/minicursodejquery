@@ -4,7 +4,11 @@ $(document).ready(function() {
 	$('#tab-contatos').parent('li').addClass('ui-tabs-active ui-state-active');
 	
 	$('#btn_novo_contato').click(function(event){
-		alert('Ainda não implementado!');
+		$('#acao').val('inserir');
+		$('#form_contato input[type=text]').val('');
+		$('#estado option').removeAttr('selected');
+		$('#estado option[value="SE"]').attr('selected', 'selected');
+		$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
 	});
 	
 	$('#table_contato').dataTable({
@@ -62,4 +66,52 @@ $(document).ready(function() {
 			hideLoading();
 		},
 	});
+	
+	$('#editor_de_contato').dialog({
+		autoOpen: false,
+		modal: true,
+		width: 800,
+		height: 600,
+		show: {
+			effect: "blind",
+	        duration: 400
+	    },
+	    open: function() {
+	    	$('#editor_de_contato_tabs').tabs('option', 'active', 0);
+	    	$('#form_contato input[type=text]').removeClass('error');
+			$('#form_contato label.error').remove();
+			$('#nome').focus();
+	    },
+	    buttons: {
+	        'Cancelar': function() {
+	        	$(this).dialog("close");
+	        },
+		    'Salvar': function() {
+		    	if ($('#form_contato').valid()) {
+		    		showLoading();
+		    		$.ajax({
+		    			async: false,
+		    			url: "ajax/salvar.php",
+		    			data: $("#form_contato").serialize(),
+		    			success: function(data) {
+		    				hideLoading();
+							if (data == '1') {
+								$('#editor_de_contato').dialog("close");
+								$("#table_contato").dataTable().fnReloadAjax();
+								$.notify('Contato cadastrado com sucesso!', 'success');
+							} else {
+								$.notify('Houve um erro ao tentar cadastrar o contato.', 'error');
+							}
+						},
+						error: function() {
+							hideLoading();
+							$.notify('Houve um erro ao tentar cadastrar o contato.', 'error');
+						}
+		    		});
+		    	}
+		    }
+	    }
+	});
+	
+	$('#editor_de_contato_tabs').tabs();
 });

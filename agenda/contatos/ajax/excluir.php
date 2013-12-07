@@ -1,5 +1,5 @@
 <?php
-require_once '../../comum.php';
+require_once '../../comum/php/comum.php';
 $contato = $db -> contato[$_POST['id']] -> fetch();
 $db -> contato -> remove($contato);
 $db -> flush();

@@ -8,7 +8,7 @@ class Categoria {
 }
 
 class Contato {
-	public $id, $nome, $apelido, $data_nascimento, $logradouro, $bairro, $cidade, $estado;
+	public $id, $nome, $apelido, $data_nascimento, $logradouro, $numero, $bairro, $cidade, $estado;
 }
 
 class Email {
@@ -23,7 +23,7 @@ class Telefone {
 	public $id, $numero, $contato_id;
 }
 
-// Tornas as entidades visíveis no namespace global
+// Torna as entidades visíveis no namespace global
 class_alias('Agenda\Entities\Categoria', 'Categoria');
 class_alias('Agenda\Entities\Contato', 'Contato');
 class_alias('Agenda\Entities\Email', 'Email');

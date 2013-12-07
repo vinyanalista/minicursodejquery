@@ -1,5 +1,5 @@
 <?php
-require_once '../../comum.php';
+require_once '../../comum/php/comum.php';
 
 $categoria = $db -> categoria[$_POST['id']] -> fetch();
 

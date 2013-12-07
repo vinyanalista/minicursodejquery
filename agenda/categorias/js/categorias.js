@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$('#btn_nova_categoria').click(function(event){
 		$('#acao').val('inserir');
 		$('#nome').val('');
-		$('#editor_de_categoria').attr('title', 'Nova categoria').dialog('open');
+		$('#editor_de_categoria').dialog('option', 'title', 'Nova categoria').dialog('open');
 	});
 	
 	$('#table_categoria').dataTable({
@@ -48,7 +48,7 @@ $(document).ready(function() {
 						$('#acao').val('atualizar');
 						$('#id').val(data.id);
 						$('#nome').val(data.nome);
-						$('#editor_de_categoria').attr('title', 'Editar categoria').dialog('open');
+						$('#editor_de_categoria').dialog('option', 'title', 'Editar categoria').dialog('open');
 						// TODO Marcar contatos na tabela
 					},
 					error: function() {
@@ -118,6 +118,7 @@ $(document).ready(function() {
 							}
 						},
 						error: function() {
+							hideLoading();
 							$.notify('Houve um erro ao tentar cadastrar a categoria.', 'error');
 						}
 		    		});

@@ -1,3 +1,5 @@
+/* Geral */
+
 html, body {
 	-webkit-font-smoothing: antialiased;
 	color: #333;
@@ -17,14 +19,13 @@ b, strong {
 	font-weight: bold;
 }
 
-/*  */
+/* Template */
 
 #container {
 	background-color: #0769AD;
 	margin: 0 auto;
     padding: 20px 20px 0px 20px;
 }
-
 #content-wrapper {
 	background: white;
 	-webkit-box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
@@ -47,28 +48,25 @@ b, strong {
 	padding-left: 58px;
 	text-decoration: none;
 }
-
 .tab {
 	background-position: 10px;
 	background-repeat: no-repeat;
 	background-size: contain;
 	padding-left: 50px !important;
 }
-
 #tab-contatos {
 	background-image: url('../imagens/icones/contatos.png');
 }
-
 #tab-categorias {
 	background-image: url('../imagens/icones/categorias.png');
 }
-
 #tab-email {
 	background-image: url('../imagens/icones/email.png');
 }
-
-/* Footer */
-
+#content-wrapper ul li {
+	float: right !important;
+	top: 13px;
+}
 footer {
 	background: url(../imagens/bg-footer-noise.jpg) repeat;
 	background-image: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url(../imagens/bg-footer-noise.jpg);
@@ -93,7 +91,6 @@ footer a:hover {
 	margin: 0 auto;
 	padding: 0px 20px;
 }
-
 #autor {
 	background-image: url('../imagens/autor.jpg');
 	background-position: left;
@@ -103,7 +100,6 @@ footer a:hover {
 	line-height: 50px;
 	padding-left: 58px;
 }
-
 #redes_sociais {
 	float: right;
 	margin-top: 10px;
@@ -171,21 +167,19 @@ table.form span.required {
 .clear {
 	clear: both;
 }
-label.success, label.error {
+/*label.success, label.error {
 	display: block;
 	font-style: italic;
 	font-weight: normal;
 }
 label.success {
 	color: green;
+}*/
+input.error {
+	border-color: red;
 }
 label.error {
 	color: red;
-}
-
-.ui-tabs .ui-tabs-nav li {
-	float: right !important;
-	top: 13px;
 }
 
 /* Ícones */

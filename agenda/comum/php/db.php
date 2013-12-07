@@ -50,9 +50,9 @@ function mysql_time($time = null) {
 function format_date($date = null, $to_mysql = false) {
 	if (!$to_mysql) {
 		if ($date == null) {
-			return date('M-d-Y');
+			return date('d/m/Y');
 		} else {
-			return date('M-d-Y', strtotime($date));
+			return date('d/m/Y', strtotime($date));
 		}
 	} else {
 		if ($date == null) {

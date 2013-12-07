@@ -1,5 +1,5 @@
 <?php
-require_once '../../comum.php';
+require_once '../../comum/php/comum.php';
 
 $cadastro = ($_POST['acao'] == 'inserir');
 if ($cadastro) {

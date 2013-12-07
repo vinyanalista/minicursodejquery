@@ -25,7 +25,38 @@ if (getInternetExplorerVersion() >= 10) {
 	});
 }
 
+/* jQuery Validate */
+
+$.validator.setDefaults({
+	onclick: false,
+	onfocusout: false,
+	onkeyup: false
+});
+
 /* jQuery UI */
+
+// Validação de data
+$.fn.extend({
+	aplicarData: function() {
+		$(this).datepicker({
+			dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+			dayNamesMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+			monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+			monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+			changeMonth: true,
+			changeYear: true,
+			yearRange: '1920:+10',
+			dateFormat: "dd/mm/yy"
+		});
+		$(this).mask("99/99/9999");
+		return $(this);
+	}
+});
+
+$(document).ready(function() {
+	$('input.data').aplicarData();
+	$('.number').mask('#', {maxlength: false});
+});
 
 $.confirmacao = function(mensagem, callbackSim, callbackNao) {
 	$('div.dialogo_confirmacao').remove();

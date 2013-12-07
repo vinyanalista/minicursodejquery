@@ -1,5 +1,5 @@
 <?php
-require_once '../comum.php';
+require_once '../comum/php/comum.php';
 require_once '../comum/php/header.php';
 ?>
 <div class="grid-12-12">
