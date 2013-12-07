@@ -92,6 +92,22 @@ $(document).ready(function() {
 	$("h2:first").after("<div class='clear' />");
 });
 
+/* CKEditor */
+
+$.fn.extend({
+	editor: function(options) {
+		options = $.extend({
+			language: 'pt-br',
+			skin: 'moono_blue',
+			toolbar: [
+				['Font'],['FontSize'],['Bold','Italic','Underline','Strike', '-', 'Subscript', 'Superscript', '-', 'RemoveFormat'],['TextColor','BGColor'],['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],'/',
+				['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'], ['Undo','Redo'],['Find', 'Replace'],['Link', 'Unlink', 'Anchor','-', 'Image','Table','Blockquote'],['Source','Preview','Maximize'],['About']
+			]
+		}, options);
+		$(this).ckeditor(options);
+	}
+});
+
 /* Tooltipster */
 
 function inicializarTooltips() {

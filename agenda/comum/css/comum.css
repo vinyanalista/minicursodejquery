@@ -194,7 +194,7 @@ label.error {
 .icone_salvar_azul{background-image: url(../imagens/icones/icon_salvar_azul.png);}
 .icone_voltar_azul{background-image: url(../imagens/icones/icon_voltar_azul.png);}
 .icone_importar_azul{background-image: url(../imagens/icones/icon_importar_azul.png);}
-.icone_enviar_azul{background-image: url(../imagens/icones/icon_enviar_azul.png);}
+.icone_enviar{background-image: url(../imagens/icones/enviar.png);}
 
 .icone_editar{background-image: url(../imagens/icones/editar.png);}
 .icone_excluir{background-image: url(../imagens/icones/excluir.png);}

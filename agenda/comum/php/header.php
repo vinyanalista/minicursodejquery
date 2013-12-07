@@ -32,6 +32,8 @@
 		<script type="text/javascript" src="../../lib/jquery-validate/messages_pt_BR.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-mask/jquery.mask.min.js"></script>
 		<script type="text/javascript" src="../../lib/datatables/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../../lib/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="../../lib/ckeditor/adapters/jquery.js"></script>
 		<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7774466af48b4f"></script>
 		<script type="text/javascript" src="../comum/js/comum.js"></script>
 	</head>
