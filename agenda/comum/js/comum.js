@@ -86,10 +86,15 @@ $(document).ready(function() {
 	/*$("#content-wrapper").tabs({
 		active: 2
 	});*/
-	
 	$("body").addClass("ui-form");
 	$("button, input[type=button], input[type=submit], a.button").button();
-	$("h2:first").after("<div class='clear' />");
+	
+	$("#navegacao li").mouseover(function() {
+		$(this).addClass('ui-state-hover');
+	});
+	$("#navegacao li").mouseout(function() {
+		$(this).removeClass('ui-state-hover');
+	});
 });
 
 /* CKEditor */

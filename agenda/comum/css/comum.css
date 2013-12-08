@@ -2,9 +2,12 @@
 
 html, body {
 	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
 	color: #333;
 	font: 15px/22.5px "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+	height: 100%;
 	margin: 0;
+	/*min-height: 510px;*/ /* Resolução mínima: 1024x600 */
 }
 h2 {
 	float: left;
@@ -23,8 +26,9 @@ b, strong {
 
 #container {
 	background-color: #0769AD;
+	min-height: calc(100% - 110px);
 	margin: 0 auto;
-    padding: 20px 20px 0px 20px;
+	padding: 20px 20px 0px 20px;
 }
 #content-wrapper {
 	background: white;
@@ -32,9 +36,6 @@ b, strong {
 	box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
 	-webkit-box-shadow: 0 0 3px rgba(1, 1, 1, 0.7);
 	box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);
-	margin: 0 auto;
-	min-height: 390px;
-	position: relative;
 }
 #content-wrapper h1 a {
 	background-image: url('../imagens/icones/agenda.png');
@@ -47,6 +48,9 @@ b, strong {
 	margin-bottom: 5px;
 	padding-left: 58px;
 	text-decoration: none;
+}
+#content-wrapper:after {
+	clear: both;
 }
 .tab {
 	background-position: 10px;
@@ -67,6 +71,9 @@ ul#navegacao li {
 	float: right !important;
 	top: 13px;
 }
+#conteudo {
+	min-height: 300px;
+}
 footer {
 	background: url(../imagens/bg-footer-noise.jpg) repeat;
 	background-image: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url(../imagens/bg-footer-noise.jpg);
@@ -75,10 +82,11 @@ footer {
 	background-size: 100px 15px, 140px 140px;
 	border-top: 1px solid #7ACEF4;
 	display: block;
-	height: 60px;
+	height: 59px;
 	margin-top: -20px;
 	padding-top: 40px;
 	padding-bottom: 10px;
+	width: 100%;
 }
 footer, footer a {
 	color: #fff;
