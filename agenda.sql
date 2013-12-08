@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `agenda`.`telefone` ;
 
 CREATE  TABLE IF NOT EXISTS `agenda`.`telefone` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `numero` VARCHAR(11) NOT NULL ,
+  `numero` VARCHAR(15) NOT NULL ,
   `contato_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_telefone_contato`

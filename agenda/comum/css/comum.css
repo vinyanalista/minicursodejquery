@@ -7,7 +7,8 @@ html, body {
 	font: 15px/22.5px "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
 	height: 100%;
 	margin: 0;
-	/*min-height: 510px;*/ /* Resolução mínima: 1024x600 */
+	min-width: 1015px;
+	min-height: 510px; /* Resolução mínima: 1024x600 */
 }
 h2 {
 	float: left;
@@ -57,15 +58,6 @@ b, strong {
 	background-repeat: no-repeat;
 	background-size: contain;
 	padding-left: 50px !important;
-}
-#tab-contatos {
-	background-image: url('../imagens/icones/contatos.png');
-}
-#tab-categorias {
-	background-image: url('../imagens/icones/categorias.png');
-}
-#tab-email {
-	background-image: url('../imagens/icones/email.png');
 }
 ul#navegacao li {
 	float: right !important;
@@ -197,29 +189,21 @@ label.error {
 .icone_22x22{background-size: 22px 22px; width: 22px; height: 22px;}
 .icone_24x24{background-size: 24px 24px; width: 24px; height: 24px;}
 
-.icone_novo_contato{background-image: url(../imagens/icones/novo_contato.png);}
-.icone_nova_categoria{background-image: url(../imagens/icones/nova_categoria.png);}
-.icone_salvar_azul{background-image: url(../imagens/icones/icon_salvar_azul.png);}
-.icone_voltar_azul{background-image: url(../imagens/icones/icon_voltar_azul.png);}
-.icone_importar_azul{background-image: url(../imagens/icones/icon_importar_azul.png);}
-.icone_enviar{background-image: url(../imagens/icones/enviar.png);}
-
-.icone_editar{background-image: url(../imagens/icones/editar.png);}
-.icone_excluir{background-image: url(../imagens/icones/excluir.png);}
-.icone_download{background-image: url(../imagens/icones/icon_download.png) !important;}
-.icone_play{background-image: url(../imagens/icones/icon_play.png) !important;}
-.icone_cancelar{background-image: url(../imagens/icones/icon_cancelar.png) !important;}
-
-.icone_categoria{background-image: url(../imagens/icones/icon_categoria.png) !important;}
-.icone_contato{background-image: url(../imagens/icones/icon_contato.png) !important;}
-.icone_grupo{background-image: url(../imagens/icones/icon_grupo.png) !important;}
-.icone_conteudos{background-image: url(../imagens/icones/icon_conteudos.png) !important;}
-.icone_conteudo{background-image: url(../imagens/icones/icon_conteudo.png) !important;}
-.icone_images{background-image: url(../imagens/icones/icon_images.png) !important;}
-.icone_arquivos{background-image: url(../imagens/icones/icon_conteudos.png) !important;}
-
 .botao_com_icone span {
 	line-height: 22px;
 	padding-left: 30px;
 	width: auto;
 }
+
+.icone_adicionar{background-image: url(../imagens/icones/adicionar.png);}
+.icone_categorias{background-image: url(../imagens/icones/categorias.png);}
+.icone_contatos{background-image: url(../imagens/icones/contatos.png);}
+.icone_editar{background-image: url(../imagens/icones/editar.png);}
+.icone_email{background-image: url(../imagens/icones/email.png);}
+.icone_excluir{background-image: url(../imagens/icones/excluir.png);}
+
+.icone_novo_contato{background-image: url(../imagens/icones/novo_contato.png);}
+
+.icone_nova_categoria{background-image: url(../imagens/icones/nova_categoria.png);}
+
+.icone_enviar{background-image: url(../imagens/icones/enviar.png);}

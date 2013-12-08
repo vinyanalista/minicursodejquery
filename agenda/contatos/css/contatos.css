@@ -4,3 +4,12 @@
 .link_excluir_contato {
 	margin-left: 10px;
 }
+.contato_telefone.primeiro .btn_excluir {
+	margin-top: 35px;
+}
+.btn_excluir span.ui-button-text {
+	padding: 6px;
+}
+.btn_excluir span.icone {
+	padding-left: 22px;
+}

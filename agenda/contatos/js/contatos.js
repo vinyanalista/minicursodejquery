@@ -1,5 +1,44 @@
 var contato_a_excluir = 0;
 
+function adicionarTelefone(telefone) {
+	if (telefone == undefined) {
+		var $novo_telefone = $('.contato_telefone').first().clone();
+		$novo_telefone.find('label.error').remove();
+		$novo_telefone.find('label').hide();
+		$novo_telefone.find('input').removeClass('error').val('').mascaraDeTelefone();
+		$novo_telefone.removeClass('primeiro');
+		$novo_telefone.find('.btn_excluir_telefone').click(removerTelefone);
+		$('.contato_telefone:last').after($novo_telefone);
+		$('.contato_telefone:last input').focus();
+	} else {
+		if ($('.contato_telefone:first input').val() != '') {
+			adicionarTelefone();
+		}
+		$('.contato_telefone:last input').val(telefone);
+	}
+}
+
+function removerTelefone(event) {
+	event.preventDefault();
+	event.stopPropagation();
+	var $telefone = $(this).parents('.contato_telefone');
+	if (($telefone[0] == $('.contato_telefone:first')[0]) && ($('.contato_telefone').length == 1)) {
+		// $telefone.is('.contato_telefone:first') não funciona, ver:
+		// http://api.jquery.com/is/
+		$telefone.find('input').removeClass('error').val('');
+		$telefone.find('label.error').remove();
+	} else {
+		$telefone.remove();
+		$('.contato_telefone:first').addClass('primeiro').find('label').show();
+	}
+}
+
+function limparTelefones() {
+	$('.contato_telefone:not(:first)').remove();
+	$('.contato_telefone').find('input').removeClass('error').val('');
+	$('.contato_telefone').find('label.error').remove();
+}
+
 function selecionarEstado(sigla) {
 	if (sigla == undefined) {
 		sigla = 'SE';
@@ -14,6 +53,7 @@ $(document).ready(function() {
 	$('#btn_novo_contato').click(function(event){
 		$('#acao').val('cadastrar');
 		$('#form_contato input[type=text]').val('');
+		limparTelefones();
 		selecionarEstado();
 		$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
 	});
@@ -60,6 +100,10 @@ $(document).ready(function() {
 						$('#nome').val(data.nome);
 						$('#apelido').val(data.apelido);
 						$('#data_nascimento').val(data.data_nascimento);
+						limparTelefones();
+						for (var t = 0; t  < data.telefones.length; t++) {
+							adicionarTelefone(data.telefones[t]);
+						};
 						$('#logradouro').val(data.logradouro);
 						$('#numero').val(data.numero);
 						$('#bairro').val(data.bairro);
@@ -106,7 +150,6 @@ $(document).ready(function() {
 		autoOpen: false,
 		modal: true,
 		width: 800,
-		height: 600,
 		show: {
 			effect: "blind",
 	        duration: 400
@@ -151,6 +194,14 @@ $(document).ready(function() {
 	
 	$('#editor_de_contato_tabs').tabs();
 	
+	$('#btn_adicionar_telefone').click(function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		adicionarTelefone();
+	});
+	
+	$('.btn_excluir_telefone').click(removerTelefone);
+	
 	$('#table_contato_categoria').dataTable({
 		"sAjaxSource": "../categorias/ajax/listar.php",
 		"fnServerParams": function (aoData) {
@@ -179,4 +230,6 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	$('#btn_novo_contato').click(); // Teste
 });

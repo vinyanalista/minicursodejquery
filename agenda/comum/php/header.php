@@ -46,13 +46,13 @@
 				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" id="navegacao">
 					<h1><a href="../">Agenda de contatos</a></h1>
 					<li class="ui-state-default ui-corner-top">
-						<a class="tab ui-tabs-anchor" id="tab-email" href="../email">E-mail</a>
+						<a class="tab icone_email ui-tabs-anchor" id="tab-email" href="../email">E-mail</a>
 					</li>
 					<li class="ui-state-default ui-corner-top">
-						<a class="tab ui-tabs-anchor" id="tab-categorias" href="../categorias">Categorias</a>
+						<a class="tab icone_categorias ui-tabs-anchor" id="tab-categorias" href="../categorias">Categorias</a>
 					</li>
 					<li class="ui-state-default ui-corner-top">
-						<a class="tab ui-tabs-anchor" id="tab-contatos" href="../contatos">Contatos</a>
+						<a class="tab icone_contatos ui-tabs-anchor" id="tab-contatos" href="../contatos">Contatos</a>
 					</li>
 				</ul>
 				<!-- Conteúdo -->

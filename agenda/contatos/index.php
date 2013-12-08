@@ -3,7 +3,9 @@ require_once '../comum/php/comum.php';
 require_once '../comum/php/header.php';
 ?>
 <div class="grid-12-12">
-	<button class="botao_com_icone" id="btn_novo_contato"><span class='icone icone_22x22 icone_novo_contato'>Novo contato</span></button>
+	<button class="botao_com_icone" id="btn_novo_contato">
+		<span class='icone icone_22x22 icone_novo_contato'>Novo contato</span>
+	</button>
 </div>
 <div class="grid-12-12">
 	<table id="table_contato" class="display">
@@ -46,13 +48,36 @@ require_once '../comum/php/header.php';
 					<label for="data_nascimento">Data de nascimento</label>
 					<input id="data_nascimento" class="data" name="data_nascimento" type="text" />
 				</div>
+				
+				<div class="grid-6-12">
+					<div class="contato_telefone primeiro">
+						<div class="grid-10-12">
+							<label>Telefone</label>
+							<input class="telefone" name="telefone[]" type="text" placeholder="Telefone" maxlength="15" />
+						</div>
+						<div class="grid-2-12">
+							<button class="botao_com_icone btn_excluir btn_excluir_telefone tooltipster" title="Excluir telefone">
+								<span class='icone icone_22x22 icone_excluir'></span>
+							</button>
+						</div>
+					</div>
+					<div class="grid-12-12">
+						<button class="botao_com_icone btn_adicionar" id="btn_adicionar_telefone">
+							<span class='icone icone_22x22 icone_adicionar'>Adicionar telefone</span>
+						</button>
+					</div>
+				</div>
+				<div class="grid-6-12">
+					<p>Aqui virá e-mail.</p>
+				</div>
+				
 				<div class="grid-10-12">
 					<label for="logradouro">Logradouro</label>
 					<input id="logradouro" name="logradouro" type="text" placeholder="Logradouro" />
 				</div>
 				<div class="grid-2-12">
 					<label for="numero">Número</label>
-					<input id="numero" class="number" name="numero" type="text" placeholder="Número" />
+					<input id="numero" class="numero" name="numero" type="text" placeholder="Número" />
 				</div>
 				<div class="grid-4-12">
 					<label for="bairro">Bairro</label>

@@ -20,6 +20,17 @@ $contato -> estado = $_POST['estado'];
 $db -> contato -> persist($contato);
 $db -> flush();
 
+/* Contato - telefone */
+
+if (!$cadastro) {
+	$mysqli -> query('DELETE FROM telefone WHERE contato_id = ' . $contato -> id);
+}
+if (!empty($_POST['telefone'])) {
+	foreach ($_POST['telefone'] as $numero) {
+		$mysqli -> query('INSERT INTO telefone (contato_id, numero) VALUES (' . $contato -> id . ', \'' . $numero . '\');');
+	}
+}
+
 /* Contato - categoria */
 
 if (!$cadastro) {

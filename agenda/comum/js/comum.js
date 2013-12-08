@@ -33,11 +33,11 @@ $.validator.setDefaults({
 	onkeyup: false
 });
 
-/* jQuery UI */
+/* Máscaras e validação */
 
-// Validação de data
 $.fn.extend({
-	aplicarData: function() {
+	// Data
+	mascaraDeData: function() {
 		$(this).datepicker({
 			dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
 			dayNamesMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
@@ -50,12 +50,28 @@ $.fn.extend({
 		});
 		$(this).mask("99/99/9999");
 		return $(this);
+	},
+	
+	// Número
+	mascaraDeNumero: function() {
+		$(this).addClass('number');
+		$(this).mask('#', {maxlength: false});
+		return $(this);
+	},
+	
+	// Telefone
+	mascaraDeTelefone: function() {
+		$(this).mask(function(phone) {
+			return phone.match(/^(\(?11\)? ?9(5[0-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9])[0-9]{1})/g) ? 
+					'(00) 00000-0000' : '(00) 0000-0000';
+		});
 	}
 });
 
 $(document).ready(function() {
-	$('input.data').aplicarData();
-	$('.number').mask('#', {maxlength: false});
+	$('input.data').mascaraDeData();
+	$('input.numero').mascaraDeNumero();
+	$('input.telefone').mascaraDeTelefone();
 });
 
 $.confirmacao = function(mensagem, callbackSim, callbackNao) {
