@@ -31,6 +31,17 @@ if (!empty($_POST['telefone'])) {
 	}
 }
 
+/* Contato - e-mail */
+
+if (!$cadastro) {
+	$mysqli -> query('DELETE FROM email WHERE contato_id = ' . $contato -> id);
+}
+if (!empty($_POST['email'])) {
+	foreach ($_POST['email'] as $endereco) {
+		$mysqli -> query('INSERT INTO email (contato_id, endereco) VALUES (' . $contato -> id . ', \'' . $endereco . '\');');
+	}
+}
+
 /* Contato - categoria */
 
 if (!$cadastro) {

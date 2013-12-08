@@ -6,6 +6,7 @@ function adicionarTelefone(telefone) {
 		$novo_telefone.find('label.error').remove();
 		$novo_telefone.find('label').hide();
 		$novo_telefone.find('input').removeClass('error').val('').mascaraDeTelefone();
+		$novo_telefone.find('button').attr('title', 'Excluir telefone').tooltip();
 		$novo_telefone.removeClass('primeiro');
 		$novo_telefone.find('.btn_excluir_telefone').click(removerTelefone);
 		$('.contato_telefone:last').after($novo_telefone);
@@ -39,6 +40,44 @@ function limparTelefones() {
 	$('.contato_telefone').find('label.error').remove();
 }
 
+function adicionarEmail(email) {
+	if (email == undefined) {
+		var $novo_email = $('.contato_email').first().clone();
+		$novo_email.find('label.error').remove();
+		$novo_email.find('label').hide();
+		$novo_email.find('input').removeClass('error').val(''); // TODO .mascaraDeTelefone();
+		$novo_email.find('button').attr('title', 'Excluir e-mail').tooltip();
+		$novo_email.removeClass('primeiro');
+		$novo_email.find('.btn_excluir_email').click(removerEmail);
+		$('.contato_email:last').after($novo_email);
+		$('.contato_email:last input').focus();
+	} else {
+		if ($('.contato_email:first input').val() != '') {
+			adicionarEmail();
+		}
+		$('.contato_email:last input').val(email);
+	}
+}
+
+function removerEmail(event) {
+	event.preventDefault();
+	event.stopPropagation();
+	var $email = $(this).parents('.contato_email');
+	if (($email[0] == $('.contato_email:first')[0]) && ($('.contato_email').length == 1)) {
+		$email.find('input').removeClass('error').val('');
+		$email.find('label.error').remove();
+	} else {
+		$email.remove();
+		$('.contato_email:first').addClass('primeiro').find('label').show();
+	}
+}
+
+function limparEmails() {
+	$('.contato_email:not(:first)').remove();
+	$('.contato_email').find('input').removeClass('error').val('');
+	$('.contato_email').find('label.error').remove();
+}
+
 function selecionarEstado(sigla) {
 	if (sigla == undefined) {
 		sigla = 'SE';
@@ -54,6 +93,7 @@ $(document).ready(function() {
 		$('#acao').val('cadastrar');
 		$('#form_contato input[type=text]').val('');
 		limparTelefones();
+		limparEmails();
 		selecionarEstado();
 		$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
 	});
@@ -150,6 +190,7 @@ $(document).ready(function() {
 		autoOpen: false,
 		modal: true,
 		width: 800,
+		// TODO Height? Colocar scroll
 		show: {
 			effect: "blind",
 	        duration: 400
@@ -200,7 +241,15 @@ $(document).ready(function() {
 		adicionarTelefone();
 	});
 	
+	$('#btn_adicionar_email').click(function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		adicionarEmail();
+	});
+	
 	$('.btn_excluir_telefone').click(removerTelefone);
+	
+	$('.btn_excluir_email').click(removerEmail);
 	
 	$('#table_contato_categoria').dataTable({
 		"sAjaxSource": "../categorias/ajax/listar.php",

@@ -67,8 +67,24 @@ require_once '../comum/php/header.php';
 						</button>
 					</div>
 				</div>
+				
 				<div class="grid-6-12">
-					<p>Aqui virá e-mail.</p>
+					<div class="contato_email primeiro">
+						<div class="grid-10-12">
+							<label>E-mail</label>
+							<input class="email" name="email[]" type="text" placeholder="E-mail" />
+						</div>
+						<div class="grid-2-12">
+							<button class="botao_com_icone btn_excluir btn_excluir_email tooltipster" title="Excluir e-mail">
+								<span class='icone icone_22x22 icone_excluir'></span>
+							</button>
+						</div>
+					</div>
+					<div class="grid-12-12">
+						<button class="botao_com_icone btn_adicionar" id="btn_adicionar_email">
+							<span class='icone icone_22x22 icone_adicionar'>Adicionar e-mail</span>
+						</button>
+					</div>
 				</div>
 				
 				<div class="grid-10-12">

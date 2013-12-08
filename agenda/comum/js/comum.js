@@ -131,15 +131,22 @@ $.fn.extend({
 
 /* Tooltipster */
 
+$.fn.extend({
+	tooltip: function(options) {
+		$(this).tooltipster(options);
+		// Exibir tooltip ao ganhar foco
+		$(this).focusin(function(){
+			$(this).tooltipster('show');
+		});
+		$(this).focusout(function(){
+			$(this).tooltipster('hide');
+		});
+	}
+});
+
 function inicializarTooltips() {
-	$('.tooltipster').tooltipster();
-	// Exibir tooltip em eventos onfocus
-	$('.tooltipster').focusin(function(){
-		$(this).tooltipster('show');
-	});
-	$('.tooltipster').focusout(function(){
-		$(this).tooltipster('hide');
-	});	
+	// TODO Remover todas as ocorrências dessa função
+	$('.tooltipster').tooltip();
 }
 
 $(document).ready(function() {
