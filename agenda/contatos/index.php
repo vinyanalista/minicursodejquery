@@ -137,9 +137,8 @@ require_once '../comum/php/header.php';
 				</div>
 			</div>
 			<div id="tab-fotos">
-				<p>
-					Ainda não implementado.
-				</p>
+				<input type="file" id="btn_enviar_foto" />				
+				<ul class="ui-sortable" id="fotos"></ul>
 			</div>
 			<div id="tab-contato_categoria">
 				<div class="grid-12-12">

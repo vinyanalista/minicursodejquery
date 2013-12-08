@@ -8,7 +8,7 @@ class Categoria {
 }
 
 class Contato {
-	public $id, $nome, $apelido, $data_nascimento, $logradouro, $numero, $bairro, $cidade, $estado;
+	public $id, $nome, $apelido, $data_nascimento, $logradouro, $numero, $bairro, $cidade, $estado, $foto_id;
 }
 
 class Email {
@@ -16,7 +16,7 @@ class Email {
 }
 
 class Foto {
-	public $id, $data_hora, $descricao, $contato_id;
+	public $id, $nome_arquivo, $data_hora, $descricao, $contato_id;
 }
 
 class Telefone {

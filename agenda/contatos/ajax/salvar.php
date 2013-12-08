@@ -17,6 +17,7 @@ $contato -> numero = ($_POST['numero'] ? $_POST['numero'] : NULL);
 $contato -> bairro = $_POST['bairro'];
 $contato -> cidade = $_POST['cidade'];
 $contato -> estado = $_POST['estado'];
+$contato -> foto_id = NULL;
 $db -> contato -> persist($contato);
 $db -> flush();
 
@@ -39,6 +40,56 @@ if (!$cadastro) {
 if (!empty($_POST['email'])) {
 	foreach ($_POST['email'] as $endereco) {
 		$mysqli -> query('INSERT INTO email (contato_id, endereco) VALUES (' . $contato -> id . ', \'' . $endereco . '\');');
+	}
+}
+
+/* Contato - foto */
+
+if (!$cadastro) {
+	$mysqli -> query('DELETE FROM foto WHERE contato_id = ' . $contato -> id);
+}
+if (!empty($_POST['foto_nome_arquivo'])) {
+	$diretorio_fotos_do_contato = UPLOADS_DIR . '/' . $contato -> id;
+	// Se não existir, cria o diretório onde serão armazenadas as fotos do contato
+	if (!empty($_POST['foto_manter']) && !file_exists($diretorio_fotos_do_contato)) {
+		mkdir($diretorio_fotos_do_contato);
+	}
+	$contato_foto_principal = -1;
+	foreach($_POST['foto_nome_arquivo'] as $nome_arquivo) {
+		$manter = isset($_POST['foto_manter'][$nome_arquivo]);
+		$descricao = $_POST['foto_descricao'][$nome_arquivo];
+		$arquivo_temporario = UPLOADS_TEMP_DIR . '/' . $nome_arquivo;
+		$arquivo_definitivo = $diretorio_fotos_do_contato . '/' . $nome_arquivo;
+		if (!file_exists($arquivo_definitivo)) {
+			// Foto nova sendo enviada agora
+			if ($manter) {
+				rename($arquivo_temporario, $arquivo_definitivo);
+			} else {
+				unlink($arquivo_temporario);
+			}
+		} else {
+			// Foto que já pertencia ao contato
+			if (!$manter) {
+				unlink($arquivo_definitivo);
+			}
+		}
+		if ($manter) {
+			$foto = new Foto();
+			$foto -> nome_arquivo = $nome_arquivo;
+			// TODO $foto -> data_hora = '';
+			$foto -> descricao = $descricao;
+			$foto -> contato_id = $contato -> id;
+			$db -> foto -> persist($foto);
+			$db -> flush();
+			if ($nome_arquivo == $_POST['foto_principal']) {
+				$contato_foto_principal = $foto -> id;
+			}
+		}
+	}
+	if ($contato_foto_principal != -1) {
+		$contato -> foto_id = $contato_foto_principal;
+		$db -> contato -> persist($contato);
+		$db -> flush();
 	}
 }
 

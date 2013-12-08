@@ -61,6 +61,7 @@ $.fn.extend({
 	
 	// Telefone
 	mascaraDeTelefone: function() {
+		// TODO Não está funcionando para números de São Paulo
 		$(this).mask(function(phone) {
 			return phone.match(/^(\(?11\)? ?9(5[0-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9])[0-9]{1})/g) ? 
 					'(00) 00000-0000' : '(00) 0000-0000';

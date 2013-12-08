@@ -1,6 +1,8 @@
 <?php
 define("SITE_HOME", "http://localhost/jquery/agenda");
-define("SITE_DIR", "/srv/www/htdocs/jquery/agenda");
+define("SITE_DIR", dirname(__FILE__));
+define("UPLOADS_DIR", SITE_DIR . '/comum/imagens/uploads');
+define("UPLOADS_TEMP_DIR", UPLOADS_DIR . '/temp');
     
 // Configuração do MySQL
 

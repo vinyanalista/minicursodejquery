@@ -15,6 +15,7 @@
 		<link rel="shortcut icon" href="../comum/imagens/icones/agenda.png" />
 		<link rel="icon" href="../comum/imagens/icones/agenda.png" />
 		<link rel="apple-touch-icon" href="../comum/imagens/icones/agenda.png" />
+		<!-- TODO Verificar estilos e scripts, carregar só o que for mesmo comum -->
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="../comum/css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/formee/css/formee-structure.css" />
@@ -22,6 +23,8 @@
 		<link rel="stylesheet" type="text/css" href="../../lib/tag-it/css/jquery.tagit.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/tooltipster/css/tooltipster.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/datatables/css/demo_table_jui.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/uploadify/uploadify.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/fancybox/jquery.fancybox.css" />
 		<link rel="stylesheet" type="text/css" href="../comum/css/comum.css" />
 		<!-- Scripts -->
 		<script type="text/javascript" src="../../lib/jquery/jquery-1.8.3.min.js"></script>
@@ -36,6 +39,8 @@
 		<script type="text/javascript" src="../../lib/datatables/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="../../lib/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="../../lib/ckeditor/adapters/jquery.js"></script>
+		<script type="text/javascript" src="../../lib/uploadify/jquery.uploadify.min.js"></script>
+		<script type="text/javascript" src="../../lib/fancybox/jquery.fancybox.pack.js"></script>
 		<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7774466af48b4f"></script>
 		<script type="text/javascript" src="../comum/js/comum.js"></script>
 	</head>

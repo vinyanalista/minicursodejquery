@@ -86,6 +86,29 @@ function selecionarEstado(sigla) {
 	$('#estado option[value="'+sigla+'"]').attr('selected', 'selected');
 }
 
+function adicionarFoto(nomeDoArquivo, caminhoCompletoDoArquivo, descricao) {
+	var html = "<li><input type='hidden' class='foto_nome_arquivo' name='foto_nome_arquivo[]' value='" + nomeDoArquivo + "' />";
+	html += "<a class='tooltipster' href='"+caminhoCompletoDoArquivo+"' title='Clique para ver a foto ampliada'><img src='" + caminhoCompletoDoArquivo + "' /></a><br />";
+	html += "<p><span>Manter foto:</span> <input type='checkbox' class='foto_manter tooltipster' name='foto_manter[" + nomeDoArquivo + "]' value='" + nomeDoArquivo + "' checked='checked' title='Desmarque para excluir a foto quando salvar' /></p>";
+	html += "<p><span>Foto do contato:</span> <input type='radio' class='foto_principal' name='foto_principal' value='" + nomeDoArquivo + "' /></p>";
+	html += "Descrição<input class='foto_descricao' type='text' name='foto_descricao[" + nomeDoArquivo + "]' value='" + descricao + "' placeholder='Descrição' /></li>";
+	
+	$("ul#fotos").append(html);
+	$("ul#fotos a").fancybox();
+	$("ul#fotos .tooltipster").tooltip();
+	$("ul#fotos input.foto_manter").change(function() {
+		$(this).parents('li').find('input.foto_principal, input.foto_descricao').prop('disabled', !$(this).is(':checked'));
+	});
+	$("ul#fotos").sortable({
+		placeholder: "ui-state-highlight"
+	}).show();
+}
+
+function limparFotos() {
+	$("ul#fotos li").remove();
+	$("ul#fotos").hide();
+}
+
 $(document).ready(function() {
 	$('#tab-contatos').parent('li').addClass('ui-tabs-active ui-state-active');
 	
@@ -95,6 +118,7 @@ $(document).ready(function() {
 		limparTelefones();
 		limparEmails();
 		selecionarEstado();
+		limparFotos();
 		$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
 	});
 	
@@ -141,14 +165,25 @@ $(document).ready(function() {
 						$('#apelido').val(data.apelido);
 						$('#data_nascimento').val(data.data_nascimento);
 						limparTelefones();
-						for (var t = 0; t  < data.telefones.length; t++) {
+						for (var t = 0; t < data.telefones.length; t++) {
 							adicionarTelefone(data.telefones[t]);
+						};
+						limparEmails();
+						for (var m = 0; m < data.emails.length; m++) {
+							adicionarEmail(data.emails[m]);
 						};
 						$('#logradouro').val(data.logradouro);
 						$('#numero').val(data.numero);
 						$('#bairro').val(data.bairro);
 						$('#cidade').val(data.cidade);
 						selecionarEstado(data.estado);
+						limparFotos();
+						for (var f = 0; f < data.fotos.length; f++) {
+							adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].descricao);
+						};
+						if (data.foto_principal != undefined) {
+							$('input.foto_principal[value="' + data.foto_principal + '"]').attr('checked', 'checked');
+						}
 						$('#editor_de_contato').dialog('option', 'title', 'Editar contato').dialog('open');
 					},
 					error: function() {
@@ -251,6 +286,27 @@ $(document).ready(function() {
 	
 	$('.btn_excluir_email').click(removerEmail);
 	
+	var extensoesDeImagemPermitidas = "*.jpg; *.gif; *.png; *.jpeg; *.JPG; *.GIF; *.PNG; *.JPEG";
+	
+	$('#btn_enviar_foto').uploadify({
+		'auto'				: true,
+		'buttonText'		: 'Enviar',
+		'fileSizeLimit' 	: '8MB',
+		'fileTypeDesc'		: 'Somente imagens',
+		'fileTypeExts'		: extensoesDeImagemPermitidas,
+		'multi'	 			: true,
+		'onUploadError' 	: function(file, errorCode, errorMsg, errorString) {
+			console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
+        },
+		'onUploadSuccess'	: function(file, data, response) {
+            //console.log('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+            //console.log(file);
+            adicionarFoto(file.name, data, '');
+        },
+		'swf'				: '../../lib/uploadify/uploadify.swf',
+		'uploader'			: 'ajax/enviar_fotos.php'
+	});
+	
 	$('#table_contato_categoria').dataTable({
 		"sAjaxSource": "../categorias/ajax/listar.php",
 		"fnServerParams": function (aoData) {
@@ -279,6 +335,4 @@ $(document).ready(function() {
 			});
 		}
 	});
-	
-	$('#btn_novo_contato').click(); // Teste
 });
