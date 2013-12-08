@@ -63,7 +63,7 @@ b, strong {
 #tab-email {
 	background-image: url('../imagens/icones/email.png');
 }
-#content-wrapper ul li {
+ul#navegacao li {
 	float: right !important;
 	top: 13px;
 }

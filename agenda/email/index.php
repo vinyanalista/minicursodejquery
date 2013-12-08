@@ -2,14 +2,15 @@
 require_once '../comum/php/comum.php';
 require_once '../comum/php/header.php';
 ?>
-<form class="formee" id="form_contato">
+<form class="formee" id="form_email">
 	<div class="grid-12-12">
 		<label for="remetente">De</label>
-		<input id="remetente" name="remetente" type="text" placeholder="Remetente" class="required" />
+		<input id="remetente" name="remetente" type="text" placeholder="Remetente" class="required" value="<?=SMTP_FROM?>" />
 	</div>
 	<div class="grid-12-12">
-		<label for="destinatarios">Para</label>
-		<input id="destinatarios" name="destinatarios" type="text" placeholder="Destinatários" class="required" />
+		<label for="ipt_destinatarios">Para</label>
+		<input id="ipt_destinatarios" name="destinatarios" type="text" placeholder="Destinatário(s)" class="required" />
+		<ul id="ul_destinatarios"></ul>
 	</div>
 	<div class="grid-12-12">
 		<label for="assunto">Assunto</label>

@@ -19,6 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="../comum/css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/formee/css/formee-structure.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/jquery-ui/css/cupertino/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/tag-it/css/jquery.tagit.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/tooltipster/css/tooltipster.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/datatables/css/demo_table_jui.css" />
 		<link rel="stylesheet" type="text/css" href="../comum/css/comum.css" />
@@ -27,6 +28,7 @@
 		<script type="text/javascript" src="../../lib/formee/js/formee.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="../../lib/notifyjs/notify-combined.min.js"></script>
+		<script type="text/javascript" src="../../lib/tag-it/js/tag-it.min.js"></script>
 		<script type="text/javascript" src="../../lib/tooltipster/js/jquery.tooltipster.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-validate/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-validate/messages_pt_BR.js"></script>
@@ -41,7 +43,7 @@
 		<div id="container">
 			<div id="content-wrapper" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 				<!-- Navegação -->
-				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" id="navegacao">
 					<h1><a href="../">Agenda de contatos</a></h1>
 					<li class="ui-state-default ui-corner-top">
 						<a class="tab ui-tabs-anchor" id="tab-email" href="../email">E-mail</a>

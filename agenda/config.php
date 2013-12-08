@@ -17,9 +17,9 @@ error_reporting(E_ALL);
  
 // Envio de e-mails
  
-define("SMTP_HOST", "ssl://just133.justhost.com");
-define("SMTP_USERNAME", "noreply+trackmegamillions.com");
-define("SMTP_PASSWORD", "0loEJ=TkXDtH"); 
-define("SMTP_PORT", 465);
-define("SMTP_FROM", "Antônio Vinícius <vinyanalista@gmail.com>");
+define("SMTP_HOST", "ssl://seu.servidor_smtp.com");
+define("SMTP_USERNAME", "seu_usuario");
+define("SMTP_PASSWORD", "sua_senha"); 
+define("SMTP_PORT", 123456);
+define("SMTP_FROM", "Você <seu@email.com>");
 ?>

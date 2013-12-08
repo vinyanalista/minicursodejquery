@@ -16,7 +16,7 @@ function enviar_email($para, $assunto, $conteudo, $html = false, $de = SMTP_FROM
 		$headers = $mime -> headers($headers);
 	}
 
-	$envio = $smtp -> send($para, $headers, $conteudo);
+	@$envio = $smtp -> send($para, $headers, $conteudo);
 	return !PEAR::isError($envio);
 }
 ?>
