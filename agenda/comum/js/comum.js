@@ -25,6 +25,14 @@ if (getInternetExplorerVersion() >= 10) {
 	});
 }
 
+/* jQuery UI */
+
+$.extend($.ui.dialog.prototype.options, {
+	// TODO Verificar mais configurações padrão
+	autoOpen: false,
+	modal: true
+});
+
 /* jQuery Validate */
 
 $.validator.setDefaults({
@@ -66,6 +74,7 @@ $.fn.extend({
 			return phone.match(/^(\(?11\)? ?9(5[0-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9])[0-9]{1})/g) ? 
 					'(00) 00000-0000' : '(00) 0000-0000';
 		});
+		return $(this);
 	}
 });
 
@@ -127,6 +136,7 @@ $.fn.extend({
 			]
 		}, options);
 		$(this).ckeditor(options);
+		return $(this);
 	}
 });
 
@@ -142,6 +152,7 @@ $.fn.extend({
 		$(this).focusout(function(){
 			$(this).tooltipster('hide');
 		});
+		return $(this);
 	}
 });
 

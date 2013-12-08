@@ -1,3 +1,18 @@
+function adicionarDestinatario(valor, contato_ou_categoria, email, id) {
+	$("#ul_destinatarios").tagit("createTag", valor);
+	$("#ul_destinatarios li.tagit-choice:last").attr('data-contato_ou_categoria', contato_ou_categoria);
+	if (contato_ou_categoria == 1) {
+		// Contato
+		$("#ul_destinatarios li.tagit-choice:last").attr('data-email', email);
+		$('#form_email').append('<input type="hidden" name="email[]" class="email" value="'+email+'">');
+	} else {
+		// Categoria
+		$("#ul_destinatarios li.tagit-choice:last").attr('data-categoria_id', id);
+		$('#form_email').append('<input type="hidden" name="categoria_id[]" class="categoria" value="'+id+'">');
+		
+	}
+}
+
 $(document).ready(function() {
 	$('#tab-email').parent('li').addClass('ui-tabs-active ui-state-active');
 	
@@ -33,18 +48,7 @@ $(document).ready(function() {
         	},
         	select: function(event, ui) {
           		this.value = '';
-          		$("#ul_destinatarios").tagit("createTag", ui.item.value);
-          		$("#ul_destinatarios li.tagit-choice:last").attr('data-contato_ou_categoria', ui.item.contato_ou_categoria);
-          		if (ui.item.contato_ou_categoria == 1) {
-          			// Contato
-          			$("#ul_destinatarios li.tagit-choice:last").attr('data-email', ui.item.email);
-          			$('#form_email').append('<input type="hidden" name="email[]" class="email" value="'+ui.item.email+'">');
-          		} else {
-          			// Categoria
-          			$("#ul_destinatarios li.tagit-choice:last").attr('data-categoria_id', ui.item.id);
-          			$('#form_email').append('<input type="hidden" name="categoria_id[]" class="categoria" value="'+ui.item.id+'">');
-          			
-          		}
+          		adicionarDestinatario(ui.item.value, ui.item.contato_ou_categoria, ui.item.email, ui.item.id);
           		return false;
         	}
 		},
@@ -105,5 +109,9 @@ $(document).ready(function() {
 		}
 	});
 	
+	if ($('#enviar_para').length > 0) {
+		adicionarDestinatario($('#enviar_para').val(), 1, $('#enviar_para').val());
+	}
+		
 	$('#form_email #ul_destinatarios input').focus();
 });

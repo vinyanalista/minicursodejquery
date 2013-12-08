@@ -28,7 +28,9 @@ if (!$cadastro) {
 }
 if (!empty($_POST['telefone'])) {
 	foreach ($_POST['telefone'] as $numero) {
-		$mysqli -> query('INSERT INTO telefone (contato_id, numero) VALUES (' . $contato -> id . ', \'' . $numero . '\');');
+		if (!empty($numero)) {
+			$mysqli -> query('INSERT INTO telefone (contato_id, numero) VALUES (' . $contato -> id . ', \'' . $numero . '\');');
+		}
 	}
 }
 
@@ -39,7 +41,9 @@ if (!$cadastro) {
 }
 if (!empty($_POST['email'])) {
 	foreach ($_POST['email'] as $endereco) {
-		$mysqli -> query('INSERT INTO email (contato_id, endereco) VALUES (' . $contato -> id . ', \'' . $endereco . '\');');
+		if (!empty($endereco)) {
+			$mysqli -> query('INSERT INTO email (contato_id, endereco) VALUES (' . $contato -> id . ', \'' . $endereco . '\');');
+		}
 	}
 }
 

@@ -23,5 +23,5 @@ define("SMTP_HOST", "ssl://seu.servidor_smtp.com");
 define("SMTP_USERNAME", "seu_usuario");
 define("SMTP_PASSWORD", "sua_senha"); 
 define("SMTP_PORT", 123456);
-define("SMTP_FROM", "Você <seu@email.com>");
+define("SMTP_FROM", "Seu Nome <seu@email.com>");
 ?>

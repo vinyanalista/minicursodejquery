@@ -1,3 +1,41 @@
+#btn_novo_contato {
+	margin-bottom: 1.8%;
+}
+#table_contato tr:hover {
+	cursor: pointer;
+}
+#info_contato {
+	display: table;
+	margin: 0 auto;
+	padding: 0.4em;
+}
+#info_contato h3 {
+	margin-bottom: 0.4em;
+	padding: 0.4em;
+	text-align: center;
+}
+#info_contato_foto_principal img, #info_contato_sem_foto {
+	display: table;
+	height: 100px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	width: 100px;
+}
+#info_contato label {
+	display: block;
+	font-weight: bold;
+}
+.info_contato_telefone, .info_contato_email {
+	background-position: 0;
+	background-repeat: no-repeat;
+	background-size: 22px;
+	line-height: 22px;
+	padding-left: 27px;
+}
+.info_contato_email:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
 .table_contato_acoes, .table_contato_categoria_contatos, .table_contato_categoria_pertence {
 	text-align: center;
 }

@@ -2,12 +2,11 @@
 require_once '../comum/php/comum.php';
 require_once '../comum/php/header.php';
 ?>
-<div class="grid-12-12">
+<div class="grid-8-12">
 	<button class="botao_com_icone" id="btn_novo_contato">
 		<span class='icone icone_22x22 icone_novo_contato'>Novo contato</span>
 	</button>
-</div>
-<div class="grid-12-12">
+	<div class="clear"></div>
 	<table id="table_contato" class="display">
 		<thead>
 			<tr>
@@ -18,6 +17,48 @@ require_once '../comum/php/header.php';
 		<tbody>
 		</tbody>
 	</table>
+</div>
+<div class="grid-4-12">
+	<div id="info_contato" class="ui-widget-content ui-corner-all">
+		<h3 class="ui-widget-header ui-corner-all">Informações sobre o contato</h3>
+		<p id="info_contato_selecione">
+			Selecione um contato para exibir suas informações aqui.
+		</p>
+		<div id="info_contato_selecionado">
+			<div class="grid-12-12">
+				<a id='info_contato_foto_principal' class='tooltipster' title='Clique para ver a foto ampliada'>
+					<img />
+				</a>
+				<img id='info_contato_sem_foto' src='../comum/imagens/icones/contato_sem_foto.png' />
+			</div>
+			<div class="grid-12-12">
+				<h2 id="info_contato_nome_apelido"></h2>
+			</div>
+			<div class="grid-6-12">
+				<label for="info_contato_idade">Idade</label>
+				<span id="info_contato_idade"></span>
+			</div>
+			<div class="grid-6-12">
+				<label for="info_contato_aniversario">Aniversário</label>
+				<span id="info_contato_aniversario"></span>
+			</div>
+			<div class="grid-12-12">
+				<label for="info_contato_telefones">Telefones</label>
+				<ul id="info_contato_telefones"></ul>
+			</div>
+			<div class="grid-12-12">
+				<label for="info_contato_emails">E-mails</label>
+				<ul id="info_contato_emails"></ul>
+			</div>
+			<div class="grid-12-12">
+				<label for="info_contato_fotos">Fotos</label>
+				<ul id="info_contato_fotos"></ul>
+			</div>
+		</div>
+		<p id="info_contato_erro">
+			Houve um erro ao tentar carregar os dados do contato selecionado.
+		</p>
+	</div>
 </div>
 <div id="editor_de_contato" title="Editor de contato">
 	<form class="formee" id="form_contato">

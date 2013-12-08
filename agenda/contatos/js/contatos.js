@@ -1,5 +1,97 @@
 var contato_a_excluir = 0;
 
+function atualizarInformacoesSobreContato() {
+	// Esconde o que estiver atualmente sendo exibido
+	$('#info_contato_selecione, #info_contato_selecionado, #info_contato_erro').hide();
+	// Obtém a linha selecionada (se houver)
+	var $linha_selecionada = $('#table_contato tbody tr.row_selected');
+	// Obtém os dados da linha selecionada na tabela
+	var contato = $('#table_contato').dataTable().fnGetData($linha_selecionada[0]);
+	// Verifica se há um contato selecionado de fato
+	if (($linha_selecionada.length != 0) && (contato != null)) {
+		console.log(contato);
+		$.ajax({
+			async: false,
+			url: "ajax/consultar.php",
+			data: {
+				id: contato.id
+			},
+			dataType : 'json',
+			success: function(data) {
+				$('a#info_contato_foto_principal, img#info_contato_sem_foto').hide();
+				if (data.foto_principal) {
+					$('a#info_contato_foto_principal').attr('href', data.foto_principal.caminho_arquivo);
+					$('a#info_contato_foto_principal img').attr('src', data.foto_principal.caminho_arquivo);
+					$('a#info_contato_foto_principal').show().fancybox();
+				} else {
+					$('img#info_contato_sem_foto').show();
+				}
+				$('#info_contato_nome_apelido').html(data.nome);
+				if (data.apelido) {
+					$('#info_contato_nome_apelido').append(' (' + data.apelido + ')');
+				}
+				if (data.data_nascimento) {
+					$('#info_contato_idade').html('21').parent('div').css('display', 'block');
+					$('#info_contato_aniversario').html('13/06').parent('div').css('display', 'block');
+				} else {
+					$('#info_contato_idade').parent('div').css('display', 'none');
+					$('#info_contato_aniversario').parent('div').css('display', 'none');
+				}
+				$('#info_contato_telefones').html('');
+				if ((data.telefones) && (data.telefones.length > 0)) {
+					for (var t = 0; t < data.telefones.length; t++) {
+						var li = '<li class="info_contato_telefone icone_telefone">';
+						li += data.telefones[t];
+						li += '</li>';
+						$('#info_contato_telefones').append(li);
+					}
+					$('#info_contato_telefones').parent('div').show();
+				} else {
+					$('#info_contato_telefones').parent('div').hide();
+				}
+				$('#info_contato_emails').html('');
+				if ((data.emails) && (data.emails.length > 0)) {
+					for (var e = 0; e < data.emails.length; e++) {
+						var li = '<li class="info_contato_email icone_email tooltipster" title="Clique para enviar um e-mail">';
+						li += data.emails[e];
+						li += '</li>';
+						$('#info_contato_emails').append(li);
+					}
+					$('#info_contato_emails').parent('div').show();
+					$('#info_contato_emails li').tooltip().click(function() {
+						window.location = '../email/?enviar_para=' + $(this).text();
+					});
+				} else {
+					$('#info_contato_emails').parent('div').hide();
+				}
+				$('#info_contato_fotos').html('');
+				if ((data.fotos) && (data.fotos.length > 0)) {
+					for (var f = 0; f < data.fotos.length; f++) {
+						var li = '<li class="info_contato_foto">';
+						li += '<a class="tooltipster" href="' + data.fotos[f].caminho_arquivo + '" title="Clique para ver a foto ampliada">';
+						li += data.fotos[f].nome_arquivo;
+						li += '</a></li>';
+						$('#info_contato_fotos').append(li);
+					}
+					$("ul#info_contato_fotos a").fancybox();
+					$("ul#info_contato_fotos .tooltipster").tooltip();
+					$('ul#info_contato_fotos').parent('div').show();
+				} else {
+					$('#info_contato_fotos').parent('div').hide();
+				}
+				$('#info_contato_selecionado').show();
+			},
+			error: function() {
+				$.notify('Houve um erro ao tentar carregar os dados do contato selecionado.', 'error');
+				$('#info_contato_erro').show();
+			}
+		});
+	} else {
+		// contato = null indica que a última linha clicada foi a linha do cabeçalho
+		$('#info_contato_selecione').show();
+	}
+}
+
 function adicionarTelefone(telefone) {
 	if (telefone == undefined) {
 		var $novo_telefone = $('.contato_telefone').first().clone();
@@ -165,24 +257,30 @@ $(document).ready(function() {
 						$('#apelido').val(data.apelido);
 						$('#data_nascimento').val(data.data_nascimento);
 						limparTelefones();
-						for (var t = 0; t < data.telefones.length; t++) {
-							adicionarTelefone(data.telefones[t]);
-						};
+						if ((data.telefones) && (data.telefones.length > 0)) {
+							for (var t = 0; t < data.telefones.length; t++) {
+								adicionarTelefone(data.telefones[t]);
+							};
+						}
 						limparEmails();
-						for (var m = 0; m < data.emails.length; m++) {
-							adicionarEmail(data.emails[m]);
-						};
+						if ((data.emails) && (data.emails.length > 0)) {
+							for (var e = 0; e < data.emails.length; e++) {
+								adicionarEmail(data.emails[e]);
+							};
+						}
 						$('#logradouro').val(data.logradouro);
 						$('#numero').val(data.numero);
 						$('#bairro').val(data.bairro);
 						$('#cidade').val(data.cidade);
 						selecionarEstado(data.estado);
 						limparFotos();
-						for (var f = 0; f < data.fotos.length; f++) {
-							adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].descricao);
-						};
-						if (data.foto_principal != undefined) {
-							$('input.foto_principal[value="' + data.foto_principal + '"]').attr('checked', 'checked');
+						if ((data.fotos) && (data.fotos.length > 0)) {
+							for (var f = 0; f < data.fotos.length; f++) {
+								adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].descricao);
+							};
+						}
+						if (data.foto_principal) {
+							$('input.foto_principal[value="' + data.foto_principal.nome_arquivo + '"]').attr('checked', 'checked');
 						}
 						$('#editor_de_contato').dialog('option', 'title', 'Editar contato').dialog('open');
 					},
@@ -221,9 +319,17 @@ $(document).ready(function() {
 		},
 	});
 	
+	$('#table_contato tbody tr').click(function(event) {
+		// Estiliza a linha selecionada
+		$($('#table_contato').dataTable().fnSettings().aoData).each(function(){
+			$(this.nTr).removeClass('row_selected');
+		});
+		$(event.target.parentNode).addClass('row_selected');
+		// Exibe as informações sobre o contato selecionado 
+		atualizarInformacoesSobreContato();
+	});
+	
 	$('#editor_de_contato').dialog({
-		autoOpen: false,
-		modal: true,
 		width: 800,
 		// TODO Height? Colocar scroll
 		show: {
@@ -335,4 +441,6 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	atualizarInformacoesSobreContato();
 });
