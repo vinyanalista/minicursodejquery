@@ -1,9 +1,9 @@
 #btn_novo_contato {
 	margin-bottom: 1.8%;
 }
-#table_contato tr:hover {
-	cursor: pointer;
-}
+
+/* Informações sobre o contato */
+
 #info_contato {
 	/*display: table;*/
 	display: block;
@@ -22,12 +22,14 @@
 	padding: 0.4em;
 	text-align: center;
 }
-#info_contato_foto_principal img, #info_contato_sem_foto {
+#info_contato_foto_principal, #info_contato_foto_principal img, #info_contato_sem_foto {
 	display: table;
 	height: 100px;
-	margin: 0 auto;
-	margin-bottom: 5px;
 	width: 100px;
+	margin: 0 auto;
+}
+#info_contato_foto_principal a, #info_contato_sem_foto {
+	margin-bottom: 5px;
 }
 #info_contato label {
 	display: block;
@@ -44,12 +46,21 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+/* Tabela */
+
+#table_contato tr:hover {
+	cursor: pointer;
+}
 .table_contato_acoes, .table_contato_categoria_contatos, .table_contato_categoria_pertence {
 	text-align: center;
 }
 .link_excluir_contato {
 	margin-left: 10px;
 }
+
+/* Editor de contatos */
+
 .primeiro .btn_excluir {
 	margin-top: 35px;
 }

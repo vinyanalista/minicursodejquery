@@ -1,127 +1,86 @@
 var contato_a_excluir = 0;
+var jcarousel = null;
 
-// TODO Atualizar quando termina a edição do contato
-// TODO Aplicar o click na linha de novo quando a tabela recarregar
-function atualizarInformacoesSobreContato() {
-	// Esconde o que estiver atualmente sendo exibido
-	$('#info_contato_selecione, #info_contato_selecionado, #info_contato_erro').hide();
-	// Obtém a linha selecionada (se houver)
-	var $linha_selecionada = $('#table_contato tbody tr.row_selected');
-	// Obtém os dados da linha selecionada na tabela
-	var contato = $('#table_contato').dataTable().fnGetData($linha_selecionada[0]);
-	// Verifica se há um contato selecionado de fato
-	if (($linha_selecionada.length != 0) && (contato != null)) {
-		$.ajax({
-			async: false,
-			url: "ajax/consultar.php",
-			data: {
-				id: contato.id
-			},
-			dataType : 'json',
-			success: function(data) {
-				$('a#info_contato_foto_principal, img#info_contato_sem_foto').hide();
-				if (data.foto_principal) {
-					$('a#info_contato_foto_principal').attr('href', data.foto_principal.caminho_arquivo);
-					$('a#info_contato_foto_principal img').attr('src', data.foto_principal.caminho_arquivo);
-					$('a#info_contato_foto_principal').show().fancybox();
-				} else {
-					$('img#info_contato_sem_foto').show();
-				}
-				$('#info_contato_nome_apelido').html(data.nome);
-				if (data.apelido) {
-					$('#info_contato_nome_apelido').append(' (' + data.apelido + ')');
-				}
-				if (data.data_nascimento) {
-					// TODO Calcular a idade de verdade
-					$('#info_contato_idade').html('21').parent('div').css('display', 'block');
-					$('#info_contato_aniversario').html('13/06').parent('div').css('display', 'block');
-				} else {
-					$('#info_contato_idade').parent('div').css('display', 'none');
-					$('#info_contato_aniversario').parent('div').css('display', 'none');
-				}
-				$('#info_contato_telefones').html('');
-				if ((data.telefones) && (data.telefones.length > 0)) {
-					for (var t = 0; t < data.telefones.length; t++) {
-						var li = '<li class="info_contato_telefone icone_telefone">';
-						li += data.telefones[t];
-						li += '</li>';
-						$('#info_contato_telefones').append(li);
-					}
-					$('#info_contato_telefones').parent('div').show();
-				} else {
-					$('#info_contato_telefones').parent('div').hide();
-				}
-				$('#info_contato_emails').html('');
-				if ((data.emails) && (data.emails.length > 0)) {
-					for (var e = 0; e < data.emails.length; e++) {
-						var li = '<li class="info_contato_email icone_email tooltipster" title="Clique para enviar um e-mail">';
-						li += data.emails[e];
-						li += '</li>';
-						$('#info_contato_emails').append(li);
-					}
-					$('#info_contato_emails').parent('div').show();
-					$('#info_contato_emails li').tooltip().click(function() {
-						window.location = '../email/?enviar_para=' + $(this).text();
-					});
-				} else {
-					$('#info_contato_emails').parent('div').hide();
-				}
-				$('#info_contato_fotos').html('');
-				if ((data.fotos) && (data.fotos.length > 0)) {
-					for (var f = 0; f < data.fotos.length; f++) {
-						var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
-						li += '<a rel="gallery" href="' + data.fotos[f].caminho_arquivo + '"';
-						if (data.fotos[f].descricao) {
-							li += ' data-descricao="'+data.fotos[f].descricao+'"';
-						}
-						if (data.fotos[f].data) {
-							li += ' data-data="'+data.fotos[f].data+'"';
-							li += ' data-hora="'+data.fotos[f].hora+'"';
-						}
-						li += '>';
-						li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
-						li += '</a></li>';
-						$('#info_contato_fotos').append(li);
-					}
-					aplicarCarrossel();
-					$("ul#info_contato_fotos .tooltipster").tooltip();
-					$("ul#info_contato_fotos a").fancybox({
-						beforeLoad: function() {
-							var title = '';
-							if ($(this.element).data('descricao')) {
-								title += '<p>' + $(this.element).data('descricao') + '</p>';
-							}
-							if ($(this.element).data('data')) {
-								title += '<p>' + $(this.element).data('data') + ' ' + $(this.element).data('hora') + '</p>';
-							}
-				            this.title = title;
-				        },
-						helpers : {
-					        title: {
-					            type: 'inside'
-					        }
-					    }
-					});
-					$('label[for="info_contato_fotos"]').parent('div').show();
-					$('.jcarousel-wrapper').show();
-				} else {
-					$('label[for="info_contato_fotos"').parent('div').hide();
-					$('.jcarousel-wrapper').hide();
-				}
-				$('#info_contato_selecionado').show();
-			},
-			error: function() {
-				$.notify('Houve um erro ao tentar carregar os dados do contato selecionado.', 'error');
-				$('#info_contato_erro').show();
-			}
-		});
+function adicionarEmail(email) {
+	if (email == undefined) {
+		var $novo_email = $('.contato_email').first().clone();
+		$novo_email.find('label.error').remove();
+		$novo_email.find('label').hide();
+		$novo_email.find('input').removeClass('error').val('');
+		$novo_email.find('button').attr('title', 'Excluir e-mail').tooltip();
+		$novo_email.removeClass('primeiro');
+		$novo_email.find('.btn_excluir_email').click(removerEmail);
+		$('.contato_email:last').after($novo_email);
+		$('.contato_email:last input').focus();
 	} else {
-		// contato = null indica que a última linha clicada foi a linha do cabeçalho
-		$('#info_contato_selecione').show();
+		if ($('.contato_email:first input').val() != '') {
+			adicionarEmail();
+		}
+		$('.contato_email:last input').val(email);
 	}
 }
 
-var jcarousel = null;
+function adicionarFoto(nomeDoArquivo, caminhoCompletoDoArquivo, data, hora, descricao) {
+	var li = "<li><input type='hidden' class='foto_nome_arquivo' name='foto_nome_arquivo[]' value='" + nomeDoArquivo + "' />";
+	li += "<a class='tooltipster' title='Clique para ver a foto ampliada' rel='fotos' href='"+caminhoCompletoDoArquivo+"' data-nome_arquivo='" + nomeDoArquivo + "'>";
+	li += "<img src='" + caminhoCompletoDoArquivo + "' /></a><br />";
+	li += "<p><span>Manter foto:</span> <input type='checkbox' class='foto_manter tooltipster' name='foto_manter[" + nomeDoArquivo + "]' value='" + nomeDoArquivo + "' checked='checked' title='Desmarque para excluir a foto quando salvar' /></p>";
+	li += "<p><span>Foto do contato:</span> <input type='radio' class='foto_principal' name='foto_principal' value='" + nomeDoArquivo + "' /></p>";
+	li += "Data e hora<br><input class='foto_data' type='text' name='foto_data[" + nomeDoArquivo + "]' data-nome_arquivo='" + nomeDoArquivo + "' value='" + data + "' placeholder='Data' />";
+	li += "<input class='foto_hora' type='text' name='foto_hora[" + nomeDoArquivo + "]' data-nome_arquivo='" + nomeDoArquivo + "' value='" + hora + "' placeholder='Hora' />";
+	li += "Descrição<input class='foto_descricao' type='text' name='foto_descricao[" + nomeDoArquivo + "]' data-nome_arquivo='" + nomeDoArquivo + "' value='" + descricao + "' placeholder='Descrição' /></li>";
+	
+	$("ul#fotos").append(li);
+	$("ul#fotos a").fancybox({
+		beforeLoad: function() {
+			var nome_arquivo = $(this.element).data('nome_arquivo');
+			var data = $('input.foto_data[data-nome_arquivo="'+nome_arquivo+'"]').val();
+			var hora = $('input.foto_hora[data-nome_arquivo="'+nome_arquivo+'"]').val();
+			var descricao = $('input.foto_descricao[data-nome_arquivo="'+nome_arquivo+'"]').val();
+			var title = '';
+			if (descricao) {
+				title += '<p>' + descricao + '</p>';
+			}
+			if (data || hora) {
+				title += '<p>' + data + ' ' + hora + '</p>';
+			}
+            this.title = title;
+        },
+		helpers : {
+	        title: {
+	            type: 'inside'
+	        }
+	    }
+	});
+	$("ul#fotos li:last a").tooltip();
+	$("ul#fotos li:last input.foto_data").mascaraDeData();
+	$("ul#fotos li:last input.foto_hora").mascaraDeHora();
+	$("ul#fotos input.foto_manter").change(function() {
+		$(this).parents('li').find('input.foto_principal, input.foto_descricao').prop('disabled', !$(this).is(':checked'));
+	});
+	$("ul#fotos").sortable({
+		placeholder: "ui-state-highlight"
+	}).show();
+}
+
+function adicionarTelefone(telefone) {
+	if (telefone == undefined) {
+		var $novo_telefone = $('.contato_telefone').first().clone();
+		$novo_telefone.find('label.error').remove();
+		$novo_telefone.find('label').hide();
+		$novo_telefone.find('input').removeClass('error').val('').mascaraDeTelefone();
+		$novo_telefone.find('button').attr('title', 'Excluir telefone').tooltip();
+		$novo_telefone.removeClass('primeiro');
+		$novo_telefone.find('.btn_excluir_telefone').click(removerTelefone);
+		$('.contato_telefone:last').after($novo_telefone);
+		$('.contato_telefone:last input').focus();
+	} else {
+		if ($('.contato_telefone:first input').val() != '') {
+			adicionarTelefone();
+		}
+		$('.contato_telefone:last input').val(telefone);
+	}
+}
 
 function aplicarCarrossel() {
 	if (jcarousel != null) {
@@ -172,22 +131,260 @@ function aplicarCarrossel() {
         });
 }
 
-function adicionarTelefone(telefone) {
-	if (telefone == undefined) {
-		var $novo_telefone = $('.contato_telefone').first().clone();
-		$novo_telefone.find('label.error').remove();
-		$novo_telefone.find('label').hide();
-		$novo_telefone.find('input').removeClass('error').val('').mascaraDeTelefone();
-		$novo_telefone.find('button').attr('title', 'Excluir telefone').tooltip();
-		$novo_telefone.removeClass('primeiro');
-		$novo_telefone.find('.btn_excluir_telefone').click(removerTelefone);
-		$('.contato_telefone:last').after($novo_telefone);
-		$('.contato_telefone:last input').focus();
+function atualizarInformacoesSobreContato() {
+	// Esconde o que estiver atualmente sendo exibido
+	$('#info_contato_selecione, #info_contato_selecionado, #info_contato_erro').hide();
+	// Obtém a linha selecionada (se houver)
+	var $linha_selecionada = $('#table_contato tbody tr.row_selected');
+	// Obtém os dados da linha selecionada na tabela
+	var contato = $('#table_contato').dataTable().fnGetData($linha_selecionada[0]);
+	// Verifica se há um contato selecionado de fato
+	if (($linha_selecionada.length != 0) && (contato != null)) {
+		$.ajax({
+			async: false,
+			url: "ajax/consultar.php",
+			data: {
+				id: contato.id
+			},
+			dataType : 'json',
+			success: function(data) {
+				$('a#info_contato_foto_principal, img#info_contato_sem_foto').hide();
+				if (data.foto_principal) {
+					$('a#info_contato_foto_principal').attr('href', data.foto_principal.caminho_arquivo);
+					$('a#info_contato_foto_principal img').attr('src', data.foto_principal.caminho_arquivo);
+					$('a#info_contato_foto_principal').show().fancybox();
+				} else {
+					$('img#info_contato_sem_foto').show();
+				}
+				$('#info_contato_nome_apelido').html(data.nome);
+				if (data.apelido) {
+					$('#info_contato_nome_apelido').append(' (' + data.apelido + ')');
+				}
+				if (data.data_nascimento) {
+					$('#info_contato_idade').html(calcularIdade(data.data_nascimento)).parent('div').css('display', 'block');
+					$('#info_contato_aniversario').html(dataDeAniversario(data.data_nascimento)).parent('div').css('display', 'block');
+				} else {
+					$('#info_contato_idade').parent('div').css('display', 'none');
+					$('#info_contato_aniversario').parent('div').css('display', 'none');
+				}
+				$('#info_contato_telefones').html('');
+				if ((data.telefones) && (data.telefones.length > 0)) {
+					for (var t = 0; t < data.telefones.length; t++) {
+						var li = '<li class="info_contato_telefone icone_telefone">';
+						li += data.telefones[t];
+						li += '</li>';
+						$('#info_contato_telefones').append(li);
+					}
+					$('#info_contato_telefones').parent('div').show();
+				} else {
+					$('#info_contato_telefones').parent('div').hide();
+				}
+				$('#info_contato_emails').html('');
+				if ((data.emails) && (data.emails.length > 0)) {
+					for (var e = 0; e < data.emails.length; e++) {
+						var li = '<li class="info_contato_email icone_email tooltipster" title="Clique para enviar um e-mail">';
+						li += data.emails[e];
+						li += '</li>';
+						$('#info_contato_emails').append(li);
+					}
+					$('#info_contato_emails').parent('div').show();
+					$('#info_contato_emails li').tooltip().click(function() {
+						window.location = '../email/?enviar_para=' + $(this).text();
+					});
+				} else {
+					$('#info_contato_emails').parent('div').hide();
+				}
+				$('#info_contato_fotos').html('');
+				if ((data.fotos) && (data.fotos.length > 0)) {
+					for (var f = 0; f < data.fotos.length; f++) {
+						var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
+						li += '<a rel="info_contato_fotos" href="' + data.fotos[f].caminho_arquivo + '"';
+						if (data.fotos[f].descricao) {
+							li += ' data-descricao="'+data.fotos[f].descricao+'"';
+						}
+						if (data.fotos[f].data) {
+							li += ' data-data="'+data.fotos[f].data+'"';
+							li += ' data-hora="'+data.fotos[f].hora+'"';
+						}
+						li += '>';
+						li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
+						li += '</a></li>';
+						$('#info_contato_fotos').append(li);
+					}
+					aplicarCarrossel();
+					$("ul#info_contato_fotos .tooltipster").tooltip();
+					$("ul#info_contato_fotos a").fancybox({
+						beforeLoad: function() {
+							var title = '';
+							if ($(this.element).data('descricao')) {
+								title += '<p>' + $(this.element).data('descricao') + '</p>';
+							}
+							if ($(this.element).data('data')) {
+								title += '<p>' + $(this.element).data('data') + ' ' + $(this.element).data('hora') + '</p>';
+							}
+				            this.title = title;
+				        },
+						helpers : {
+					        title: {
+					            type: 'inside'
+					        }
+					    }
+					});
+					$('label[for="info_contato_fotos"]').parent('div').show();
+					$('.jcarousel-wrapper').show();
+				} else {
+					$('label[for="info_contato_fotos"').parent('div').hide();
+					$('.jcarousel-wrapper').hide();
+				}
+				$('#info_contato_selecionado').show();
+			},
+			error: function() {
+				$.notify('Houve um erro ao tentar carregar os dados do contato selecionado.', 'error');
+				$('#info_contato_erro').show();
+			}
+		});
 	} else {
-		if ($('.contato_telefone:first input').val() != '') {
-			adicionarTelefone();
+		// contato = null indica que a última linha clicada foi a linha do cabeçalho
+		$('#info_contato_selecione').show();
+	}
+}
+
+function calcularIdade(data_nascimento) {
+	var data_nascimento_partes = data_nascimento.split('/');
+	var data_nascimento_dia = data_nascimento_partes[0];
+	var data_nascimento_mes = data_nascimento_partes[1];
+	var data_nascimento_ano = data_nascimento_partes[2];
+	
+	var data_atual = new Date();
+	var data_atual_ano = data_atual.getFullYear();
+	
+	var aniversario = new Date(data_atual_ano, data_nascimento_mes - 1, data_nascimento_dia - 1);
+
+	var idade = data_atual_ano - data_nascimento_ano;
+	if (data_atual < aniversario) {
+		idade--;
+    }
+    return idade;
+}
+
+function carregarContato(id, success) {
+	$.ajax({
+		async: false,
+		url: "ajax/consultar.php",
+		data: {
+			'id': id
+		},
+		dataType : 'json',
+		'success': success,
+		error: function() {
+			$.notify('Erro ao carregar o contato. Por favor, tente novamente.', 'error');
 		}
-		$('.contato_telefone:last input').val(telefone);
+	});
+}
+
+function dataDeAniversario(data_nascimento) {
+	var data_nascimento_partes = data_nascimento.split('/');
+	var data_nascimento_dia = data_nascimento_partes[0];
+	var data_nascimento_mes = data_nascimento_partes[1];
+	return data_nascimento_dia + '/' + data_nascimento_mes;
+}
+
+function editarContato(id) {
+	carregarContato(id, function(data) {
+		$('#acao').val('atualizar');
+		$('#id').val(data.id);
+		$('#nome').val(data.nome);
+		$('#apelido').val(data.apelido);
+		$('#data_nascimento').val(data.data_nascimento);
+		limparTelefones();
+		if ((data.telefones) && (data.telefones.length > 0)) {
+			for (var t = 0; t < data.telefones.length; t++) {
+				adicionarTelefone(data.telefones[t]);
+			};
+		}
+		limparEmails();
+		if ((data.emails) && (data.emails.length > 0)) {
+			for (var e = 0; e < data.emails.length; e++) {
+				adicionarEmail(data.emails[e]);
+			};
+		}
+		$('#logradouro').val(data.logradouro);
+		$('#numero').val(data.numero);
+		$('#bairro').val(data.bairro);
+		$('#cidade').val(data.cidade);
+		selecionarEstado(data.estado);
+		limparFotos();
+		if ((data.fotos) && (data.fotos.length > 0)) {
+			for (var f = 0; f < data.fotos.length; f++) {
+				adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].data, data.fotos[f].hora, data.fotos[f].descricao);
+			};
+		}
+		if (data.foto_principal) {
+			$('input.foto_principal[value="' + data.foto_principal.nome_arquivo + '"]').attr('checked', 'checked');
+		}
+		$('#editor_de_contato').dialog('option', 'title', 'Editar contato').dialog('open');
+	});
+}
+
+function excluirContato(id) {
+	$.confirmacao('Tem certeza de que deseja excluir esse contato?<br><br>Esta ação não poderá ser desfeita!', function(){
+		$.ajax({
+			url: "ajax/excluir.php",
+			data: {
+				'id': id
+			},
+			success: function(data) {
+				if (data == '1') {
+					$.notify('Contato excluído com sucesso!', 'success');
+					$("#table_contato").dataTable().fnReloadAjax();
+				} else {
+					$.notify('Houve um erro ao tentar excluir o contato.', 'error');
+				}
+			},
+			error: function() {
+				$.notify('Houve um erro ao tentar excluir o contato.', 'error');
+			}
+		});
+	});
+}
+
+function limparEmails() {
+	$('.contato_email:not(:first)').remove();
+	$('.contato_email').find('input').removeClass('error').val('');
+	$('.contato_email').find('label.error').remove();
+}
+
+function limparFotos() {
+	$("ul#fotos li").remove();
+	$("ul#fotos").hide();
+}
+
+function limparTelefones() {
+	$('.contato_telefone:not(:first)').remove();
+	$('.contato_telefone').find('input').removeClass('error').val('');
+	$('.contato_telefone').find('label.error').remove();
+}
+
+function novoContato() {
+	$('#acao').val('cadastrar');
+	$('#form_contato input[type=text]').val('');
+	limparTelefones();
+	limparEmails();
+	selecionarEstado();
+	limparFotos();
+	$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
+}
+
+function removerEmail(event) {
+	event.preventDefault();
+	event.stopPropagation();
+	var $email = $(this).parents('.contato_email');
+	if (($email[0] == $('.contato_email:first')[0]) && ($('.contato_email').length == 1)) {
+		$email.find('input').removeClass('error').val('');
+		$email.find('label.error').remove();
+	} else {
+		$email.remove();
+		$('.contato_email:first').addClass('primeiro').find('label').show();
 	}
 }
 
@@ -206,48 +403,28 @@ function removerTelefone(event) {
 	}
 }
 
-function limparTelefones() {
-	$('.contato_telefone:not(:first)').remove();
-	$('.contato_telefone').find('input').removeClass('error').val('');
-	$('.contato_telefone').find('label.error').remove();
-}
-
-function adicionarEmail(email) {
-	if (email == undefined) {
-		var $novo_email = $('.contato_email').first().clone();
-		$novo_email.find('label.error').remove();
-		$novo_email.find('label').hide();
-		$novo_email.find('input').removeClass('error').val(''); // TODO .mascaraDeTelefone();
-		$novo_email.find('button').attr('title', 'Excluir e-mail').tooltip();
-		$novo_email.removeClass('primeiro');
-		$novo_email.find('.btn_excluir_email').click(removerEmail);
-		$('.contato_email:last').after($novo_email);
-		$('.contato_email:last input').focus();
-	} else {
-		if ($('.contato_email:first input').val() != '') {
-			adicionarEmail();
-		}
-		$('.contato_email:last input').val(email);
+function salvarContato() {
+	var salvou = false;
+	if ($('#form_contato').valid()) {
+		$.ajax({
+			async: false,
+			url: "ajax/salvar.php",
+			data: $("#form_contato").serialize(),
+			success: function(data) {
+				if (data == '1') {
+					$.notify('Contato ' + ($('#acao').val() == 'cadastrar' ? 'cadastrado' : 'atualizado') + ' com sucesso!', 'success');
+					$("#table_contato").dataTable().fnReloadAjax();
+					salvou = true;
+				} else {
+					$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' o contato.', 'error');
+				}
+			},
+			error: function() {
+				$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' o contato.', 'error');
+			}
+		});
 	}
-}
-
-function removerEmail(event) {
-	event.preventDefault();
-	event.stopPropagation();
-	var $email = $(this).parents('.contato_email');
-	if (($email[0] == $('.contato_email:first')[0]) && ($('.contato_email').length == 1)) {
-		$email.find('input').removeClass('error').val('');
-		$email.find('label.error').remove();
-	} else {
-		$email.remove();
-		$('.contato_email:first').addClass('primeiro').find('label').show();
-	}
-}
-
-function limparEmails() {
-	$('.contato_email:not(:first)').remove();
-	$('.contato_email').find('input').removeClass('error').val('');
-	$('.contato_email').find('label.error').remove();
+	return salvou;
 }
 
 function selecionarEstado(sigla) {
@@ -258,46 +435,10 @@ function selecionarEstado(sigla) {
 	$('#estado option[value="'+sigla+'"]').attr('selected', 'selected');
 }
 
-function adicionarFoto(nomeDoArquivo, caminhoCompletoDoArquivo, data, hora, descricao) {
-	var li = "<li><input type='hidden' class='foto_nome_arquivo' name='foto_nome_arquivo[]' value='" + nomeDoArquivo + "' />";
-	li += "<a class='tooltipster' title='Clique para ver a foto ampliada' href='"+caminhoCompletoDoArquivo+"'><img src='" + caminhoCompletoDoArquivo + "' /></a><br />";
-	li += "<p><span>Manter foto:</span> <input type='checkbox' class='foto_manter tooltipster' name='foto_manter[" + nomeDoArquivo + "]' value='" + nomeDoArquivo + "' checked='checked' title='Desmarque para excluir a foto quando salvar' /></p>";
-	li += "<p><span>Foto do contato:</span> <input type='radio' class='foto_principal' name='foto_principal' value='" + nomeDoArquivo + "' /></p>";
-	li += "Data e hora<br><input class='foto_data' type='text' name='foto_data[" + nomeDoArquivo + "]' value='" + data + "' placeholder='Data' />";
-	li += "<input class='foto_hora' type='text' name='foto_hora[" + nomeDoArquivo + "]' value='" + hora + "' placeholder='Hora' />";
-	li += "Descrição<input class='foto_descricao' type='text' name='foto_descricao[" + nomeDoArquivo + "]' value='" + descricao + "' placeholder='Descrição' /></li>";
-	
-	$("ul#fotos").append(li);
-	// TODO Verificar a possibilidade de usar a galeria do fancybox aqui também
-	$("ul#fotos a").fancybox();
-	$("ul#fotos li:last a").tooltip();
-	$("ul#fotos li:last input.foto_data").mascaraDeData();
-	$("ul#fotos li:last input.foto_hora").mascaraDeHora();
-	$("ul#fotos input.foto_manter").change(function() {
-		$(this).parents('li').find('input.foto_principal, input.foto_descricao').prop('disabled', !$(this).is(':checked'));
-	});
-	$("ul#fotos").sortable({
-		placeholder: "ui-state-highlight"
-	}).show();
-}
-
-function limparFotos() {
-	$("ul#fotos li").remove();
-	$("ul#fotos").hide();
-}
-
 $(document).ready(function() {
-	$('#tab-contatos').parent('li').addClass('ui-tabs-active ui-state-active');
+	$('#tab-contatos').tabAtiva();
 	
-	$('#btn_novo_contato').click(function(event){
-		$('#acao').val('cadastrar');
-		$('#form_contato input[type=text]').val('');
-		limparTelefones();
-		limparEmails();
-		selecionarEstado();
-		limparFotos();
-		$('#editor_de_contato').dialog('option', 'title', 'Novo contato').dialog('open');
-	});
+	$('#btn_novo_contato').click(novoContato);
 	
 	$('#table_contato').dataTable({
 		"sAjaxSource": "ajax/listar.php",
@@ -319,107 +460,47 @@ $(document).ready(function() {
 			[0, "asc"],
 		],
 		"fnDrawCallback": function() {
-			$('#table_contato tr:not([role=row])').each(function(){
-				$(this).find('td:eq(1)').addClass('table_contato_acoes');
-			});
-			
-			inicializarTooltips();
-			
-			$('.link_editar_contato').click(function(event){
-				event.preventDefault();
-				event.stopPropagation();
-				$.ajax({
-					async: false,
-					url: "ajax/consultar.php",
-					data: {
-						id: $(this).data('id')
-					},
-					dataType : 'json',
-					success: function(data) {
-						$('#acao').val('atualizar');
-						$('#id').val(data.id);
-						$('#nome').val(data.nome);
-						$('#apelido').val(data.apelido);
-						$('#data_nascimento').val(data.data_nascimento);
-						limparTelefones();
-						if ((data.telefones) && (data.telefones.length > 0)) {
-							for (var t = 0; t < data.telefones.length; t++) {
-								adicionarTelefone(data.telefones[t]);
-							};
-						}
-						limparEmails();
-						if ((data.emails) && (data.emails.length > 0)) {
-							for (var e = 0; e < data.emails.length; e++) {
-								adicionarEmail(data.emails[e]);
-							};
-						}
-						$('#logradouro').val(data.logradouro);
-						$('#numero').val(data.numero);
-						$('#bairro').val(data.bairro);
-						$('#cidade').val(data.cidade);
-						selecionarEstado(data.estado);
-						limparFotos();
-						if ((data.fotos) && (data.fotos.length > 0)) {
-							for (var f = 0; f < data.fotos.length; f++) {
-								adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].data, data.fotos[f].hora, data.fotos[f].descricao);
-							};
-						}
-						if (data.foto_principal) {
-							$('input.foto_principal[value="' + data.foto_principal.nome_arquivo + '"]').attr('checked', 'checked');
-						}
-						$('#editor_de_contato').dialog('option', 'title', 'Editar contato').dialog('open');
-					},
-					error: function() {
-						$.notify('Houve um erro ao tentar carregar o contato para edição.', 'error');
-					}
-				});
-			});
-			
-			$('.link_excluir_contato').click(function(event){
-				event.preventDefault();
-				event.stopPropagation();
-				contato_a_excluir = $(this).data('id');
-				$.confirmacao('Tem certeza de que deseja excluir esse contato?<br><br>Esta ação não poderá ser desfeita!', function(){
-					$.ajax({
-						url: "ajax/excluir.php",
-						data: {
-							id: contato_a_excluir
-						},
-						success: function(data) {
-							if (data == '1') {
-								$.notify('Contato excluído com sucesso!', 'success');
-								$("#table_contato").dataTable().fnReloadAjax();
-							} else {
-								$.notify('Houve um erro ao tentar excluir o contato.', 'error');
-							}
-						},
-						error: function() {
-							$.notify('Houve um erro ao tentar excluir o contato.', 'error');
-						}
+			// Verifica se há contatos na tabela (se ela não está vazia)
+			if ($('#table_contato td.dataTables_empty').length == 0) {
+				// Quando o usuário clica em uma linha da tabela
+				$('#table_contato tbody tr').click(function(event) {
+					// Estiliza a linha selecionada
+					$($('#table_contato').dataTable().fnSettings().aoData).each(function(){
+						$(this.nTr).removeClass('row_selected');
 					});
+					$(event.target.parentNode).addClass('row_selected');
+					// Exibe as informações sobre o contato selecionado 
+					atualizarInformacoesSobreContato();
 				});
-			});
-			
-			hideLoading();
+				
+				$('#table_contato tr:not([role=row])').each(function(){
+					$(this).find('td:eq(1)').addClass('table_contato_acoes');
+				});
+				
+				$('.link_editar_contato').click(function(event){
+					event.preventDefault();
+					event.stopPropagation();
+					editarContato($(this).data('id'));
+				});
+				
+				$('.link_excluir_contato').click(function(event){
+					event.preventDefault();
+					event.stopPropagation();
+					excluirContato($(this).data('id'));
+				});
+				
+				$('.tooltipster').tooltip();
+				
+				atualizarInformacoesSobreContato();
+			}
 		},
 	});
 	
-	$('#table_contato tbody tr').click(function(event) {
-		// Estiliza a linha selecionada
-		$($('#table_contato').dataTable().fnSettings().aoData).each(function(){
-			$(this.nTr).removeClass('row_selected');
-		});
-		$(event.target.parentNode).addClass('row_selected');
-		// Exibe as informações sobre o contato selecionado 
-		atualizarInformacoesSobreContato();
-	});
-	
 	$('#editor_de_contato').dialog({
-		width: 800,
-		// TODO Height? Colocar scroll
-		show: {
-			effect: "blind",
-	        duration: 400
+	    create: function() {
+	    	var $botoes = $('div.ui-dialog[aria-describedby="editor_de_contato"] .ui-dialog-buttonset button');
+	    	$botoes.first().addClass('botao_com_icone').find('.ui-button-text').html('<span class="icone icone_22x22 icone_cancelar">Cancelar</span>');
+	    	$botoes.eq(1).addClass('botao_com_icone').find('.ui-button-text').html('<span class="icone icone_22x22 icone_salvar">Salvar</span>');
 	    },
 	    open: function() {
 	    	$('#editor_de_contato_tabs').tabs('option', 'active', 0);
@@ -429,32 +510,12 @@ $(document).ready(function() {
 			$('#nome').focus();
 	    },
 	    buttons: {
-	        // TODO Adicionar ícones aos botões?  
 	    	'Cancelar': function() {
 	        	$(this).dialog("close");
 	        },
 		    'Salvar': function() {
-		    	if ($('#form_contato').valid()) {
-		    		showLoading();
-		    		$.ajax({
-		    			async: false,
-		    			url: "ajax/salvar.php",
-		    			data: $("#form_contato").serialize(),
-		    			success: function(data) {
-		    				hideLoading();
-							if (data == '1') {
-								$('#editor_de_contato').dialog("close");
-								$("#table_contato").dataTable().fnReloadAjax();
-								$.notify('Contato ' + ($('#acao').val() == 'cadastrar' ? 'cadastrado' : 'atualizado') + ' com sucesso!', 'success');
-							} else {
-								$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' o contato.', 'error');
-							}
-						},
-						error: function() {
-							hideLoading();
-							$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' o contato.', 'error');
-						}
-		    		});
+		    	if (salvarContato()) {
+		    		$(this).dialog("close");
 		    	}
 		    }
 	    }
@@ -488,11 +549,9 @@ $(document).ready(function() {
 		'fileTypeExts'		: extensoesDeImagemPermitidas,
 		'multi'	 			: true,
 		'onUploadError' 	: function(file, errorCode, errorMsg, errorString) {
-			console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
+			$.notify('Erro ao enviar a foto. Por favor, tente novamente.', 'error');
         },
 		'onUploadSuccess'	: function(file, data, response) {
-            //console.log('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-            //console.log(file);
             adicionarFoto(file.name, data, '', '', '');
         },
 		'swf'				: '../../lib/uploadify/uploadify.swf',

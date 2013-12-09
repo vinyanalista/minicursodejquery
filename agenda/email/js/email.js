@@ -14,7 +14,7 @@ function adicionarDestinatario(valor, contato_ou_categoria, email, id) {
 }
 
 $(document).ready(function() {
-	$('#tab-email').parent('li').addClass('ui-tabs-active ui-state-active');
+	$('#tab-email').tabAtiva();
 	
 	function extractLast(term) {
 		return term.split( /,\s*/ ).pop();

@@ -21,7 +21,5 @@
 				</div>
 			</div>
 		</footer>
-		<!-- TODO Loading -->
-		<img id="loading" src="../comum/imagens/loading.gif" width="173" height="125" style="display:none" /></div>
 	</body>
 </html>

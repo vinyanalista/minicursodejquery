@@ -33,6 +33,8 @@
 		<script type="text/javascript" src="../../lib/jquery/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="../../lib/formee/js/formee.js"></script>
 		<script type="text/javascript" src="../../lib/jquery-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="../../lib/jquery-ui/js/jquery.ui.datepicker-pt-BR.js"></script>
+		<script type="text/javascript" src="../../lib/blockui/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="../../lib/notifyjs/notify-combined.min.js"></script>
 		<script type="text/javascript" src="../../lib/tag-it/js/tag-it.min.js"></script>
 		<script type="text/javascript" src="../../lib/tooltipster/js/jquery.tooltipster.min.js"></script>

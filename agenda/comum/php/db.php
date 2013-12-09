@@ -58,6 +58,7 @@ function format_date($date = NULL, $to_mysql = FALSE) {
 		if (empty($date)) {
 			return date('Y-m-d');
 		} else {
+			$date = str_replace('/', '-', $date);
 			return date('Y-m-d', strtotime($date));
 		}
 	}
@@ -74,6 +75,7 @@ function format_datetime($datetime = NULL, $to_mysql = FALSE) {
 		if (empty($datetime)) {
 			return date('Y-m-d H:i');
 		} else {
+			$datetime = str_replace('/', '-', $datetime);
 			return date('Y-m-d H:i', strtotime($datetime));
 		}
 	}

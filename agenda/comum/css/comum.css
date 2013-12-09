@@ -10,6 +10,11 @@ html, body {
 	min-width: 1015px;
 	min-height: 510px; /* Resolução mínima: 1024x600 */
 }
+h2 {
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 15px;
+}
 p {
 	margin-bottom: 10px;
 }
@@ -162,24 +167,21 @@ table.form span.required {
 	font-weight: bold;
 }
 
-/* Other */
+/* Diversos */
 
 .clear {
 	clear: both;
 }
-/*label.success, label.error {
-	display: block;
-	font-style: italic;
-	font-weight: normal;
-}
-label.success {
-	color: green;
-}*/
 input.error {
 	border-color: red;
 }
 label.error {
 	color: red;
+}
+#loading {
+	display: none;
+	height: 55px;
+	width: 55px;
 }
 
 /* Ícones */
@@ -196,12 +198,14 @@ label.error {
 }
 
 .icone_adicionar{background-image: url(../imagens/icones/adicionar.png);}
+.icone_cancelar{background-image: url(../imagens/icones/cancelar.png);}
 .icone_categorias{background-image: url(../imagens/icones/categorias.png);}
 .icone_contatos{background-image: url(../imagens/icones/contatos.png);}
 .icone_editar{background-image: url(../imagens/icones/editar.png);}
 .icone_email{background-image: url(../imagens/icones/email.png);}
-.icone_telefone{background-image: url(../imagens/icones/telefone.png);}
 .icone_excluir{background-image: url(../imagens/icones/excluir.png);}
+.icone_salvar{background-image: url(../imagens/icones/salvar.png);}
+.icone_telefone{background-image: url(../imagens/icones/telefone.png);}
 
 .icone_novo_contato{background-image: url(../imagens/icones/novo_contato.png);}
 

@@ -29,7 +29,7 @@ require_once '../comum/php/header.php';
 				<a id='info_contato_foto_principal' class='tooltipster' title='Clique para ver a foto ampliada'>
 					<img />
 				</a>
-				<img id='info_contato_sem_foto' src='../comum/imagens/icones/contato_sem_foto.png' />
+				<img class='tooltipster' id='info_contato_sem_foto' src='../comum/imagens/icones/contato_sem_foto.png' title='Este contato não possui foto.' />
 			</div>
 			<div class="grid-12-12">
 				<h2 id="info_contato_nome_apelido"></h2>
@@ -93,7 +93,7 @@ require_once '../comum/php/header.php';
 					<a href="#tab-contato_categoria">Categorias</a>
 				</li>
 			</ul>
-			<div id="tab-informacoes-pessoais">
+			<div class="tab" id="tab-informacoes-pessoais">
 				<div class="grid-12-12">
 					<label for="nome">Nome</label>
 					<input id="nome" name="nome" type="text" placeholder="Nome" class="required" />
@@ -194,11 +194,11 @@ require_once '../comum/php/header.php';
 					</select>
 				</div>
 			</div>
-			<div id="tab-fotos">
+			<div class="tab" id="tab-fotos">
 				<input type="file" id="btn_enviar_foto" />				
 				<ul class="ui-sortable" id="fotos"></ul>
 			</div>
-			<div id="tab-contato_categoria">
+			<div class="tab" id="tab-contato_categoria">
 				<div class="grid-12-12">
 					<table id="table_contato_categoria" class="display">
 						<thead>

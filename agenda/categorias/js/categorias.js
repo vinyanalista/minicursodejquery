@@ -1,7 +1,7 @@
 var categoria_a_excluir = 0;
 
 $(document).ready(function() {
-	$('#tab-categorias').parent('li').addClass('ui-tabs-active ui-state-active');
+	$('#tab-categorias').tabAtiva();
 	
 	$('#btn_nova_categoria').click(function(event){
 		$('#acao').val('cadastrar');
@@ -35,7 +35,7 @@ $(document).ready(function() {
 				$(this).find('td:eq(2)').addClass('table_categoria_acoes');
 			});
 			
-			inicializarTooltips();
+			$('.tooltipster').tooltip();
 			
 			$('.link_editar_categoria').click(function(event){
 				event.preventDefault();
@@ -83,19 +83,14 @@ $(document).ready(function() {
 					});
 				});
 			});
-			
-			hideLoading();
 		},
 	});
 	
 	$('#editor_de_categoria').dialog({
-		autoOpen: false,
-		modal: true,
-		width: 800,
-		height: 600,
-		show: {
-			effect: "blind",
-	        duration: 400
+		create: function() {
+	    	var $botoes = $('div.ui-dialog[aria-describedby="editor_de_categoria"] .ui-dialog-buttonset button');
+	    	$botoes.first().addClass('botao_com_icone').find('.ui-button-text').html('<span class="icone icone_22x22 icone_cancelar">Cancelar</span>');
+	    	$botoes.eq(1).addClass('botao_com_icone').find('.ui-button-text').html('<span class="icone icone_22x22 icone_salvar">Salvar</span>');
 	    },
 	    open: function() {
 	    	$('#form_categoria input[type=text]').removeClass('error');
@@ -109,13 +104,11 @@ $(document).ready(function() {
 	        },
 		    'Salvar': function() {
 		    	if ($('#form_categoria').valid()) {
-		    		showLoading();
 		    		$.ajax({
 		    			async: false,
 		    			url: "ajax/salvar.php",
 		    			data: $("#form_categoria").serialize(),
 		    			success: function(data) {
-		    				hideLoading();
 							if (data == '1') {
 								$('#editor_de_categoria').dialog("close");
 								$("#table_categoria").dataTable().fnReloadAjax();
@@ -125,7 +118,6 @@ $(document).ready(function() {
 							}
 						},
 						error: function() {
-							hideLoading();
 							$.notify('Houve um erro ao tentar ' + $('#acao').val() + ' a categoria.', 'error');
 						}
 		    		});

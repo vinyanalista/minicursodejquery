@@ -85,7 +85,7 @@ if (!empty($_POST['foto_nome_arquivo'])) {
 			if (empty($data) && !empty($hora)) {
 				$data = format_date();
 			}
-			$foto -> data_hora = format_date(trim($data . ($hora ? ' ' . $hora : '')), TRUE);
+			$foto -> data_hora = format_datetime(trim($data . ($hora ? ' ' . $hora : '')), TRUE);
 			$foto -> descricao = $descricao;
 			$foto -> contato_id = $contato -> id;
 			$db -> foto -> persist($foto);

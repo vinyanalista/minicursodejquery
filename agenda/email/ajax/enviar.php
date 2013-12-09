@@ -1,4 +1,5 @@
 <?php
+sleep(5);
 echo TRUE; exit; // Não envia o e-mail de verdade
 require_once '../../comum/php/comum.php';
 $remetente = $_POST['remetente'];

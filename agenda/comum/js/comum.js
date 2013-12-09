@@ -28,9 +28,18 @@ if (getInternetExplorerVersion() >= 10) {
 /* jQuery UI */
 
 $.extend($.ui.dialog.prototype.options, {
-	// TODO Verificar mais configurações padrão
 	autoOpen: false,
-	modal: true
+	modal: true,
+	width: 800,
+	show: {
+		effect: "blind",
+        duration: 400
+    },
+    hide: {
+		effect: "blind",
+        duration: 200
+    }
+	// TODO Pesquisar um meio viável de acrescentar scroll ao diálogo
 });
 
 /* jQuery Validate */
@@ -47,14 +56,10 @@ $.fn.extend({
 	// Data
 	mascaraDeData: function() {
 		$(this).datepicker({
-			dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
-			dayNamesMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
-			monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-			monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
 			changeMonth: true,
 			changeYear: true,
 			yearRange: '1920:+10',
-			dateFormat: "dd/mm/yy"
+			showButtonPanel: true 
 		});
 		$(this).mask("00/00/0000");
 		return $(this);
@@ -79,7 +84,7 @@ $.fn.extend({
 	
 	// Telefone
 	mascaraDeTelefone: function() {
-		// TODO Não está funcionando para números de São Paulo
+		// TODO Não está funcionando para números de São Paulo com 9 dígitos
 		$(this).mask(function(phone) {
 			return phone.match(/^(\(?11\)? ?9(5[0-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9])[0-9]{1})/g) ? 
 					'(00) 00000-0000' : '(00) 0000-0000';
@@ -167,13 +172,8 @@ $.fn.extend({
 	}
 });
 
-function inicializarTooltips() {
-	// TODO Remover todas as ocorrências dessa função
-	$('.tooltipster').tooltip();
-}
-
 $(document).ready(function() {
-	inicializarTooltips();
+	$('.tooltipster').tooltip();
 });
 
 /* Data tables */
@@ -197,12 +197,8 @@ $.extend($.fn.dataTable.defaults, {
 		    success: fnCallback
 	    });
     },
-	"fnPreDrawCallback": function() {
-		showLoading();
-	},
 	"fnDrawCallback": function() {
-		inicializarTooltips();
-		hideLoading();
+		$('.tooltipster').tooltip();
 	},
 	"oLanguage": {
 	    "sProcessing":   "Processando...",
@@ -214,7 +210,8 @@ $.extend($.fn.dataTable.defaults, {
 	    "sInfoPostFix":  "",
 	    "sSearch":       "Buscar:",
 	    "sUrl":          "",
-	    // TODO Sugerir atualização de tradução no site do Data Tables
+	    // TODO Traduzir e propor alteração no site do DataTables
+	    // Sem a configuração abaixo, a tabela não é renderizada
 	    "oAria": {
 	    	"sSortAscending": ": activate to sort column ascending",
 	    	"sSortDescending": ": activate to sort column descending"
@@ -352,42 +349,46 @@ function showDebugger() {
 
 /* Loading */
 
-// TODO Fazer o loading
-
-function showLoading() {
-	/*if ($(".blockOverlay").length == 0) {
-		$.blockUI({
-			message : $('#loading'),
-			css : {
-				background : 'transparent',
-				border : '0',
-				top : ($(window).height() - 125) / 2 + 'px',
-				left : ($(window).width() - 173) / 2 + 'px',
-				width : '173px'
-			}
-		});
-	}*/
+$.showLoading = function() {
+	$('body').append('<img id="loading" src="../comum/imagens/loading.gif" />');
+	$.blockUI({
+		message : $('#loading'),
+		css : {
+			background : 'transparent',
+			border : '0',
+			top : ($(window).height() - 55) / 2 + 'px',
+			left : ($(window).width() - 55) / 2 + 'px',
+			width : '55px'
+		}
+	});
 }
 
-function hideLoading() {
-	/*if ($(".blockOverlay").length > 0) {
-		$.unblockUI();
-	}*/
+$.hideLoading = function() {
+	$.unblockUI();
 }
 
-/* Other */
-
-function redirect(url) {
-	window.top.showLoading();
-	window.top.location = url;
-}
-
-/*$(document).ready(function() {
-	$("#table_contato").dataTable();
+$(document).ajaxSend(function() {
+	$.showLoading();
 });
 
-$(document).ready(function() {
-	$("#table_categoria").dataTable();
-});*/
+$(document).ajaxComplete(function() {
+	$.hideLoading();
+});
 
-// TODO Marcar aba: adicionar classes ui-tabs-active ui-state-active
+$('a').click(function() {
+	$.showLoading();
+});
+
+/* Outras funções */
+
+$.fn.extend({
+	tabAtiva: function() {
+		$(this).parent('li').addClass('ui-tabs-active ui-state-active');
+		return $(this);
+	}
+});
+
+$.redirecionar = function(url) {
+	$.showLoading();
+	window.top.location = url;
+}
