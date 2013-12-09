@@ -67,17 +67,29 @@ function atualizarInformacoesSobreContato() {
 				$('#info_contato_fotos').html('');
 				if ((data.fotos) && (data.fotos.length > 0)) {
 					for (var f = 0; f < data.fotos.length; f++) {
-						var li = '<li class="info_contato_foto">';
-						li += '<a class="tooltipster" href="' + data.fotos[f].caminho_arquivo + '" title="Clique para ver a foto ampliada">';
-						li += data.fotos[f].nome_arquivo;
+						var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
+						li += '<a rel="gallery" href="' + data.fotos[f].caminho_arquivo + '"' + (data.fotos[f].descricao ? ' descricao="'+data.fotos[f].descricao+'"' : '') + '>';
+						li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
 						li += '</a></li>';
 						$('#info_contato_fotos').append(li);
 					}
-					$("ul#info_contato_fotos a").fancybox();
+					aplicarCarrossel();
 					$("ul#info_contato_fotos .tooltipster").tooltip();
-					$('ul#info_contato_fotos').parent('div').show();
+					$("ul#info_contato_fotos a").fancybox({
+						beforeLoad: function() {
+				            this.title = $(this.element).attr('descricao');
+				        },
+						helpers : {
+					        title: {
+					            type: 'inside'
+					        }
+					    }
+					});
+					$('label[for="info_contato_fotos"]').parent('div').show();
+					$('.jcarousel-wrapper').show();
 				} else {
-					$('#info_contato_fotos').parent('div').hide();
+					$('label[for="info_contato_fotos"').parent('div').hide();
+					$('.jcarousel-wrapper').hide();
 				}
 				$('#info_contato_selecionado').show();
 			},
@@ -90,6 +102,57 @@ function atualizarInformacoesSobreContato() {
 		// contato = null indica que a última linha clicada foi a linha do cabeçalho
 		$('#info_contato_selecione').show();
 	}
+}
+
+var jcarousel = null;
+
+function aplicarCarrossel() {
+	if (jcarousel != null) {
+		jcarousel.jcarousel('destroy');
+	}
+	
+	jcarousel = $('.jcarousel')
+        .on('jcarousel:reload jcarousel:create', function () {
+            var width = $(this).innerWidth();
+
+            if (width >= 600) {
+                width = width / 3;
+            } else if (width >= 150) {
+                width = width / 2;
+            }
+
+            $(this).jcarousel('items').css('width', width + 'px');
+        })
+        .jcarousel({
+            wrap: 'circular'
+        });
+
+    $('.jcarousel-control-prev')
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    $('.jcarousel-control-next')
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    $('.jcarousel-pagination')
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            perPage: 1,
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
 }
 
 function adicionarTelefone(telefone) {

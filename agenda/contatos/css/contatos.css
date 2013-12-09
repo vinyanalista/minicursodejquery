@@ -5,9 +5,17 @@
 	cursor: pointer;
 }
 #info_contato {
-	display: table;
-	margin: 0 auto;
+	/*display: table;*/
+	display: block;
+	margin: auto;
 	padding: 0.4em;
+}
+#info_contato:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	overflow: hidden;
 }
 #info_contato h3 {
 	margin-bottom: 0.4em;

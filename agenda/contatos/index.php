@@ -52,7 +52,23 @@ require_once '../comum/php/header.php';
 			</div>
 			<div class="grid-12-12">
 				<label for="info_contato_fotos">Fotos</label>
-				<ul id="info_contato_fotos"></ul>
+				
+	            <div class="jcarousel-wrapper">
+	                <div class="jcarousel">
+	                    <ul id="info_contato_fotos">
+	                    </ul>
+	                </div>
+	
+	                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+	                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+	
+	                <p class="jcarousel-pagination"></p>
+	            </div>
+		        <link rel="stylesheet" type="text/css" href="../../lib/jcarousel/jcarousel.responsive.css">
+		         <script type="text/javascript" src="../../lib/jcarousel/jquery.jcarousel.min.js"></script>
+		        <!--<script type="text/javascript" src="../../lib/jcarousel/jcarousel.responsive.js"></script>-->
+		        
+		        
 			</div>
 		</div>
 		<p id="info_contato_erro">
