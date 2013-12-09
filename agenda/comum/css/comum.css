@@ -10,12 +10,6 @@ html, body {
 	min-width: 1015px;
 	min-height: 510px; /* Resolução mínima: 1024x600 */
 }
-h2 {
-	float: left;
-	font-size: 20px;
-	font-weight: bold;
-	padding-bottom: 15px;
-}
 p {
 	margin-bottom: 10px;
 }
@@ -44,7 +38,8 @@ b, strong {
 	background-repeat: no-repeat;
 	background-size: contain;
 	float: left;
-	font-size: 20px;
+	font-family: 'Forgotten Futurist', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
+	font-size: 25px;
 	line-height: 48px;
 	margin-bottom: 5px;
 	padding-left: 58px;

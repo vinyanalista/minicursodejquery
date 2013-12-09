@@ -1,4 +1,5 @@
 /*@import url(http://fonts.googleapis.com/css?family=Questrial|Nunito:400,700);*/
+@import url(../../../../../forgotten-futurist/forgotten-futurist.css);
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
@@ -17,7 +18,8 @@
   font-weight: 400;
   src: local('Questrial'), local('Questrial-Regular'), url(../fonts/questrial.woff), url(http://themes.googleusercontent.com/static/fonts/questrial/v3/MYWJ4lYm5dbZ1UBuYox79LO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
 }
-@font-face {
+
+/*@font-face {
   font-family: 'Forgotten Futurist';
   font-style: normal;
   font-weight: 400;
@@ -28,7 +30,7 @@
   font-style: normal;
   font-weight: 700;
   src: url(../fonts/forgotten-futurist-bold.ttf);
-}
+}*/
 
 .ppw-slide-element{
     font-family: 'Questrial' !IMPORTANT;

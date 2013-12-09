@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Forgotten Futurist';
+  font-style: normal;
+  font-weight: 400;
+  src: url(forgotten-futurist-regular.ttf);
+}
+@font-face {
+  font-family: 'Forgotten Futurist';
+  font-style: normal;
+  font-weight: 700;
+  src: url(forgotten-futurist-bold.ttf);
+}

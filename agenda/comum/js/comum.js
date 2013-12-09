@@ -56,7 +56,17 @@ $.fn.extend({
 			yearRange: '1920:+10',
 			dateFormat: "dd/mm/yy"
 		});
-		$(this).mask("99/99/9999");
+		$(this).mask("00/00/0000");
+		return $(this);
+	},
+	
+	// Hora
+	mascaraDeHora: function() {
+		$(this).timepicker({
+			scrollDefaultNow: true,
+			timeFormat: 'H:i'
+		});
+		$(this).mask("00:00");
 		return $(this);
 	},
 	
@@ -80,6 +90,7 @@ $.fn.extend({
 
 $(document).ready(function() {
 	$('input.data').mascaraDeData();
+	$('input.hora').mascaraDeHora();
 	$('input.numero').mascaraDeNumero();
 	$('input.telefone').mascaraDeTelefone();
 });
@@ -340,6 +351,8 @@ function showDebugger() {
 }
 
 /* Loading */
+
+// TODO Fazer o loading
 
 function showLoading() {
 	/*if ($(".blockOverlay").length == 0) {

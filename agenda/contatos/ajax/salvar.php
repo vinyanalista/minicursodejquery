@@ -61,6 +61,8 @@ if (!empty($_POST['foto_nome_arquivo'])) {
 	$contato_foto_principal = -1;
 	foreach($_POST['foto_nome_arquivo'] as $nome_arquivo) {
 		$manter = isset($_POST['foto_manter'][$nome_arquivo]);
+		$data = $_POST['foto_data'][$nome_arquivo];
+		$hora = $_POST['foto_hora'][$nome_arquivo];
 		$descricao = $_POST['foto_descricao'][$nome_arquivo];
 		$arquivo_temporario = UPLOADS_TEMP_DIR . '/' . $nome_arquivo;
 		$arquivo_definitivo = $diretorio_fotos_do_contato . '/' . $nome_arquivo;
@@ -80,7 +82,10 @@ if (!empty($_POST['foto_nome_arquivo'])) {
 		if ($manter) {
 			$foto = new Foto();
 			$foto -> nome_arquivo = $nome_arquivo;
-			// TODO $foto -> data_hora = '';
+			if (empty($data) && !empty($hora)) {
+				$data = format_date();
+			}
+			$foto -> data_hora = format_date(trim($data . ($hora ? ' ' . $hora : '')), TRUE);
 			$foto -> descricao = $descricao;
 			$foto -> contato_id = $contato -> id;
 			$db -> foto -> persist($foto);

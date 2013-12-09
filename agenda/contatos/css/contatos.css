@@ -61,9 +61,11 @@
 }
 ul#fotos {overflow: hidden; width: 100%; border: 1px solid #ccc; background-color: #f0f0f0;}
 ul#fotos .ui-state-highlight {background: #DEEDF7; width: 205px; height: 260px;}
-ul#fotos li {cursor: move;display:inline;float:left;margin:5px; padding:10px; border:1px dotted #aaa; background-color: #fff; width: 205px; height: 260px;}
+ul#fotos li {cursor: move;display:inline;float:left;margin:5px; padding:10px; border:1px dotted #aaa; background-color: #fff; width: 205px; height: 330px;}
 ul#fotos li a {display: table;margin: auto;}
 ul#fotos li img {border:4px double #ccc;cursor: pointer;clear:both;width: 100px;height: 100px}
 ul#fotos li p {margin: 0 0 0.75em;}
 ul#fotos li .foto_manter, ul#fotos li .foto_principal {display: inline;}
+ul#fotos li input.foto_data {width: 110px;}
+ul#fotos li input.foto_hora {margin-left: 10px; width: 70px;}
 ul#fotos li input.foto_descricao {display:block; width:100%; border:1px solid #ccc; padding: 5px 3px; color:#666}

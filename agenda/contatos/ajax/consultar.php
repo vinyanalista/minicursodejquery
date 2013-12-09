@@ -33,7 +33,10 @@ if (count($fotos) > 0) {
 	$contato -> fotos = array();
 	$diretorio_fotos_do_contato = UPLOADS_DIR . '/' . $contato -> id;
 	foreach ($fotos as $foto) {
-		$contato -> fotos[] = array('nome_arquivo' => $foto -> nome_arquivo, 'caminho_arquivo' => SITE_HOME . '/comum/imagens/uploads/' . $contato -> id . '/' . $foto -> nome_arquivo, 'descricao' => $foto -> descricao);
+		$data_hora = format_datetime($foto -> data_hora);
+		$data = substr($data_hora, 0, strpos($data_hora, ' '));
+		$hora = substr($data_hora, strpos($data_hora, ' ') + 1);
+		$contato -> fotos[] = array('nome_arquivo' => $foto -> nome_arquivo, 'caminho_arquivo' => SITE_HOME . '/comum/imagens/uploads/' . $contato -> id . '/' . $foto -> nome_arquivo, 'data' => $data, 'hora' => $hora, 'descricao' => $foto -> descricao);
 	}
 }
 

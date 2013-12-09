@@ -39,26 +39,42 @@ if (mysqli_connect_errno()) {
 /* Auxiliary functions */
 
 //Formats a time indication to send to the database
-function mysql_time($time = null) {
-	if ($time == null) {
+function mysql_time($time = NULL) {
+	if ($time == NULL) {
 		return 'NOW()';
 	} else {
 		return date("Y-m-d H:i", $time);
 	}
 }
 
-function format_date($date = null, $to_mysql = false) {
+function format_date($date = NULL, $to_mysql = FALSE) {
 	if (!$to_mysql) {
-		if ($date == null) {
+		if (empty($date)) {
 			return date('d/m/Y');
 		} else {
 			return date('d/m/Y', strtotime($date));
 		}
 	} else {
-		if ($date == null) {
+		if (empty($date)) {
 			return date('Y-m-d');
 		} else {
 			return date('Y-m-d', strtotime($date));
+		}
+	}
+}
+
+function format_datetime($datetime = NULL, $to_mysql = FALSE) {
+	if (!$to_mysql) {
+		if (empty($datetime)) {
+			return date('d/m/Y H:i');
+		} else {
+			return date('d/m/Y H:i', strtotime($datetime));
+		}
+	} else {
+		if (empty($datetime)) {
+			return date('Y-m-d H:i');
+		} else {
+			return date('Y-m-d H:i', strtotime($datetime));
 		}
 	}
 }

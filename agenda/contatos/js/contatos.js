@@ -1,5 +1,7 @@
 var contato_a_excluir = 0;
 
+// TODO Atualizar quando termina a edição do contato
+// TODO Aplicar o click na linha de novo quando a tabela recarregar
 function atualizarInformacoesSobreContato() {
 	// Esconde o que estiver atualmente sendo exibido
 	$('#info_contato_selecione, #info_contato_selecionado, #info_contato_erro').hide();
@@ -9,7 +11,6 @@ function atualizarInformacoesSobreContato() {
 	var contato = $('#table_contato').dataTable().fnGetData($linha_selecionada[0]);
 	// Verifica se há um contato selecionado de fato
 	if (($linha_selecionada.length != 0) && (contato != null)) {
-		console.log(contato);
 		$.ajax({
 			async: false,
 			url: "ajax/consultar.php",
@@ -31,6 +32,7 @@ function atualizarInformacoesSobreContato() {
 					$('#info_contato_nome_apelido').append(' (' + data.apelido + ')');
 				}
 				if (data.data_nascimento) {
+					// TODO Calcular a idade de verdade
 					$('#info_contato_idade').html('21').parent('div').css('display', 'block');
 					$('#info_contato_aniversario').html('13/06').parent('div').css('display', 'block');
 				} else {
@@ -68,7 +70,15 @@ function atualizarInformacoesSobreContato() {
 				if ((data.fotos) && (data.fotos.length > 0)) {
 					for (var f = 0; f < data.fotos.length; f++) {
 						var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
-						li += '<a rel="gallery" href="' + data.fotos[f].caminho_arquivo + '"' + (data.fotos[f].descricao ? ' descricao="'+data.fotos[f].descricao+'"' : '') + '>';
+						li += '<a rel="gallery" href="' + data.fotos[f].caminho_arquivo + '"';
+						if (data.fotos[f].descricao) {
+							li += ' data-descricao="'+data.fotos[f].descricao+'"';
+						}
+						if (data.fotos[f].data) {
+							li += ' data-data="'+data.fotos[f].data+'"';
+							li += ' data-hora="'+data.fotos[f].hora+'"';
+						}
+						li += '>';
 						li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
 						li += '</a></li>';
 						$('#info_contato_fotos').append(li);
@@ -77,7 +87,14 @@ function atualizarInformacoesSobreContato() {
 					$("ul#info_contato_fotos .tooltipster").tooltip();
 					$("ul#info_contato_fotos a").fancybox({
 						beforeLoad: function() {
-				            this.title = $(this.element).attr('descricao');
+							var title = '';
+							if ($(this.element).data('descricao')) {
+								title += '<p>' + $(this.element).data('descricao') + '</p>';
+							}
+							if ($(this.element).data('data')) {
+								title += '<p>' + $(this.element).data('data') + ' ' + $(this.element).data('hora') + '</p>';
+							}
+				            this.title = title;
 				        },
 						helpers : {
 					        title: {
@@ -241,16 +258,21 @@ function selecionarEstado(sigla) {
 	$('#estado option[value="'+sigla+'"]').attr('selected', 'selected');
 }
 
-function adicionarFoto(nomeDoArquivo, caminhoCompletoDoArquivo, descricao) {
-	var html = "<li><input type='hidden' class='foto_nome_arquivo' name='foto_nome_arquivo[]' value='" + nomeDoArquivo + "' />";
-	html += "<a class='tooltipster' href='"+caminhoCompletoDoArquivo+"' title='Clique para ver a foto ampliada'><img src='" + caminhoCompletoDoArquivo + "' /></a><br />";
-	html += "<p><span>Manter foto:</span> <input type='checkbox' class='foto_manter tooltipster' name='foto_manter[" + nomeDoArquivo + "]' value='" + nomeDoArquivo + "' checked='checked' title='Desmarque para excluir a foto quando salvar' /></p>";
-	html += "<p><span>Foto do contato:</span> <input type='radio' class='foto_principal' name='foto_principal' value='" + nomeDoArquivo + "' /></p>";
-	html += "Descrição<input class='foto_descricao' type='text' name='foto_descricao[" + nomeDoArquivo + "]' value='" + descricao + "' placeholder='Descrição' /></li>";
+function adicionarFoto(nomeDoArquivo, caminhoCompletoDoArquivo, data, hora, descricao) {
+	var li = "<li><input type='hidden' class='foto_nome_arquivo' name='foto_nome_arquivo[]' value='" + nomeDoArquivo + "' />";
+	li += "<a class='tooltipster' title='Clique para ver a foto ampliada' href='"+caminhoCompletoDoArquivo+"'><img src='" + caminhoCompletoDoArquivo + "' /></a><br />";
+	li += "<p><span>Manter foto:</span> <input type='checkbox' class='foto_manter tooltipster' name='foto_manter[" + nomeDoArquivo + "]' value='" + nomeDoArquivo + "' checked='checked' title='Desmarque para excluir a foto quando salvar' /></p>";
+	li += "<p><span>Foto do contato:</span> <input type='radio' class='foto_principal' name='foto_principal' value='" + nomeDoArquivo + "' /></p>";
+	li += "Data e hora<br><input class='foto_data' type='text' name='foto_data[" + nomeDoArquivo + "]' value='" + data + "' placeholder='Data' />";
+	li += "<input class='foto_hora' type='text' name='foto_hora[" + nomeDoArquivo + "]' value='" + hora + "' placeholder='Hora' />";
+	li += "Descrição<input class='foto_descricao' type='text' name='foto_descricao[" + nomeDoArquivo + "]' value='" + descricao + "' placeholder='Descrição' /></li>";
 	
-	$("ul#fotos").append(html);
+	$("ul#fotos").append(li);
+	// TODO Verificar a possibilidade de usar a galeria do fancybox aqui também
 	$("ul#fotos a").fancybox();
-	$("ul#fotos .tooltipster").tooltip();
+	$("ul#fotos li:last a").tooltip();
+	$("ul#fotos li:last input.foto_data").mascaraDeData();
+	$("ul#fotos li:last input.foto_hora").mascaraDeHora();
 	$("ul#fotos input.foto_manter").change(function() {
 		$(this).parents('li').find('input.foto_principal, input.foto_descricao').prop('disabled', !$(this).is(':checked'));
 	});
@@ -339,7 +361,7 @@ $(document).ready(function() {
 						limparFotos();
 						if ((data.fotos) && (data.fotos.length > 0)) {
 							for (var f = 0; f < data.fotos.length; f++) {
-								adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].descricao);
+								adicionarFoto(data.fotos[f].nome_arquivo, data.fotos[f].caminho_arquivo, data.fotos[f].data, data.fotos[f].hora, data.fotos[f].descricao);
 							};
 						}
 						if (data.foto_principal) {
@@ -407,7 +429,8 @@ $(document).ready(function() {
 			$('#nome').focus();
 	    },
 	    buttons: {
-	        'Cancelar': function() {
+	        // TODO Adicionar ícones aos botões?  
+	    	'Cancelar': function() {
 	        	$(this).dialog("close");
 	        },
 		    'Salvar': function() {
@@ -470,7 +493,7 @@ $(document).ready(function() {
 		'onUploadSuccess'	: function(file, data, response) {
             //console.log('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
             //console.log(file);
-            adicionarFoto(file.name, data, '');
+            adicionarFoto(file.name, data, '', '', '');
         },
 		'swf'				: '../../lib/uploadify/uploadify.swf',
 		'uploader'			: 'ajax/enviar_fotos.php'

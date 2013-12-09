@@ -77,6 +77,7 @@ require_once '../comum/php/header.php';
 	</div>
 </div>
 <div id="editor_de_contato" title="Editor de contato">
+	<!-- TODO Fixar problemas de formatação do formee -->
 	<form class="formee" id="form_contato">
 		<input id="acao" name="acao" type="hidden" value="cadastrar" />
 		<input id="id" name="id" type="hidden" />

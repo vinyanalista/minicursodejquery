@@ -6,7 +6,7 @@
 		<footer class="clear">
 			<div class="constrain">
 				<div id="autor">
-					Criada por <a href="mailto:vinyanalista@gmail.com">Antônio Vinícius</a> para o <a href="https://github.com/vinyanalista/minicurso_jquery">minicurso de jQuery</a>.
+					Criada por <a href="mailto:vinyanalista@gmail.com">Antônio Vinícius</a> para o <a href="http://minicursodejquery.sf.net">minicurso de jQuery</a>.
 				</div>
 				<!-- AddThis -->
 				<div id="redes_sociais">

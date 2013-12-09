@@ -1,0 +1,25 @@
+section h2 {
+	background-position: top right;
+	background-repeat: no-repeat;
+	background-size: contain;
+	padding-right: 250px;
+}
+
+section.ckeditor h2 {
+	background-image: url('../imagens/logo/ckeditor.png');
+}
+section.datatables h2 {
+	background-image: url('../imagens/logo/datatables.png');
+}
+section.jquery-ui h2 {
+	background-image: url('../imagens/logo/jquery-ui.png');
+}
+section.jquery h2 {
+	background-image: url('../imagens/logo/jquery.png');
+}
+section.tag-it h2 {
+	background-image: url('../imagens/logo/tag-it.png');
+}
+section.uploadify h2 {
+	background-image: url('../imagens/logo/uploadify.png');
+}

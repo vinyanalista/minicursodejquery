@@ -6,10 +6,10 @@ if (!empty($_FILES)) {
 	$targetFile = rtrim(UPLOADS_TEMP_DIR, '/') . '/' . $_FILES['Filedata']['name'];
 	
 	// Validate the file type
-	$fileTypes = array('jpg','jpeg','gif','png'); // File extensions
+	$fileTypes = array('jpg','gif','png','jpeg'); // File extensions
 	$fileParts = pathinfo($_FILES['Filedata']['name']);
 	
-	if (in_array($fileParts['extension'],$fileTypes)) {
+	if (in_array(strtolower($fileParts['extension']),$fileTypes)) {
 		move_uploaded_file($tempFile, $targetFile);
 		echo SITE_HOME . '/comum/imagens/uploads/temp/' . $_FILES['Filedata']['name'];
 	} else {
