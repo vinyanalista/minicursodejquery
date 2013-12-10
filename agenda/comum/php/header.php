@@ -1,16 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Agenda de contatos</title>
-		<!-- TODO Configurar redes sociais e AddThis -->
 		<!-- Facebook -->
 		<meta property="og:url" content="http://minicursodejquery.sf.net/" />
-		<meta property="og:title" content="Minicurso de jQuery" />
-		<meta property="og:description" content="A Internet das páginas de conteúdo estático cedeu espaço a um ambiente dinâmico, com sites e sistemas ricos em design e funcionalidades. Para implementar sites interativos e atraentes, os desenvolvedores recorrem a bibliotecas como o jQuery para simplificar todas as tarefas das mais simples às mais complicadas, como por exemplo: modificar o design e conteúdo da página, acrescentar animações, prover interatividade com suporte a eventos, facilitar o uso do AJAX, etc. Além disso, o jQuery pode ser expandido através de plugins, utiliza uma sintaxe fácil de aprender e respeita os padrões da Internet, contribuindo para a correta exibição do site nos diversos navegadores existentes. Não sem motivo, o jQuery é a biblioteca JavaScript mais usada, presente em 55% dos 10 mil sites mais visitados do mundo. O objetivo deste minicurso é introduzir o desenvolvedor à utilização do jQuery. Serão apresentados os conceitos básicos para a utilização dessa biblioteca, assim como exemplos cotidianos do uso de suas rotinas e plugins. Espera-se que após o minicurso os desenvolvedores sejam capazes de utilizar a biblioteca eficientemente em seus projetos, assim como trilhar seus próprios caminhos na descoberta de mais funcionalidades e plugins." />
-		<meta property="og:image" content="<?=SITE_HOME?>/imagens/ufs.png"/>
-		<meta property="og:image:width" content="200" />
-		<meta property="og:image:height" content="200" />
+		<meta property="og:title" content="Agenda de contatos" />
+		<meta property="og:description" content="Aplicação de exemplo desenvolvida para o Minicurso de jQuery: http://minicursodejquery.sf.net" />
+		<meta property="og:image" content="../comum/imagens/icones/agenda.png"/>
+		<meta property="og:image:width" content="128" />
+		<meta property="og:image:height" content="128" />
 		<meta property="og:type" content="website"/>
 		<!-- Favicons -->
 		<link rel="shortcut icon" href="../comum/imagens/icones/agenda.png" />

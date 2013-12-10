@@ -3,10 +3,13 @@ require_once '../comum/php/comum.php';
 require_once '../comum/php/header.php';
 ?>
 <div class="grid-8-12">
+	
+	<!-- Novo contato -->
 	<button class="botao_com_icone" id="btn_novo_contato">
 		<span class='icone icone_22x22 icone_novo_contato'>Novo contato</span>
 	</button>
-	<div class="clear"></div>
+	
+	<!-- Tabela contato -->
 	<table id="table_contato" class="display">
 		<thead>
 			<tr>
@@ -19,8 +22,13 @@ require_once '../comum/php/header.php';
 	</table>
 </div>
 <div class="grid-4-12">
+	
+	<!-- Informações sobre o contato -->
 	<div id="info_contato" class="ui-widget-content ui-corner-all">
 		<h3 class="ui-widget-header ui-corner-all">Informações sobre o contato</h3>
+		<p id="info_contato_nao_ha">
+			Não há contatos cadastrados.
+		</p>
 		<p id="info_contato_selecione">
 			Selecione um contato para exibir suas informações aqui.
 		</p>
@@ -52,23 +60,15 @@ require_once '../comum/php/header.php';
 			</div>
 			<div class="grid-12-12">
 				<label for="info_contato_fotos">Fotos</label>
-				
 	            <div class="jcarousel-wrapper">
 	                <div class="jcarousel">
 	                    <ul id="info_contato_fotos">
 	                    </ul>
 	                </div>
-	
 	                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
 	                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
-	
 	                <p class="jcarousel-pagination"></p>
 	            </div>
-		        <link rel="stylesheet" type="text/css" href="../../lib/jcarousel/jcarousel.responsive.css">
-		         <script type="text/javascript" src="../../lib/jcarousel/jquery.jcarousel.min.js"></script>
-		        <!--<script type="text/javascript" src="../../lib/jcarousel/jcarousel.responsive.js"></script>-->
-		        
-		        
 			</div>
 		</div>
 		<p id="info_contato_erro">
@@ -76,12 +76,14 @@ require_once '../comum/php/header.php';
 		</p>
 	</div>
 </div>
+
+<!-- Editor de contato -->
 <div id="editor_de_contato" title="Editor de contato">
-	<!-- TODO Fixar problemas de formatação do formee -->
 	<form class="formee" id="form_contato">
 		<input id="acao" name="acao" type="hidden" value="cadastrar" />
 		<input id="id" name="id" type="hidden" />
 		<div id="editor_de_contato_tabs">
+			<!-- Tabs do editor -->
 			<ul>
 				<li>
 					<a href="#tab-informacoes-pessoais">Informações pessoais</a>
@@ -93,6 +95,8 @@ require_once '../comum/php/header.php';
 					<a href="#tab-contato_categoria">Categorias</a>
 				</li>
 			</ul>
+			
+			<!-- Informações pessoais -->
 			<div class="tab" id="tab-informacoes-pessoais">
 				<div class="grid-12-12">
 					<label for="nome">Nome</label>
@@ -194,10 +198,16 @@ require_once '../comum/php/header.php';
 					</select>
 				</div>
 			</div>
+			
+			<!-- Fotos -->
 			<div class="tab" id="tab-fotos">
-				<input type="file" id="btn_enviar_foto" />				
-				<ul class="ui-sortable" id="fotos"></ul>
+				<div class="grid-10-12">
+					<input type="file" id="btn_enviar_foto" />				
+					<ul class="ui-sortable" id="fotos"></ul>
+				</div>
 			</div>
+			
+			<!-- Categorias -->
 			<div class="tab" id="tab-contato_categoria">
 				<div class="grid-12-12">
 					<table id="table_contato_categoria" class="display">
@@ -216,11 +226,15 @@ require_once '../comum/php/header.php';
 		</div>
 	</form>
 </div>
+
 <!-- CSS -->
+<link rel="stylesheet" type="text/css" href="../../lib/jcarousel/jcarousel.responsive.css">
 <link rel="stylesheet" type="text/css" href="../../lib/fancybox/jquery.fancybox.css" />
 <link rel="stylesheet" type="text/css" href="../../lib/uploadify/uploadify.css" />
 <link rel="stylesheet" type="text/css" href="css/contatos.css" />
+
 <!-- Scripts -->
+<script type="text/javascript" src="../../lib/jcarousel/jquery.jcarousel.min.js"></script>
 <script type="text/javascript" src="../../lib/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="../../lib/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="js/contatos.js"></script>

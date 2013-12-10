@@ -1,5 +1,19 @@
+/* Novo contato */
+
 #btn_novo_contato {
 	margin-bottom: 1.8%;
+}
+
+/* Tabela contato */
+
+#table_contato tr:hover {
+	cursor: pointer;
+}
+.table_contato_acoes, .table_contato_categoria_contatos, .table_contato_categoria_pertence {
+	text-align: center;
+}
+.link_excluir_contato {
+	margin-left: 10px;
 }
 
 /* Informações sobre o contato */
@@ -47,20 +61,11 @@
 	text-decoration: underline;
 }
 
-/* Tabela */
+/* Editor de contato */
 
-#table_contato tr:hover {
-	cursor: pointer;
+input.telefone, input.email {
+	padding: 10px !important;
 }
-.table_contato_acoes, .table_contato_categoria_contatos, .table_contato_categoria_pertence {
-	text-align: center;
-}
-.link_excluir_contato {
-	margin-left: 10px;
-}
-
-/* Editor de contatos */
-
 .primeiro .btn_excluir {
 	margin-top: 35px;
 }
@@ -79,4 +84,4 @@ ul#fotos li p {margin: 0 0 0.75em;}
 ul#fotos li .foto_manter, ul#fotos li .foto_principal {display: inline;}
 ul#fotos li input.foto_data {width: 110px;}
 ul#fotos li input.foto_hora {margin-left: 10px; width: 70px;}
-ul#fotos li input.foto_descricao {display:block; width:100%; border:1px solid #ccc; padding: 5px 3px; color:#666}
+ul#fotos li input.foto_descricao {display:block; width:100%; padding: 5px 3px; color:#666}

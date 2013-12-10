@@ -27,9 +27,11 @@ require_once '../comum/php/header.php';
 	</div>
 </form>
 <?php if (isset($_GET['enviar_para'])) echo '<input type="hidden" id="enviar_para" value="'.$_GET['enviar_para'].'">'; ?>
+
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="../../lib/tag-it/css/jquery.tagit.css" />
 <link rel="stylesheet" type="text/css" href="css/email.css" />
+
 <!-- Scripts -->
 <script type="text/javascript" src="../../lib/tag-it/js/tag-it.min.js"></script>
 <script type="text/javascript" src="js/email.js"></script>

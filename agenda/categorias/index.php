@@ -3,9 +3,15 @@ require_once '../comum/php/comum.php';
 require_once '../comum/php/header.php';
 ?>
 <div class="grid-12-12">
-	<button class="botao_com_icone" id="btn_nova_categoria"><span class='icone icone_22x22 icone_nova_categoria'>Nova categoria</span></button>
+	
+	<!-- Nova categoria -->
+	<button class="botao_com_icone" id="btn_nova_categoria">
+		<span class='icone icone_22x22 icone_nova_categoria'>Nova categoria</span>
+	</button>
 </div>
 <div class="grid-12-12">
+	
+	<!-- Tabela categoria -->
 	<table id="table_categoria" class="display">
 		<thead>
 			<tr>
@@ -18,6 +24,8 @@ require_once '../comum/php/header.php';
 		</tbody>
 	</table>
 </div>
+
+<!-- Editor de categoria -->
 <div id="editor_de_categoria" title="Editor de categoria">
 	<form class="formee" id="form_categoria">
 		<input id="acao" name="acao" type="hidden" value="cadastrar" />
@@ -40,7 +48,11 @@ require_once '../comum/php/header.php';
 		</div>
 	</form>
 </div>
+
+<!-- CSS -->
 <link rel="stylesheet" type="text/css" href="css/categorias.css" />
+
+<!-- Scripts -->
 <script type="text/javascript" src="js/categorias.js"></script>
 <?php
 require_once '../comum/php/footer.php';

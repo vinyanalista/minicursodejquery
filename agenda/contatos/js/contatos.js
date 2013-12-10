@@ -1,6 +1,3 @@
-var contato_a_excluir = 0;
-var jcarousel = null;
-
 function adicionarEmail(email) {
 	if (email == undefined) {
 		var $novo_email = $('.contato_email').first().clone();
@@ -33,6 +30,7 @@ function adicionarFoto(nomeDoArquivo, caminhoCompletoDoArquivo, data, hora, desc
 	$("ul#fotos").append(li);
 	$("ul#fotos a").fancybox({
 		beforeLoad: function() {
+			// Exibe a descrição e a data/hora como legenda
 			var nome_arquivo = $(this.element).data('nome_arquivo');
 			var data = $('input.foto_data[data-nome_arquivo="'+nome_arquivo+'"]').val();
 			var hora = $('input.foto_hora[data-nome_arquivo="'+nome_arquivo+'"]').val();
@@ -81,6 +79,8 @@ function adicionarTelefone(telefone) {
 		$('.contato_telefone:last input').val(telefone);
 	}
 }
+
+var jcarousel = null;
 
 function aplicarCarrossel() {
 	if (jcarousel != null) {
@@ -133,115 +133,119 @@ function aplicarCarrossel() {
 
 function atualizarInformacoesSobreContato() {
 	// Esconde o que estiver atualmente sendo exibido
-	$('#info_contato_selecione, #info_contato_selecionado, #info_contato_erro').hide();
+	$('#info_contato_nao_ha, #info_contato_selecione, #info_contato_selecionado, #info_contato_erro').hide();
+	// Verifica se a tabela está vazia (se não há contatos)
+	if ($('#table_contato td.dataTables_empty').length != 0) {
+		// Se não há contatos, não há o que fazer
+		$('#info_contato_nao_ha').show();
+		return;
+	}
 	// Obtém a linha selecionada (se houver)
 	var $linha_selecionada = $('#table_contato tbody tr.row_selected');
 	// Obtém os dados da linha selecionada na tabela
 	var contato = $('#table_contato').dataTable().fnGetData($linha_selecionada[0]);
 	// Verifica se há um contato selecionado de fato
 	if (($linha_selecionada.length != 0) && (contato != null)) {
-		$.ajax({
-			async: false,
-			url: "ajax/consultar.php",
-			data: {
-				id: contato.id
-			},
-			dataType : 'json',
-			success: function(data) {
-				$('a#info_contato_foto_principal, img#info_contato_sem_foto').hide();
-				if (data.foto_principal) {
-					$('a#info_contato_foto_principal').attr('href', data.foto_principal.caminho_arquivo);
-					$('a#info_contato_foto_principal img').attr('src', data.foto_principal.caminho_arquivo);
-					$('a#info_contato_foto_principal').show().fancybox();
-				} else {
-					$('img#info_contato_sem_foto').show();
-				}
-				$('#info_contato_nome_apelido').html(data.nome);
-				if (data.apelido) {
-					$('#info_contato_nome_apelido').append(' (' + data.apelido + ')');
-				}
-				if (data.data_nascimento) {
-					$('#info_contato_idade').html(calcularIdade(data.data_nascimento)).parent('div').css('display', 'block');
-					$('#info_contato_aniversario').html(dataDeAniversario(data.data_nascimento)).parent('div').css('display', 'block');
-				} else {
-					$('#info_contato_idade').parent('div').css('display', 'none');
-					$('#info_contato_aniversario').parent('div').css('display', 'none');
-				}
-				$('#info_contato_telefones').html('');
-				if ((data.telefones) && (data.telefones.length > 0)) {
-					for (var t = 0; t < data.telefones.length; t++) {
-						var li = '<li class="info_contato_telefone icone_telefone">';
-						li += data.telefones[t];
-						li += '</li>';
-						$('#info_contato_telefones').append(li);
-					}
-					$('#info_contato_telefones').parent('div').show();
-				} else {
-					$('#info_contato_telefones').parent('div').hide();
-				}
-				$('#info_contato_emails').html('');
-				if ((data.emails) && (data.emails.length > 0)) {
-					for (var e = 0; e < data.emails.length; e++) {
-						var li = '<li class="info_contato_email icone_email tooltipster" title="Clique para enviar um e-mail">';
-						li += data.emails[e];
-						li += '</li>';
-						$('#info_contato_emails').append(li);
-					}
-					$('#info_contato_emails').parent('div').show();
-					$('#info_contato_emails li').tooltip().click(function() {
-						window.location = '../email/?enviar_para=' + $(this).text();
-					});
-				} else {
-					$('#info_contato_emails').parent('div').hide();
-				}
-				$('#info_contato_fotos').html('');
-				if ((data.fotos) && (data.fotos.length > 0)) {
-					for (var f = 0; f < data.fotos.length; f++) {
-						var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
-						li += '<a rel="info_contato_fotos" href="' + data.fotos[f].caminho_arquivo + '"';
-						if (data.fotos[f].descricao) {
-							li += ' data-descricao="'+data.fotos[f].descricao+'"';
-						}
-						if (data.fotos[f].data) {
-							li += ' data-data="'+data.fotos[f].data+'"';
-							li += ' data-hora="'+data.fotos[f].hora+'"';
-						}
-						li += '>';
-						li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
-						li += '</a></li>';
-						$('#info_contato_fotos').append(li);
-					}
-					aplicarCarrossel();
-					$("ul#info_contato_fotos .tooltipster").tooltip();
-					$("ul#info_contato_fotos a").fancybox({
-						beforeLoad: function() {
-							var title = '';
-							if ($(this.element).data('descricao')) {
-								title += '<p>' + $(this.element).data('descricao') + '</p>';
-							}
-							if ($(this.element).data('data')) {
-								title += '<p>' + $(this.element).data('data') + ' ' + $(this.element).data('hora') + '</p>';
-							}
-				            this.title = title;
-				        },
-						helpers : {
-					        title: {
-					            type: 'inside'
-					        }
-					    }
-					});
-					$('label[for="info_contato_fotos"]').parent('div').show();
-					$('.jcarousel-wrapper').show();
-				} else {
-					$('label[for="info_contato_fotos"').parent('div').hide();
-					$('.jcarousel-wrapper').hide();
-				}
-				$('#info_contato_selecionado').show();
-			},
-			error: function() {
-				$.notify('Houve um erro ao tentar carregar os dados do contato selecionado.', 'error');
-				$('#info_contato_erro').show();
+		// Se há um contato selecionado, carrega o contato e exibe suas informações
+		carregarContato(contato.id, function(data) {
+			// Foto principal
+			$('a#info_contato_foto_principal, img#info_contato_sem_foto').hide();
+			if (data.foto_principal) {
+				$('a#info_contato_foto_principal').attr('href', data.foto_principal.caminho_arquivo);
+				$('a#info_contato_foto_principal img').attr('src', data.foto_principal.caminho_arquivo);
+				$('a#info_contato_foto_principal').show().fancybox();
+			} else {
+				$('img#info_contato_sem_foto').show();
 			}
+			// Nome e apelido
+			$('#info_contato_nome_apelido').html(data.nome);
+			if (data.apelido) {
+				$('#info_contato_nome_apelido').append(' (' + data.apelido + ')');
+			}
+			// Idade e aniversário
+			if (data.data_nascimento) {
+				$('#info_contato_idade').html(calcularIdade(data.data_nascimento)).parent('div').css('display', 'block');
+				$('#info_contato_aniversario').html(dataDeAniversario(data.data_nascimento)).parent('div').css('display', 'block');
+			} else {
+				$('#info_contato_idade').parent('div').css('display', 'none');
+				$('#info_contato_aniversario').parent('div').css('display', 'none');
+			}
+			// Telefones
+			$('#info_contato_telefones').html('');
+			if ((data.telefones) && (data.telefones.length > 0)) {
+				for (var t = 0; t < data.telefones.length; t++) {
+					var li = '<li class="info_contato_telefone icone_telefone">';
+					li += data.telefones[t];
+					li += '</li>';
+					$('#info_contato_telefones').append(li);
+				}
+				$('#info_contato_telefones').parent('div').show();
+			} else {
+				$('#info_contato_telefones').parent('div').hide();
+			}
+			// E-mails
+			$('#info_contato_emails').html('');
+			if ((data.emails) && (data.emails.length > 0)) {
+				for (var e = 0; e < data.emails.length; e++) {
+					var li = '<li class="info_contato_email icone_email tooltipster" title="Clique para enviar um e-mail">';
+					li += data.emails[e];
+					li += '</li>';
+					$('#info_contato_emails').append(li);
+				}
+				$('#info_contato_emails').parent('div').show();
+				$('#info_contato_emails li').tooltip().click(function() {
+					window.location = '../email/?enviar_para=' + $(this).text();
+				});
+			} else {
+				$('#info_contato_emails').parent('div').hide();
+			}
+			// Fotos
+			$('#info_contato_fotos').html('');
+			if ((data.fotos) && (data.fotos.length > 0)) {
+				// Insere cada uma das fotos
+				for (var f = 0; f < data.fotos.length; f++) {
+					var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
+					li += '<a rel="info_contato_fotos" href="' + data.fotos[f].caminho_arquivo + '"';
+					if (data.fotos[f].descricao) {
+						li += ' data-descricao="'+data.fotos[f].descricao+'"';
+					}
+					if (data.fotos[f].data) {
+						li += ' data-data="'+data.fotos[f].data+'"';
+						li += ' data-hora="'+data.fotos[f].hora+'"';
+					}
+					li += '>';
+					li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
+					li += '</a></li>';
+					$('#info_contato_fotos').append(li);
+				}
+				// Configura os componentes
+				aplicarCarrossel();
+				$("ul#info_contato_fotos .tooltipster").tooltip();
+				$("ul#info_contato_fotos a").fancybox({
+					beforeLoad: function() {
+						var title = '';
+						if ($(this.element).data('descricao')) {
+							title += '<p>' + $(this.element).data('descricao') + '</p>';
+						}
+						if ($(this.element).data('data')) {
+							title += '<p>' + $(this.element).data('data') + ' ' + $(this.element).data('hora') + '</p>';
+						}
+			            this.title = title;
+			        },
+					helpers : {
+				        title: {
+				            type: 'inside'
+				        }
+				    }
+				});
+				$('label[for="info_contato_fotos"]').parent('div').show();
+				$('.jcarousel-wrapper').show();
+			} else {
+				$('label[for="info_contato_fotos"').parent('div').hide();
+				$('.jcarousel-wrapper').hide();
+			}
+			// Exibe as informações do contato
+			$('#info_contato_selecionado').show();
 		});
 	} else {
 		// contato = null indica que a última linha clicada foi a linha do cabeçalho
@@ -291,17 +295,20 @@ function dataDeAniversario(data_nascimento) {
 
 function editarContato(id) {
 	carregarContato(id, function(data) {
+		// Informações pessoais
 		$('#acao').val('atualizar');
 		$('#id').val(data.id);
 		$('#nome').val(data.nome);
 		$('#apelido').val(data.apelido);
 		$('#data_nascimento').val(data.data_nascimento);
+		// Telefones
 		limparTelefones();
 		if ((data.telefones) && (data.telefones.length > 0)) {
 			for (var t = 0; t < data.telefones.length; t++) {
 				adicionarTelefone(data.telefones[t]);
 			};
 		}
+		// E-mails
 		limparEmails();
 		if ((data.emails) && (data.emails.length > 0)) {
 			for (var e = 0; e < data.emails.length; e++) {
@@ -313,6 +320,7 @@ function editarContato(id) {
 		$('#bairro').val(data.bairro);
 		$('#cidade').val(data.cidade);
 		selecionarEstado(data.estado);
+		// Fotos
 		limparFotos();
 		if ((data.fotos) && (data.fotos.length > 0)) {
 			for (var f = 0; f < data.fotos.length; f++) {
@@ -322,6 +330,7 @@ function editarContato(id) {
 		if (data.foto_principal) {
 			$('input.foto_principal[value="' + data.foto_principal.nome_arquivo + '"]').attr('checked', 'checked');
 		}
+		// Abre o editor
 		$('#editor_de_contato').dialog('option', 'title', 'Editar contato').dialog('open');
 	});
 }
@@ -405,12 +414,15 @@ function removerTelefone(event) {
 
 function salvarContato() {
 	var salvou = false;
+	// Verifica se o formulário foi preenchido corretamente
 	if ($('#form_contato').valid()) {
+		// Se sim, procede ao envio via AJAX
 		$.ajax({
 			async: false,
 			url: "ajax/salvar.php",
 			data: $("#form_contato").serialize(),
 			success: function(data) {
+				// Verifica a resposta do servidor (se o contato foi salvo)
 				if (data == '1') {
 					$.notify('Contato ' + ($('#acao').val() == 'cadastrar' ? 'cadastrado' : 'atualizado') + ' com sucesso!', 'success');
 					$("#table_contato").dataTable().fnReloadAjax();
@@ -438,7 +450,10 @@ function selecionarEstado(sigla) {
 $(document).ready(function() {
 	$('#tab-contatos').tabAtiva();
 	
+	// Novo contato
 	$('#btn_novo_contato').click(novoContato);
+	
+	/* Tabela contato */
 	
 	$('#table_contato').dataTable({
 		"sAjaxSource": "ajax/listar.php",
@@ -474,6 +489,7 @@ $(document).ready(function() {
 				});
 				
 				$('#table_contato tr:not([role=row])').each(function(){
+					// Estiliza a coluna Ações
 					$(this).find('td:eq(1)').addClass('table_contato_acoes');
 				});
 				
@@ -490,14 +506,17 @@ $(document).ready(function() {
 				});
 				
 				$('.tooltipster').tooltip();
-				
-				atualizarInformacoesSobreContato();
 			}
+			
+			atualizarInformacoesSobreContato();
 		},
 	});
 	
+	/* Editor de contato */
+	
 	$('#editor_de_contato').dialog({
 	    create: function() {
+	    	// Adiciona ícones aos botões Cancelar e Salvar
 	    	var $botoes = $('div.ui-dialog[aria-describedby="editor_de_contato"] .ui-dialog-buttonset button');
 	    	$botoes.first().addClass('botao_com_icone').find('.ui-button-text').html('<span class="icone icone_22x22 icone_cancelar">Cancelar</span>');
 	    	$botoes.eq(1).addClass('botao_com_icone').find('.ui-button-text').html('<span class="icone icone_22x22 icone_salvar">Salvar</span>');
@@ -521,7 +540,10 @@ $(document).ready(function() {
 	    }
 	});
 	
+	// Tabs do editor
 	$('#editor_de_contato_tabs').tabs();
+	
+	/* Informações pessoais */
 	
 	$('#btn_adicionar_telefone').click(function(event) {
 		event.preventDefault();
@@ -538,6 +560,8 @@ $(document).ready(function() {
 	$('.btn_excluir_telefone').click(removerTelefone);
 	
 	$('.btn_excluir_email').click(removerEmail);
+	
+	/* Fotos */
 	
 	var extensoesDeImagemPermitidas = "*.jpg; *.gif; *.png; *.jpeg; *.JPG; *.GIF; *.PNG; *.JPEG";
 	
@@ -557,6 +581,8 @@ $(document).ready(function() {
 		'swf'				: '../../lib/uploadify/uploadify.swf',
 		'uploader'			: 'ajax/enviar_fotos.php'
 	});
+	
+	/* Categorias */
 	
 	$('#table_contato_categoria').dataTable({
 		"sAjaxSource": "../categorias/ajax/listar.php",
@@ -581,11 +607,10 @@ $(document).ready(function() {
 		],
 		"fnDrawCallback": function() {
 			$('#table_contato_categoria tr:not([role=row])').each(function(){
+				// Estiliza as colunas Contatos e Pertence
 				$(this).find('td:eq(1)').addClass('table_contato_categoria_contatos');
 				$(this).find('td:eq(2)').addClass('table_contato_categoria_pertence');
 			});
 		}
 	});
-	
-	atualizarInformacoesSobreContato();
 });

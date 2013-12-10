@@ -218,7 +218,7 @@ a{
 		padding-top: 10px;
 		text-align: left;
 	}
-	.ppw-slide-type-opening span#moobi {
+	.ppw-slide-type-opening a#moobi {
 		background-image: url('../images/moobi.png');
 		background-repeat: no-repeat;
 		background-size: 100px;
@@ -228,7 +228,7 @@ a{
 		margin: 25px 10px 10px 10px;
 		width: 100px;
 	}
-	span#ufs {
+	.ppw-slide-type-opening a#ufs {
 		background-image: url('../images/ufs.gif');
 		background-repeat: no-repeat;
 		background-size: 80px;
@@ -259,11 +259,11 @@ a{
         z-index: 1;
     }*/
     .ppw-slide-type-opening a, .ppw-slide-type-opening strong{
-        color: white;
-        font-size: 1.2em;
+        color: #FCFCFA;
+        /*font-size: 1.2em;*/
         text-decoration: none;
-        margin: 4px;
-        letter-spacing: 6px;
+        /*margin: 4px;
+        letter-spacing: 6px;*/
     }
     .ppw-slide-type-opening em{
         color: black;

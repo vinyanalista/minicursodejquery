@@ -1,6 +1,11 @@
-.table_categoria_contatos, .table_categoria_acoes, .table_contato_categoria_pertence {
-	text-align: center;
-}
+/* Tabela categoria */
+
 .link_excluir_categoria {
 	margin-left: 10px;
+}
+
+/* Editor de categoria */
+
+.table_categoria_contatos, .table_categoria_acoes, .table_contato_categoria_pertence {
+	text-align: center;
 }

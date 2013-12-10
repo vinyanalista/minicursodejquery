@@ -57,7 +57,7 @@ b, strong {
 	visibility: hidden;
 	overflow: hidden;
 }
-.tab {
+ul#navegacao a.tab {
 	background-position: 10px;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -111,10 +111,29 @@ footer a:hover {
 	width: 250px;
 }
 
+/* Formee */
+
+.formee .formee-txt, .formee input[type="text"], .formee input[type="password"], .formee input[type="file"], .formee textarea, .formee select {
+	padding: 5px;
+}
+.formee select {
+	height: 2em;
+}
+
+/* jQuery UI */
+
+.ui-tabs .ui-tabs-panel {
+	padding: 0 !important;
+}
+
 /* Data tables */
 
+.dataTables_length select {
+	max-width: 75px;
+}
 .dataTables_filter input {
 	background: white url(../imagens/icones/pesquisar.png) left 5px center no-repeat !important;
+	max-width: 280px;
 	padding-left: 26px !important;
 }
 .dataTable tr:not([role=row]):hover {
@@ -137,34 +156,6 @@ tr.odd {
 }
 tr.odd td[class*="sorting"] {
 	background-color: #CADDEA;
-}
-
-/* Forms */
-
-table.form td {
-	vertical-align: middle;
-}
-table.form td.label {
-	padding-right: 10px;
-	text-align: right;
-}
-table.form td.label label {
-	font-weight: bold;
-}
-table.form td.field {
-	padding-bottom: 10px;
-}
-table.form input[type=text].error, table.form input[type=password].error {
-	background: #FFF999;
-	border-color: #D47E8A !important;
-}
-table.form input[type=button], table.form input[type=submit] {
-	float: right;
-	margin-top: 10px;
-}
-table.form span.required {
-	color: red;
-	font-weight: bold;
 }
 
 /* Diversos */

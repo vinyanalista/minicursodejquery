@@ -1,3 +1,5 @@
+/* Destinatários */
+
 #ipt_destinatarios {
 	display: none;
 }
@@ -7,6 +9,9 @@
 	margin-left: 0;
 	margin-right: 0;
 }
+
+/* Enviar */
+
 #btn_enviar {
 	float: right;
 }
