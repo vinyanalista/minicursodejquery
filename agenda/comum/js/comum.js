@@ -27,6 +27,25 @@ if (getInternetExplorerVersion() >= 10) {
 
 /* jQuery UI */
 
+$(document).ready(function() {
+	$("body").addClass("ui-form");
+	$("button, input[type=button], input[type=submit], a.button").button();
+	
+	$("#navegacao li").mouseover(function() {
+		$(this).addClass('ui-state-hover');
+	});
+	$("#navegacao li").mouseout(function() {
+		$(this).removeClass('ui-state-hover');
+	});
+});
+
+$.fn.extend({
+	tabAtiva: function() {
+		$(this).parent('li').addClass('ui-tabs-active ui-state-active');
+		return $(this);
+	}
+});
+
 $.extend($.ui.dialog.prototype.options, {
 	autoOpen: false,
 	modal: true,
@@ -40,6 +59,67 @@ $.extend($.ui.dialog.prototype.options, {
         duration: 200
     }
 	// TODO Pesquisar um meio viável de acrescentar scroll ao diálogo
+});
+
+$.confirmacao = function(mensagem, callbackSim, callbackNao) {
+	$('div.dialogo_confirmacao').remove();
+	$('#conteudo').append('<div class="dialogo_confirmacao" title="Confirmação">'+mensagem+'</div>');
+	$('div.dialogo_confirmacao').dialog({
+		autoOpen: false,
+		closeOnEscape: true,
+		modal: true,
+		buttons: {
+			'Sim': function() {
+				if (callbackSim != undefined) {
+					callbackSim();
+				}
+				$(this).dialog('close');
+			},
+			'Não' : function() {
+				if (callbackNao != undefined) {
+					callbackNao();
+				}
+				$(this).dialog('close');
+			}
+		}
+	}).dialog('open');
+}
+
+/* jQuery BlockUI Plugin */
+
+$.showLoading = function() {
+	$('body').append('<img id="loading" src="../comum/imagens/loading.gif" />');
+	$.blockUI({
+		message : $('#loading'),
+		css : {
+			background : 'transparent',
+			border : '0',
+			top : ($(window).height() - 55) / 2 + 'px',
+			left : ($(window).width() - 55) / 2 + 'px',
+			width : '55px'
+		}
+	});
+}
+
+$.hideLoading = function() {
+	$.unblockUI();
+}
+
+$.redirecionar = function(url) {
+	$.showLoading();
+	window.top.location = url;
+}
+
+$(document).ajaxSend(function() {
+	$.showLoading();
+});
+
+$(document).ajaxComplete(function() {
+	$.hideLoading();
+});
+
+$('a').click(function() {
+	$.showLoading();
 });
 
 /* jQuery Validate */
@@ -100,45 +180,6 @@ $(document).ready(function() {
 	$('input.telefone').mascaraDeTelefone();
 });
 
-$.confirmacao = function(mensagem, callbackSim, callbackNao) {
-	$('div.dialogo_confirmacao').remove();
-	$('#conteudo').append('<div class="dialogo_confirmacao" title="Confirmação">'+mensagem+'</div>');
-	$('div.dialogo_confirmacao').dialog({
-		autoOpen: false,
-		closeOnEscape: true,
-		modal: true,
-		buttons: {
-			'Sim': function() {
-				if (callbackSim != undefined) {
-					callbackSim();
-				}
-				$(this).dialog('close');
-			},
-			'Não' : function() {
-				if (callbackNao != undefined) {
-					callbackNao();
-				}
-				$(this).dialog('close');
-			}
-		}
-	}).dialog('open');
-}
-
-$(document).ready(function() {
-	/*$("#content-wrapper").tabs({
-		active: 2
-	});*/
-	$("body").addClass("ui-form");
-	$("button, input[type=button], input[type=submit], a.button").button();
-	
-	$("#navegacao li").mouseover(function() {
-		$(this).addClass('ui-state-hover');
-	});
-	$("#navegacao li").mouseout(function() {
-		$(this).removeClass('ui-state-hover');
-	});
-});
-
 /* CKEditor */
 
 $.fn.extend({
@@ -156,27 +197,7 @@ $.fn.extend({
 	}
 });
 
-/* Tooltipster */
-
-$.fn.extend({
-	tooltip: function(options) {
-		$(this).tooltipster(options);
-		// Exibir tooltip ao ganhar foco
-		$(this).focusin(function(){
-			$(this).tooltipster('show');
-		});
-		$(this).focusout(function(){
-			$(this).tooltipster('hide');
-		});
-		return $(this);
-	}
-});
-
-$(document).ready(function() {
-	$('.tooltipster').tooltip();
-});
-
-/* Data tables */
+/* DataTables */
 
 $.extend($.fn.dataTable.defaults, {
 	"bJQueryUI": true,
@@ -313,6 +334,26 @@ $.fn.dataTableExt.oApi.fnSetFilteringDelay = function ( oSettings, iDelay ) {
     return this;
 };
 
+/* Tooltipster */
+
+$.fn.extend({
+	tooltip: function(options) {
+		$(this).tooltipster(options);
+		// Exibir tooltip ao ganhar foco
+		$(this).focusin(function(){
+			$(this).tooltipster('show');
+		});
+		$(this).focusout(function(){
+			$(this).tooltipster('hide');
+		});
+		return $(this);
+	}
+});
+
+$(document).ready(function() {
+	$('.tooltipster').tooltip();
+});
+
 /* Redes sociais */
 
 var addthis_config = {
@@ -326,69 +367,3 @@ var addthis_share = {
 	"title" : "Pesquisa: o que influencia a MGP dos alunos da UFS?",
 	"description" : "Pesquisa desenvolvida por alunos da disciplina de Estatística Aplicada 2013/1 com o intuito de verificar como anda a MGP dos alunos da UFS e quais fatores podem estar contribuindo para essa condição."
 }; 
-
-$(document).ready(function(){
-	/*var left = $("#header").position().left + $("#header").width() - $("#redes_sociais_flutuante").width() + 20;
-	$("#redes_sociais_flutuante").css("left", left);*/
-});
-
-/* Debugger */
-
-$(document).ready(function() {
-	$("#debugger").dialog({
-		autoOpen : false,
-		modal : true,
-		width : 640,
-		height : 480
-	});
-});
-
-function showDebugger() {
-	$("#debugger").dialog("open");
-}
-
-/* Loading */
-
-$.showLoading = function() {
-	$('body').append('<img id="loading" src="../comum/imagens/loading.gif" />');
-	$.blockUI({
-		message : $('#loading'),
-		css : {
-			background : 'transparent',
-			border : '0',
-			top : ($(window).height() - 55) / 2 + 'px',
-			left : ($(window).width() - 55) / 2 + 'px',
-			width : '55px'
-		}
-	});
-}
-
-$.hideLoading = function() {
-	$.unblockUI();
-}
-
-$(document).ajaxSend(function() {
-	$.showLoading();
-});
-
-$(document).ajaxComplete(function() {
-	$.hideLoading();
-});
-
-$('a').click(function() {
-	$.showLoading();
-});
-
-/* Outras funções */
-
-$.fn.extend({
-	tabAtiva: function() {
-		$(this).parent('li').addClass('ui-tabs-active ui-state-active');
-		return $(this);
-	}
-});
-
-$.redirecionar = function(url) {
-	$.showLoading();
-	window.top.location = url;
-}

@@ -158,18 +158,94 @@ a{
 /*** COVER ***/
     .ppw-slide-type-opening{
         text-align: center;
-        background: url(../images/wall-bg.jpg) no-repeat;
-        background-size: 100% 100%;
+        background: #0F1923;
         font-size: 2em;
     }
 
-    .ppw-slide-type-opening h1{
+	.ppw-slide-type-opening div#central {
+		background: url(../images/capa.jpg) no-repeat center;
+		background-size: 720px 450px;
+		display: table;
+		height: 450px;
+		left: 50%;
+		margin: -225px auto auto -360px;
+		position: absolute;
+		top: 50%;
+		width: 720px;
+	}
+	
+	.ppw-slide-type-opening div#central h1 {
+		color: #FCFCFA;
+		font-family: 'Forgotten Futurist';
+		font-size: 60px;
+		line-height: 80px;
+		margin-top: 0px;
+	}
+	
+	.ppw-slide-type-opening h2 {
+		bottom: 120px;
+		color: #FCFCFA;
+		font-size: 40px;
+		display: table;
+		left: 50%;
+		margin: 0 auto auto -285px;
+		padding: 0;
+		position: absolute;
+		width: 570px;
+	}
+	.ppw-slide-type-opening div#footer {
+		background: url('../images/bg-footer-noise.jpg') repeat;
+		background-size: 100px 15px, 140px 140px;
+		border-top: 1px solid #7ACEF4;
+		bottom: 0;
+		display: block;
+		height: 100px;
+		margin-left: -20px;
+		position: absolute;
+		width: 100%;
+	}
+	.ppw-slide-type-opening div#autor {
+		background-image: url('../images/autor.jpg');
+		background-position: 13px;
+		background-repeat: no-repeat;
+		background-size: 75px;
+		color: #FCFCFA;
+		float: left;
+		font-size: 25px;
+		height: inherit;
+		line-height: 5px;
+		padding-left: 100px;
+		padding-top: 10px;
+		text-align: left;
+	}
+	.ppw-slide-type-opening span#moobi {
+		background-image: url('../images/moobi.png');
+		background-repeat: no-repeat;
+		background-size: 100px;
+		display: block;
+		float: right;
+		height: 45px;
+		margin: 25px 10px 10px 10px;
+		width: 100px;
+	}
+	span#ufs {
+		background-image: url('../images/ufs.gif');
+		background-repeat: no-repeat;
+		background-size: 80px;
+		display: block;
+		float: right;
+		height: 80px;
+		margin: 10px 10px;
+		width: 80px;
+	}
+
+    /*.ppw-slide-type-opening h1{
         margin-top: 15%;
         font-size: 2.4em;
         position: relative;
         z-index: 2;
-    }
-    .ppw-slide-type-opening h1:before{
+    }*/
+    /*.ppw-slide-type-opening h1:before{
         content: "jQuery";
         white-space: nowrap;
         text-align: center;
@@ -181,10 +257,7 @@ a{
         color: transparent;
         text-shadow: 0px 0px 60px white;
         z-index: 1;
-    }
-    .ppw-slide-type-opening h2{
-        font-size: 1.4em;
-    }
+    }*/
     .ppw-slide-type-opening a, .ppw-slide-type-opening strong{
         color: white;
         font-size: 1.2em;

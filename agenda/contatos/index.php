@@ -216,7 +216,13 @@ require_once '../comum/php/header.php';
 		</div>
 	</form>
 </div>
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="../../lib/fancybox/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="../../lib/uploadify/uploadify.css" />
 <link rel="stylesheet" type="text/css" href="css/contatos.css" />
+<!-- Scripts -->
+<script type="text/javascript" src="../../lib/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="../../lib/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="js/contatos.js"></script>
 <?php
 require_once '../comum/php/footer.php';

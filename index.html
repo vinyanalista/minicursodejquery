@@ -1,2 +1,217 @@
-<p><a href="agenda">Aplicacao de exemplo</a></p>
-<p><a href="apresentacao">Apresentacao</a></p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Minicurso de jQuery</title>
+		<!-- TODO Configurar redes sociais e AddThis -->
+		<!-- Facebook -->
+		<meta property="og:url" content="http://minicursodejquery.sf.net/" />
+		<meta property="og:title" content="Minicurso de jQuery" />
+		<meta property="og:description" content="A Internet das páginas de conteúdo estático cedeu espaço a um ambiente dinâmico, com sites e sistemas ricos em design e funcionalidades. Para implementar sites interativos e atraentes, os desenvolvedores recorrem a bibliotecas como o jQuery para simplificar todas as tarefas das mais simples às mais complicadas, como por exemplo: modificar o design e conteúdo da página, acrescentar animações, prover interatividade com suporte a eventos, facilitar o uso do AJAX, etc. Além disso, o jQuery pode ser expandido através de plugins, utiliza uma sintaxe fácil de aprender e respeita os padrões da Internet, contribuindo para a correta exibição do site nos diversos navegadores existentes. Não sem motivo, o jQuery é a biblioteca JavaScript mais usada, presente em 55% dos 10 mil sites mais visitados do mundo. O objetivo deste minicurso é introduzir o desenvolvedor à utilização do jQuery. Serão apresentados os conceitos básicos para a utilização dessa biblioteca, assim como exemplos cotidianos do uso de suas rotinas e plugins. Espera-se que após o minicurso os desenvolvedores sejam capazes de utilizar a biblioteca eficientemente em seus projetos, assim como trilhar seus próprios caminhos na descoberta de mais funcionalidades e plugins." />
+		<meta property="og:image" content="apresentacao/imagens/miniatura_facebook.jpg"/>
+		<meta property="og:image:width" content="400" />
+		<meta property="og:image:height" content="400" />
+		<meta property="og:type" content="website"/>
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="apresentacao/imagens/icones/jquery.ico">
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="lib/formee/css/formee-structure.css" />
+		<link rel="stylesheet" type="text/css" href="lib/forgotten-futurist/forgotten-futurist.css" />
+		<style>
+			html, body {
+				-webkit-font-smoothing: antialiased;
+				box-sizing: border-box;
+				color: #333;
+				font: 15px/22.5px "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+				height: 100%;
+				margin: 0;
+				min-width: 1015px;
+				min-height: 510px; /* Resolução mínima: 1024x600 */
+			}
+			#container {
+				background-color: #0769AD;
+				min-height: calc(100% - 110px);
+				margin: 0 auto;
+				padding: 20px 20px 0px 20px;
+			}
+			#content-wrapper {
+				background: rgb(255,255,255); /* Old browsers */
+			    background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 39%, rgba(196,196,196,1) 100%); /* FF3.6+ */
+			    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(39%,rgba(255,255,255,1)), color-stop(100%,rgba(196,196,196,1))); /* Chrome,Safari4+ */
+			    background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 39%,rgba(196,196,196,1) 100%); /* Chrome10+,Safari5.1+ */
+			    background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 39%,rgba(196,196,196,1) 100%); /* Opera 12+ */
+			    background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 39%,rgba(196,196,196,1) 100%); /* IE10+ */
+			    background: radial-gradient(ellipse at center, rgba(255,255,255,1) 39%,rgba(196,196,196,1) 100%); /* W3C */
+				border-radius: 6px;
+				-webkit-box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
+				box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
+				-webkit-box-shadow: 0 0 3px rgba(1, 1, 1, 0.7);
+				box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c4c4c4',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+				height: calc(100% - 110px);
+				position: absolute;
+				width: calc(100% - 40px);
+				z-index: 10;
+			}
+			#content-wrapper h1 a {
+				background-image: url('../imagens/icones/agenda.png');
+				background-position: left;
+				background-repeat: no-repeat;
+				background-size: contain;
+				float: left;
+				font-family: 'Forgotten Futurist', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
+				font-size: 25px;
+				line-height: 48px;
+				margin-bottom: 5px;
+				padding-left: 58px;
+				text-decoration: none;
+			}
+			#content-wrapper:after {
+				content: ".";
+				display: block;
+				clear: both;
+				visibility: hidden;
+				overflow: hidden;
+			}
+			#conteudo {
+				border: 1px solid black;
+				display: table;
+				height: 350px;
+				left: calc(50% - 400px);
+				padding: 0;
+				position: absolute;
+				top: calc(50% - 175px);
+				width: 800px;
+			}
+			div#chamada {
+				background: url('apresentacao/imagens/logo/jquery.png') no-repeat center;
+				background-position: 55px 110px;
+				background-size: 200px;
+				display: table;
+				height: 185px;
+				margin: 0 auto;
+				position: absolute;
+				text-align: center;
+				width: 310px;
+			}
+			div#chamada h1 {
+				font-family: 'Forgotten Futurist';
+				font-size: 30px;
+				line-height: 45px;
+				margin-top: 0px;
+			}
+			p#resumo {
+				font-size: 12px;
+				line-height: 15px;
+				margin: 0;
+				text-align: justify;
+			}
+			footer {
+				background: url('agenda/comum/imagens/bg-footer-noise.jpg') repeat;
+				background-image: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url('agenda/comum/imagens/bg-footer-noise.jpg');
+				background-image: linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,0)), url('agenda/comum/imagens/bg-footer-noise.jpg');
+				background-repeat: repeat-x, repeat;
+				background-size: 100px 15px, 140px 140px;
+				border-top: 1px solid #7ACEF4;
+				bottom: 0;
+				display: block;
+				height: 60px;
+				padding-top: 40px;
+				padding-bottom: 10px;
+				position: absolute;
+				width: 100%;
+			}
+			footer, footer a {
+				color: #fff;
+				text-decoration: none;
+			}
+			footer a:hover {
+				text-decoration: underline;
+			}
+			.constrain {
+				margin: 0 auto;
+				padding: 0px 20px;
+			}
+			#autor {
+				background-image: url('agenda/comum/imagens/autor.jpg');
+				background-position: left;
+				background-repeat: no-repeat;
+				background-size: 50px;
+				float: left;
+				height: 50px;
+				line-height: 16px;
+				padding-left: 58px;
+				width: 420px;
+			}
+			#autor p {
+				margin: 0;
+			}
+			#redes_sociais {
+				float: right;
+				margin-top: 10px;
+				width: 250px;
+			}
+		</style>
+		<!-- Scripts -->
+		<script type="text/javascript" src="lib/jquery/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="lib/formee/js/formee.js"></script>
+		<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7774466af48b4f"></script>
+		<script>
+			
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="content-wrapper" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+				<div id="conteudo">
+					<div class="grid-5-12">
+						<div id="chamada">
+							<h1>Desenvolvimento de sites para a web 2.0 com</h1>
+							
+						</div>
+					</div>
+					<div class="grid-7-12">
+						<p id="resumo">
+							A Internet das páginas de conteúdo estático cedeu espaço a um ambiente dinâmico, com sites e sistemas ricos em design e funcionalidades. Para implementar sites interativos e atraentes, os desenvolvedores recorrem a bibliotecas como o jQuery para simplificar todas as tarefas das mais simples às mais complicadas, como por exemplo: modificar o design e conteúdo da página, acrescentar animações, prover interatividade com suporte a eventos, facilitar o uso do AJAX, etc. Além disso, o jQuery pode ser expandido através de plugins, utiliza uma sintaxe fácil de aprender e respeita os padrões da Internet, contribuindo para a correta exibição do site nos diversos navegadores existentes. Não sem motivo, o jQuery é a biblioteca JavaScript mais usada, presente em 55% dos 10 mil sites mais visitados do mundo. O objetivo deste minicurso é introduzir o desenvolvedor à utilização do jQuery. Serão apresentados os conceitos básicos para a utilização dessa biblioteca, assim como exemplos cotidianos do uso de suas rotinas e plugins. Espera-se que após o minicurso os desenvolvedores sejam capazes de utilizar a biblioteca eficientemente em seus projetos, assim como trilhar seus próprios caminhos na descoberta de mais funcionalidades e plugins.
+						</p>
+					</div>
+					<div class="grid-2-12">
+						<strong>Hotsite em construção</strong>
+					</div>
+					<div class="grid-3-12">
+						<a href="agenda">Aplicação de exemplo</a>
+					</div>
+					<div class="grid-3-12">
+						<a href="apresentacao">Apresentação</a>
+					</div>
+					<div class="grid-2-12">
+						<a href="https://github.com/vinyanalista/minicursodejquery/archive/master.zip">Download</a>
+					</div>
+					<div class="grid-2-12">
+						<a href="#">Instruções</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<footer class="clear">
+			<div class="constrain">
+				<div id="autor">
+					<p>Copyleft 2013 <a href="mailto:vinyanalista@gmail.com">Antônio Vinícius Menezes Medeiros</a>.</p>
+					<p>A apresentação e a aplicação de exemplo do minicurso podem ser utilizadas conforme as licenças <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_blank">GPLv2</a> ou <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.</p>
+				</div>
+				<!-- AddThis -->
+				<div id="redes_sociais">
+					<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+						<a class="addthis_button_facebook"></a>
+						<a class="addthis_button_twitter"></a>
+						<a class="addthis_button_google_plusone_share"></a>
+						<a class="addthis_button_email"></a>
+						<a class="addthis_button_compact"></a>
+						<a class="addthis_counter addthis_bubble_style"></a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
