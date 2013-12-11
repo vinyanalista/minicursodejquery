@@ -1,3 +1,5 @@
+/* Ícones nos títulos das seções  */
+
 section h2 {
 	background-position: top right;
 	background-repeat: no-repeat;
@@ -5,51 +7,83 @@ section h2 {
 	padding-right: 250px;
 }
 
-section.blockui h2 {
+section.logo_blockui h2 {
 	background-image: url('../imagens/logo/blockui.jpeg');
 }
-section.ckeditor h2 {
+section.logo_ckeditor h2 {
 	background-image: url('../imagens/logo/ckeditor.png');
 }
-section.datatables h2 {
+section.logo_datatables h2 {
 	background-image: url('../imagens/logo/datatables.png');
 }
-section.fancybox h2 {
+section.logo_fancybox h2 {
 	background-image: url('../imagens/logo/fancybox.png');
 }
-section.formee h2 {
+section.logo_formee h2 {
 	background-image: url('../imagens/logo/formee.jpg');
 }
-section.jcarousel h2 {
+section.logo_jcarousel h2 {
 	background-image: url('../imagens/logo/jcarousel.jpeg');
 }
-section.jquery-mask h2 {
+section.logo_jquery-mask h2 {
 	background-image: url('../imagens/logo/jquery-mask.jpeg');
 }
-section.jquery-timepicker h2 {
+section.logo_jquery-timepicker h2 {
 	/* background-image: url('../imagens/logo/jquery-timepicker.jpeg'); */
 }
-section.jquery-ui h2 {
+section.logo_jquery-ui h2 {
 	background-image: url('../imagens/logo/jquery-ui.png');
 }
-section.jquery-validate h2 {
+section.logo_jquery-validate h2 {
 	/* background-image: url('../imagens/logo/jquery-validate.jpeg'); */
 }
-section.jquery h2 {
+section.logo_jquery h2 {
 	background-image: url('../imagens/logo/jquery.png');
 }
-section.notify h2 {
+section.logo_notify h2 {
 	background-image: url('../imagens/logo/notify.jpeg');
 }
-section.tag-it h2 {
+section.logo_tag-it h2 {
 	background-image: url('../imagens/logo/tag-it.png');
 }
-section.tooltipster h2 {
+section.logo_tooltipster h2 {
 	background-image: url('../imagens/logo/tooltipster.jpeg');
 }
-section.uploadify h2 {
+section.logo_uploadify h2 {
 	background-image: url('../imagens/logo/uploadify.png');
 }
+
+/* Ícones */
+
+.icone{background: no-repeat 0 center; display: inline-block;}
+.icone_16x16{background-size: 16px 16px; width: 16px; height: 16px;}
+.icone_22x22{background-size: 22px 22px; width: 22px; height: 22px;}
+.icone_24x24{background-size: 24px 24px; width: 24px; height: 24px;}
+
+.botao_com_icone span {
+	line-height: 22px;
+	padding-left: 30px;
+	width: auto;
+}
+
+.icone_jquery{background-image: url(../imagens/icones/jquery.png);}
+
+/* Syntax Highlighter */
+
+.syntaxhighlighter {
+	font-size: 18px !important;
+}
+.syntaxhighlighter .line {
+    white-space: pre-wrap !important;
+}
+.syntaxhighlighter .line.alt2 {
+	background-color: #E1E1E1 !important;
+}
+.syntaxhighlighter .line:hover {
+	background: #99CDF1 !important;
+}
+
+/* Diversos */
 
 .center {
 	display: table;

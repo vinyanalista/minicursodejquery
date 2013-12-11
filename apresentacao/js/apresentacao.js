@@ -13,12 +13,10 @@ PPW.init({
 });
 
 $(document).ready(function() {
-	/*$("pre.javascript").snippet("javascript", {
-		style : "ide-eclipse"
+	$("pre").each(function(){
+		$(this).text($(this).html());
 	});
-
-	$("pre#exemplo01").snippet("javascript", {
-		style : "ide-eclipse",
-		'box' : '2'
-	});*/
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.config.clipboardSwf = '../lib/syntaxhighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.all();
 });

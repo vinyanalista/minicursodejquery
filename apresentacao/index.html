@@ -13,12 +13,24 @@
 		<meta property="og:type" content="website"/>
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="imagens/icones/jquery.ico">
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="../lib/syntaxhighlighter/styles/shCore.css" />
+		<link rel="stylesheet" type="text/css" href="../lib/syntaxhighlighter/styles/shThemeDefault.css" />
+		<link rel="stylesheet" type="text/css" href="css/apresentacao.css" />
+		<!--[if gte IE 9]>
+			<style type="text/css">
+			.gradient {
+				filter: none;
+			}
+		</style>
+		<![endif]-->
 		<!-- Scripts -->
 		<script type="text/javascript" src="../lib/jquery/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shCore.js"></script>
+		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushPhp.js"></script>
 		<script type="text/javascript" src="../lib/power-polygon/ppw.js"></script>
-		<script type="text/javascript" src="../lib/power-polygon/_addons/syntaxhighlighter/sh.js"></script>
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="css/apresentacao.css" />
 	</head>
 	<body>
 		<section>
@@ -36,15 +48,15 @@
 			</div>
 		</section>
 		
-		<section class="jquery">
+		<section class="logo_jquery">
 			<h2>Downloading jQuery</h2>
 			<p>Compressed and uncompressed copies of jQuery files are available. The uncompressed file is best used during development or debugging; the compressed file saves bandwidth and improves performance in production. Starting with jQuery 1.9, we also make available sourcemap files that can be used to debug the compressed file in sourcemap-aware browsers such as Google Chrome. The map file is not required for users to run jQuery, it just improves the developer's debugger experience.</p>
 		</section>
 		
-		<section class="jquery">
+		<section class="logo_jquery">
 			<h2>Código-fonte</h2>
 			Some content here, for slide 2
-			<pre class="sh_javascript" id="exemplo01">
+			<pre class="brush: js">
 $(document).ready(function() {
 	$("pre.javascript").snippet("javascript", {
 		style : "ide-eclipse"
@@ -52,7 +64,7 @@ $(document).ready(function() {
 });</pre>
 		</section>
 
-		<section class="jquery-ui">
+		<section class="logo_jquery-ui">
 			<h2>jQuery UI</h2>
 			<img class="center screenshot" src="imagens/screenshots/jqueryui.png" />
 			<ul>
@@ -61,7 +73,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://jqueryui.com/" target="_blank">http://jqueryui.com/</a></li>
 			</ul>
 		</section>
-		<section class="tooltipster">
+		<section class="logo_tooltipster">
 			<h2>Tooltipster</h2>
 			<img class="center screenshot" src="imagens/screenshots/tooltipster.png" />
 			<ul>
@@ -70,7 +82,49 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://calebjacob.com/tooltipster/" target="_blank">http://calebjacob.com/tooltipster/</a></li>
 			</ul>
 		</section>
-		<section class="datatables">
+		
+		<section class="logo_tooltipster">
+			<h2>Tooltipster</h2>
+			<p>Para usar o Tooltipster, adicionar ao elemento head:</p>
+			<pre class="brush: html">
+<!-- CSS -->				
+<link rel="stylesheet" type="text/css" href="tooltipster/css/tooltipster.css" />
+<!-- Scripts -->
+<script type="text/javascript" src="tooltipster/js/jquery.tooltipster.min.js"></script></pre>
+			<p>O tooltip se baseia no atributo title:</p>
+			<pre class="brush: html">
+<a class="tooltipster" title="Aqui vem o texto do tooltip.">Exemplo</a></pre>
+		</section>
+		
+		<section class="logo_tooltipster">
+			<h2>Tooltipster</h2>
+			<p>Por fim, inicializar o tooltip via jQuery:</p>
+			<pre class="brush: js">
+$(document).ready(function() {
+	$(".tooltipster").tooltipster();
+});</pre>
+		</section>
+		
+		<section class="logo_tooltipster">
+			<h2>Tooltipster</h2>
+			<p>Função conveniente (arquivo comum.js):</p>
+			<pre class="brush: js">
+$.fn.extend({
+	tooltip: function(options) {
+		$(this).tooltipster(options);
+		// Exibir tooltip ao ganhar foco
+		$(this).focusin(function(){
+			$(this).tooltipster('show');
+		});
+		$(this).focusout(function(){
+			$(this).tooltipster('hide');
+		});
+		return $(this);
+	}
+});</pre>
+		</section>
+		
+		<section class="logo_datatables">
 			<h2>DataTables</h2>
 			<img class="center screenshot" src="imagens/screenshots/datatables.png" />
 			<ul>
@@ -79,7 +133,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://datatables.net/" target="_blank">http://datatables.net/</a></li>
 			</ul>
 		</section>
-		<section class="jquery-validate">
+		<section class="logo_jquery-validate">
 			<h2>jQuery Validation Plugin</h2>
 			<img class="center screenshot" src="imagens/screenshots/jquery-validate.png" />
 			<ul>
@@ -88,7 +142,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://jqueryvalidation.org/" target="_blank">http://jqueryvalidation.org/</a></li>
 			</ul>
 		</section>
-		<section class="jquery-mask">
+		<section class="logo_jquery-mask">
 			<h2>jQuery Mask Plugin</h2>
 			<img class="center screenshot" src="imagens/screenshots/jquery-mask.png" />
 			<ul>
@@ -97,7 +151,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://igorescobar.github.io/jQuery-Mask-Plugin/" target="_blank">http://igorescobar.github.io/jQuery-Mask-Plugin/</a></li>
 			</ul>
 		</section>
-		<section class="jquery-timepicker">
+		<section class="logo_jquery-timepicker">
 			<h2>jQuery Timepicker</h2>
 			<img class="center screenshot" src="imagens/screenshots/jquery-timepicker.png" />
 			<ul>
@@ -106,7 +160,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://jonthornton.github.io/jquery-timepicker/" target="_blank">http://jonthornton.github.io/jquery-timepicker/</a></li>
 			</ul>
 		</section>
-		<section class="notify">
+		<section class="logo_notify">
 			<h2>Notify.js</h2>
 			<img class="center screenshot" src="imagens/screenshots/notify.png" />
 			<ul>
@@ -115,7 +169,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://notifyjs.com/" target="_blank">http://notifyjs.com/</a></li>
 			</ul>
 		</section>
-		<section class="jcarousel">
+		<section class="logo_jcarousel">
 			<h2>jCarousel</h2>
 			<img class="center screenshot" src="imagens/screenshots/jcarousel.png" />
 			<ul>
@@ -124,7 +178,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://sorgalla.com/jcarousel/" target="_blank">http://sorgalla.com/jcarousel/</a></li>
 			</ul>
 		</section>
-		<section class="fancybox">
+		<section class="logo_fancybox">
 			<h2>fancyBox</h2>
 			<img class="center screenshot" src="imagens/screenshots/fancybox.jpg" />
 			<ul>
@@ -133,7 +187,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://fancyapps.com/fancybox/" target="_blank">http://fancyapps.com/fancybox/</a></li>
 			</ul>
 		</section>
-		<section class="tag-it">
+		<section class="logo_tag-it">
 			<h2>jQuery Tag-it!</h2>
 			<img class="center screenshot" src="imagens/screenshots/tag-it.png" />
 			<ul>
@@ -142,7 +196,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://aehlke.github.io/tag-it/" target="_blank">http://aehlke.github.io/tag-it/</a></li>
 			</ul>
 		</section>
-		<section class="ckeditor">
+		<section class="logo_ckeditor">
 			<h2>CKEditor</h2>
 			<img class="center screenshot" src="imagens/screenshots/ckeditor.png" />
 			<ul>
@@ -151,7 +205,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://ckeditor.com" target="_blank">http://ckeditor.com</a></li>
 			</ul>
 		</section>
-		<section class="uploadify">
+		<section class="logo_uploadify">
 			<h2>Uploadify</h2>
 			<img class="center screenshot" src="imagens/screenshots/blockui.jpg" />
 			<ul>
@@ -160,7 +214,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://www.uploadify.com/" target="_blank">http://www.uploadify.com/</a></li>
 			</ul>
 		</section>
-		<section class="blockui">
+		<section class="logo_blockui">
 			<h2>jQuery BlockUI Plugin</h2>
 			<img class="center screenshot" src="imagens/screenshots/blockui.jpg" />
 			<ul>
@@ -169,7 +223,7 @@ $(document).ready(function() {
 				<li><b>Página oficial:</b> <a href="http://www.malsup.com/jquery/block/" target="_blank">http://www.malsup.com/jquery/block/</a></li>
 			</ul>
 		</section>
-		<section class="formee">
+		<section class="logo_formee">
 			<h2>formee</h2>
 			<img class="center screenshot" src="imagens/screenshots/formee.png" />
 			<ul>
