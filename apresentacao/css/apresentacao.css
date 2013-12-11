@@ -5,21 +5,56 @@ section h2 {
 	padding-right: 250px;
 }
 
+section.blockui h2 {
+	background-image: url('../imagens/logo/blockui.jpeg');
+}
 section.ckeditor h2 {
 	background-image: url('../imagens/logo/ckeditor.png');
 }
 section.datatables h2 {
 	background-image: url('../imagens/logo/datatables.png');
 }
+section.fancybox h2 {
+	background-image: url('../imagens/logo/fancybox.png');
+}
+section.formee h2 {
+	background-image: url('../imagens/logo/formee.jpg');
+}
+section.jcarousel h2 {
+	background-image: url('../imagens/logo/jcarousel.jpeg');
+}
+section.jquery-mask h2 {
+	background-image: url('../imagens/logo/jquery-mask.jpeg');
+}
+section.jquery-timepicker h2 {
+	/* background-image: url('../imagens/logo/jquery-timepicker.jpeg'); */
+}
 section.jquery-ui h2 {
 	background-image: url('../imagens/logo/jquery-ui.png');
+}
+section.jquery-validate h2 {
+	/* background-image: url('../imagens/logo/jquery-validate.jpeg'); */
 }
 section.jquery h2 {
 	background-image: url('../imagens/logo/jquery.png');
 }
+section.notify h2 {
+	background-image: url('../imagens/logo/notify.jpeg');
+}
 section.tag-it h2 {
 	background-image: url('../imagens/logo/tag-it.png');
 }
+section.tooltipster h2 {
+	background-image: url('../imagens/logo/tooltipster.jpeg');
+}
 section.uploadify h2 {
 	background-image: url('../imagens/logo/uploadify.png');
+}
+
+.center {
+	display: table;
+	margin: 0 auto;
+}
+.screenshot {
+	max-height: 50%;
 }
