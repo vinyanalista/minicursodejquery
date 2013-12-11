@@ -18,5 +18,6 @@ $(document).ready(function() {
 	});
 	SyntaxHighlighter.defaults['gutter'] = true;
 	SyntaxHighlighter.config.clipboardSwf = '../lib/syntaxhighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.config.tagName = 'xmp';
 	SyntaxHighlighter.all();
 });

@@ -65,9 +65,7 @@ $.confirmacao = function(mensagem, callbackSim, callbackNao) {
 	$('div.dialogo_confirmacao').remove();
 	$('#conteudo').append('<div class="dialogo_confirmacao" title="Confirmação">'+mensagem+'</div>');
 	$('div.dialogo_confirmacao').dialog({
-		autoOpen: false,
 		closeOnEscape: true,
-		modal: true,
 		buttons: {
 			'Sim': function() {
 				if (callbackSim != undefined) {
@@ -88,9 +86,8 @@ $.confirmacao = function(mensagem, callbackSim, callbackNao) {
 /* jQuery BlockUI Plugin */
 
 $.showLoading = function() {
-	$('body').append('<img id="loading" src="../comum/imagens/loading.gif" />');
 	$.blockUI({
-		message : $('#loading'),
+		message : '<img id="loading" src="../comum/imagens/loading.gif" />',
 		css : {
 			background : 'transparent',
 			border : '0',
@@ -366,4 +363,4 @@ var addthis_share = {
 	"url" : "http://www.vinyanalista.com.br/estatistica20131",
 	"title" : "Pesquisa: o que influencia a MGP dos alunos da UFS?",
 	"description" : "Pesquisa desenvolvida por alunos da disciplina de Estatística Aplicada 2013/1 com o intuito de verificar como anda a MGP dos alunos da UFS e quais fatores podem estar contribuindo para essa condição."
-}; 
+};

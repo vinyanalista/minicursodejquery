@@ -7,6 +7,9 @@ section h2 {
 	padding-right: 250px;
 }
 
+section.logo_aptana h2 {
+	background-image: url('../imagens/logo/aptana.png');
+}
 section.logo_blockui h2 {
 	background-image: url('../imagens/logo/blockui.jpeg');
 }
@@ -21,6 +24,9 @@ section.logo_fancybox h2 {
 }
 section.logo_formee h2 {
 	background-image: url('../imagens/logo/formee.jpg');
+}
+section.logo_google-chrome h2 {
+	background-image: url('../imagens/logo/google-chrome.png');
 }
 section.logo_jcarousel h2 {
 	background-image: url('../imagens/logo/jcarousel.jpeg');
@@ -51,6 +57,9 @@ section.logo_tooltipster h2 {
 }
 section.logo_uploadify h2 {
 	background-image: url('../imagens/logo/uploadify.png');
+}
+section.logo_xampp h2 {
+	background-image: url('../imagens/logo/xampp.png');
 }
 
 /* Ícones */
@@ -91,4 +100,7 @@ section.logo_uploadify h2 {
 }
 .screenshot {
 	max-height: 50%;
+}
+.screenshot_ferramentas {
+	max-height: 40%;
 }

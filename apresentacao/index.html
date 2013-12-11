@@ -14,6 +14,7 @@
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="imagens/icones/jquery.ico">
 		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="../lib/formee/css/formee-structure.css" />
 		<link rel="stylesheet" type="text/css" href="../lib/syntaxhighlighter/styles/shCore.css" />
 		<link rel="stylesheet" type="text/css" href="../lib/syntaxhighlighter/styles/shThemeDefault.css" />
 		<link rel="stylesheet" type="text/css" href="css/apresentacao.css" />
@@ -27,12 +28,16 @@
 		<!-- Scripts -->
 		<script type="text/javascript" src="../lib/jquery/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shCore.js"></script>
-		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushCss.js"></script>
 		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
 		<script type="text/javascript" src="../lib/syntaxhighlighter/scripts/shBrushPhp.js"></script>
 		<script type="text/javascript" src="../lib/power-polygon/ppw.js"></script>
 	</head>
 	<body>
+		
+		<!-------------------------------- Capa -------------------------------->
+		
 		<section>
 			<div id="central">
 				<h1>Desenvolvimento de sites para a web 2.0 com</h1>
@@ -48,31 +53,645 @@
 			</div>
 		</section>
 		
+		<section>
+			<h2>Agradecimentos</h2>
+			<ul>
+				<li>Cézar Ayran</li>
+				<li>Eloá Alves</li>
+				<li>Augusto Flávio</li>
+				<li>Caique Oliveira</li>
+				<li>Jayson Sabino</li>
+				<li>José Fernando</li>
+				<li>Railan Xisto</li>
+				<li>Pedro José</li>
+				<li>Rafael Aquino</li>
+			</ul>
+		</section>
+		
+		<!-------------------------------- Introdução -------------------------------->
+		
 		<section class="logo_jquery">
-			<h2>Downloading jQuery</h2>
-			<p>Compressed and uncompressed copies of jQuery files are available. The uncompressed file is best used during development or debugging; the compressed file saves bandwidth and improves performance in production. Starting with jQuery 1.9, we also make available sourcemap files that can be used to debug the compressed file in sourcemap-aware browsers such as Google Chrome. The map file is not required for users to run jQuery, it just improves the developer's debugger experience.</p>
+			<h2>O que é o jQuery?</h2>
+			<p>Biblioteca Javascript que visa facilitar a execução de tarefas comuns como:</p>
+			<ul>
+				<li>Manipulação de elementos na página</li>
+				<li>Tratamento de eventos</li>
+				<li>Animação</li>
+				<li>Comunicação com o servidor via AJAX</li>
+			</ul>
+			<p>O jQuery NÃO É uma linguagem de programação.</p>
+			<ul>
+				<li><b>Desenvolvedor:</b> The jQuery Foundation</li>
+				<li><b>Versão:</b> 1.8.3 (utilizada), 1.10.2 (legada) ou 2.0.3 (atual)</li>
+				<li><b>Página oficial:</b> <a href="http://jquery.com/‎" target="_blank">http://jquery.com/‎</a></li>
+			</ul>
 		</section>
 		
 		<section class="logo_jquery">
-			<h2>Código-fonte</h2>
-			Some content here, for slide 2
-			<pre class="brush: js">
-$(document).ready(function() {
-	$("pre.javascript").snippet("javascript", {
-		style : "ide-eclipse"
-	});
-});</pre>
+			<h2>Por quê o jQuery é tão bom?</h2>
+			<ul>
+				<li>Funcionamento baseado em princípios do HTML e do CSS</li>
+				<li>Apresenta um padrão de sintaxe fácil de aprender</li>
+				<li>Possui arquitetura modular e pode ser estendido através de plugins.</li>
+				<li>Provê compatibilidade entre os diversos navegadores existentes</li>
+				<li>Trabalha sempre com conjuntos</li>
+				<li>Permite a execução de várias ações sequenciais com apenas um comando através de <i>method chaining</i></li>
+			</ul>
 		</section>
+		
+		<section class="logo_jquery">
+			<h2>Aplicação de exemplo</h2>
+			<img class="center screenshot" src="imagens/screenshots/agenda.png" />
+		</section>
+		
+		<!-------------------------------- Ferramentas utilizadas -------------------------------->
+		
+		<section class="logo_google-chrome">
+			<h2>Ferramentas utilizadas</h2>
+			<p>Google Chrome</p>
+			<img class="center screenshot_ferramentas" src="imagens/screenshots/google-chrome.png" />
+			<ul>
+				<li><b>Desenvolvedor:</b> Google</li>
+				<li><b>Versão:</b> 31</li>
+				<li><b>Página oficial:</b> <a href="http://www.google.com/intl/pt-BR/chrome/‎" target="_blank">http://www.google.com/intl/pt-BR/chrome/‎</a></li>
+			</ul>
+		</section>
+		
+		<section class="logo_google-chrome">
+			<h2>Ferramentas utilizadas</h2>
+			<p>Chrome DevTools</p>
+			<img class="center screenshot" src="imagens/screenshots/chrome-devtools.png" />
+		</section>
+		
+		<section class="logo_xampp">
+			<h2>Ferramentas utilizadas</h2>
+			<p>XAMPP</p>
+			<img class="center screenshot_ferramentas" src="imagens/screenshots/xampp.jpg" />
+			<ul>
+				<li><b>Desenvolvedor:</b> Apache Friends</li>
+				<li><b>Versão:</b> 1.8.3</li>
+				<li><b>Página oficial:</b> <a href="http://www.apachefriends.org/pt_br/" target="_blank">http://www.apachefriends.org/pt_br/</a></li>
+			</ul>
+		</section>
+		
+		<section class="logo_aptana">
+			<h2>Ferramentas utilizadas</h2>
+			<p>Aptana Studio</p>
+			<img class="center screenshot_ferramentas" src="imagens/screenshots/aptana.png" />
+			<ul>
+				<li><b>Desenvolvedor:</b> Appcelerator</li>
+				<li><b>Versão:</b> 3.4.2</li>
+				<li><b>Página oficial:</b> <a href="http://www.aptana.com/" target="_blank">http://www.aptana.com/</a></li>
+			</ul>
+		</section>
+		
+		<!-------------------------------- Usando o jQuery -------------------------------->
+		
+		<section class="logo_jquery">
+			<h2>Usando o jQuery</h2>
+			<p>O jQuery pode ser obtido:</p>
+			<ul>
+				<li>Através do site oficial:
+					<ul>
+						<li><a href="http://jquery.com/download/" target="_blank">http://jquery.com/download/</a></li>
+					</ul>
+				</li>
+				<li>Através de um CDN:
+					<ul>
+						<li><a href="http://code.google.com/apis/ajaxlibs/documentation/index.html#jquery" target="_blank">Google CDN</a></li>
+						<li><a href="http://www.asp.net/ajaxlibrary/cdn.ashx#jQuery_Releases_on_the_CDN_0" target="_blank">Microsoft CDN</a></li>
+						<li><a href="http://cdnjs.com/libraries/jquery/" target="_blank">CDNJS CDN</a></li>
+					</ul>
+				</li>
+			</ul>
+			<p>É necessário importar apenas um script:</p>
+			<xmp class="brush: html">
+<!-- Scripts -->
+<script type="text/javascript" src="jquery-1.8.3.min.js"></script></xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Usando o jQuery</h2>
+			<p>Estrutura comum dos arquivos HTML:</p>
+			<xmp class="brush: html">
+<html>
+	<head>
+		<title></title>
+		<!-- CSS -->
+		<style></style>
+		<!-- Scripts -->
+		<script></script>
+	</head>
+	<body>
+		<!-- Conteúdo -->
+	</body>
+</html></xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Usando o jQuery</h2>
+			<p>Estrutura comum dos arquivos HTML:</p>
+			<xmp class="brush: html">
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<!-- Conteúdo -->
+		<!-- CSS -->
+		<style></style>
+		<!-- Scripts -->
+		<script></script>
+	</body>
+</html></xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Usando o jQuery</h2>
+			<p>Após importar e inicializar o jQuery, é possível executar comandos:</p>
+			<xmp class="brush: js">
+// var $ = jQuery.noConflict();				
+$(document).ready(function() {
+	$('#tab-categorias').parent('li').
+		addClass('ui-tabs-active ui-state-active');
+});
+</xmp>
+			<p>Abra a aplicação de exemplo e experimente executar esse comando no console do navegador:</p>
+			<xmp class="brush: js">
+$('#tab-categorias').parent('li').
+	addClass('ui-tabs-active ui-state-active');
+</xmp>
+		</section>
+		
+		<!-------------------------------- Com e sem jQuery -------------------------------->
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<p><b>Exemplo 1:</b> tabela com coloração alternada ("zebra")</p>
+			<ul>
+				<li>CSS:</li>
+				<xmp class="brush: css">
+.impar { background: #FFFFFF; }
+.par { background: #F2F2F2; }</xmp>
+				<li>HTML:</li>
+				<xmp class="brush: html">
+<table id="tabela_exemplo">
+	<tr><td>Linha 1</td></tr>
+	<tr><td>Linha 2</td></tr>
+	<tr><td>Linha 3</td></tr>
+	<tr><td>Linha 4</td></tr>
+	<tr><td>Linha 5</td></tr>
+</table></xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<p>Exemplo 1 sem jQuery</p>
+				<xmp class="brush: js">
+function hasClass(el, cl) {
+	var regex = new RegExp('(?:\\s|^)' + cl + '(?:\\s|$)');
+	return !!el.className.match(regex);
+}
+
+function addClass(el, cl) {
+	el.className += ' ' + cl;
+} // Continua...</xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<p>Exemplo 1 sem jQuery</p>
+				<xmp class="brush: js">
+window.onload = function() {
+	var tabela = document.getElementById('tabela_exemplo');
+	var linhas = tabela.getElementsByTagName('tr');
+	for (var l = 0; l < linhas.length; l++) {
+		var classe;
+		if (l % 2) {
+			classe = 'par';
+		} else {
+			classe = 'impar';
+		}
+		if (!hasClass(linhas[l], classe)) {
+			addClass(linhas[l], classe);
+		}
+	}
+}; // Fim</xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<p>Exemplo 1 com jQuery</p>
+				<xmp class="brush: js">
+$(function() {
+	$('#tabela_exemplo tr:odd').addClass('impar');
+	$('#tabela_exemplo tr:even').addClass('par');
+});</xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<p><b>Exemplo 2:</b> responder a um evento onclick (permitindo outros eventos)</p>
+			<p>Deseja-se executar a seguinte função toda vez que ocorrer um clique em um link (elemento a):</p>
+			<xmp class="brush: js">
+function teste() {
+	alert("Você clicou em um link!");
+}</xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<xmp class="brush: js">
+var addEvent = (function() { // Exemplo 2 sem jQuery
+	var filter = function(el, type, fn) {
+		for (var i = 0, len = el.length; i < len; i++) {
+			addEvent(el[i], type, fn);
+		}
+	};
+	if (document.addEventListener) {
+		return function(el, type, fn) {
+			if (el && el.nodeName || el === window) {
+				el.addEventListener(type, fn, false);
+			} else if (el && el.length) {
+				filter(el, type, fn);
+			}
+		};
+	} // Continua...</xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<xmp class="brush: js">
+	return function(el, type, fn) {
+		if (el && el.nodeName || el === window) {
+			el.attachEvent('on' + type, function() {
+				return fn.call(el, window.event);
+			});
+		} else if (el && el.length) {
+			filter(el, type, fn);
+		}
+	};
+})();
+
+window.onload = function() {
+	addEvent(document.getElementsByTagName('a'), 'click', teste);
+}</xmp>
+		</section>
+		
+		<section class="logo_jquery">
+			<h2>Com e sem jQuery</h2>
+			<p>Exemplo 2 com jQuery:</p>
+			<xmp class="brush: js">
+$(function() {
+	$('a').click(teste);
+});</xmp>
+		</section>
+		
+		<!-------------------------------- Contrapontos -------------------------------->
+		
+		<section class="logo_jquery">
+			<h2>Contrapontos</h2>
+			<ul>
+				<li>A versão mais nova (2.0.3) não suporta IE 6, 7 e 8</li>
+				<li>É uma biblioteca genérica Javascript de 267KB (pesada)
+					<ul>
+						<li>Nem todos os módulos são necessários</li>
+					</ul>
+				</li>
+				<li>A versão compactada (91KB) precisa ser descompactada pelo navegador antes de fazer qualquer outra coisa</li>
+				<li>Mesmo a versão compactada pode ser pesada para dispositivos móveis
+					<ul>
+						<li>Existem alternativas mais leves, como o <a href="http://zeptojs.com/" target="_blank">Zepto.JS</a>
+							<ul>
+								<li>10KB compactado, 25KB descompactado, compatível com jQuery)</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+		<!-------------------------------- Seletores -------------------------------->
+		
+		<!-- TODO Não fiz tudo que eu queria... :/ -->
+		
+		<!--<section class="logo_jquery">
+			<h2>Seletores</h2>
+			<p>AQUI AINDA VEM TEXTO</p>
+			<xmp class="brush: js">
+$(function() {
+	$('a').click(teste);
+});</xmp>
+		</section>-->
+		
+		<!-------------------------------- Manipulando elementos na página -------------------------------->
+		
+		<!--<section class="logo_jquery">
+			<h2>Manipulando elementos</h2>
+			<p>AQUI AINDA VEM TEXTO</p>
+			<xmp class="brush: js">
+$(function() {
+	$('a').click(teste);
+});</xmp>
+		</section>-->
+		
+		<!-------------------------------- Comunicação com o servidor via AJAX -------------------------------->
+		
+		<!--<section class="logo_jquery">
+			<h2>Requisições AJAX</h2>
+			<p>AQUI AINDA VEM TEXTO</p>
+			<xmp class="brush: js">
+$(function() {
+	$('a').click(teste);
+});</xmp>
+		</section>-->
+		
+		<!-------------------------------- Componentes -------------------------------->
+		
+		<section class="logo_jquery">
+			<h2>Componentes</h2>
+			<p>Além de possuir várias funcionalidades, o jQuery pode ser expandido através de componentes. Aqui veremos os que foram utilizados para desenvolver a aplicação de exemplo:</p>
+			<div class="grid-6-12">
+				<ul>
+					<li>jQuery UI</li>
+					<li>Tooltipster</li>
+					<li>DataTables</li>
+					<li>jQuery Validation Plugin</li>
+					<li>jQuery Timepicker</li>
+					<li>jQuery Mask Plugin</li>
+					<li>Notify.js</li>
+				</ul>
+			</div>
+			<div class="grid-6-12">
+				<ul>
+					<li>jCarousel</li>
+					<li>fancyBox</li>
+					<li>jQuery Tag-it!</li>
+					<li>CKEditor</li>
+					<li>Uploadify</li>
+					<li>jQuery BlockUI Plugin</li>
+					<li>formee</li>
+				</ul>
+			</div>
+		</section>
+		
+		<!-------------------------------- jQuery UI -------------------------------->
 
 		<section class="logo_jquery-ui">
 			<h2>jQuery UI</h2>
-			<img class="center screenshot" src="imagens/screenshots/jqueryui.png" />
+			<img class="center screenshot" src="imagens/screenshots/jquery-ui.png" />
 			<ul>
 				<li><b>Desenvolvedor:</b> The jQuery Foundation</li>
 				<li><b>Versão:</b> 1.10.3</li>
 				<li><b>Página oficial:</b> <a href="http://jqueryui.com/" target="_blank">http://jqueryui.com/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI</h2>
+			<p>Biblioteca de componentes de interface gráfica:</p>
+			<div class="grid-6-12">
+				<ul>
+					<li>Accordion</li>
+					<li><u>Autocomplete</u></li>
+					<li><b>Button</b></li>
+					<li><b>Datepicker</b></li>
+					<li><b>Dialog</b></li>
+					<li>Menu</li>
+					<li>Progressbar</li>
+					<li>Slider</li>
+					<li>Spinner</li>
+					<li><u>Tabs</u></li>
+				</ul>
+			</div>
+			<div class="grid-6-12">
+				<ul>
+					<li>Tooltip</li>
+					<li>Draggable</li>
+					<li>Droppable</li>
+					<li>Resizable</li>
+					<li>Selectable</li>
+					<li><b>Sortable</b></li>
+					<li><b>Hide</b></li>
+					<li><b>Show</b></li>
+					<li>Toggle</li>
+					<li>E mais...</li>
+				</ul>
+			</div>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="jquery-ui/css/cupertino/jquery-ui-1.10.3.custom.min.css" />				
+<!-- Scripts -->
+<script type="text/javascript" src="jquery-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="jquery-ui/js/jquery.ui.datepicker-pt-BR.js"></script></xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI</h2>
+			<xmp class="brush: js">
+$(document).ready(function() {
+	$("body").addClass("ui-form");
+	$("button, input[type=button], input[type=submit], a.button").button();
+	
+	$("#navegacao li").mouseover(function() {
+		$(this).addClass('ui-state-hover');
+	});
+	$("#navegacao li").mouseout(function() {
+		$(this).removeClass('ui-state-hover');
+	});
+});</xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI</h2>
+			<xmp class="brush: js">
+// comum.js
+$.fn.extend({
+	tabAtiva: function() {
+		$(this).parent('li').addClass('ui-tabs-active ui-state-active');
+		return $(this);
+	}
+});
+
+$('#tab-contatos').tabAtiva(); // contatos.js
+$('#tab-categorias').tabAtiva(); // categorias.js
+$('#tab-email').tabAtiva(); // email.js</xmp>
+			<p>Botão com ícone:</p>
+			<xmp class="brush: html">
+<button class="botao_com_icone" id="btn_novo_contato">
+	<span class='icone icone_22x22 icone_novo_contato'>Novo contato</span></button></xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Dialog</h2>
+			<img class="center" src="imagens/screenshots/jquery-ui-dialog.png" />
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Dialog</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<div id="dialog" title="Aqui vem o título">
+	<p>Conteúdo da caixa de diálogo.</p>
+</div></xmp>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$(document).ready(function() {
+	$("#dialogo").dialog();
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Dialog</h2>
+			<p>Configurações padrão:</p>
+			<xmp class="brush: js">
+$.extend($.ui.dialog.prototype.options, {
+	autoOpen: false,
+	modal: true,
+	width: 800,
+	show: {
+		effect: "blind",
+        duration: 400
+    },
+    hide: {
+		effect: "blind",
+        duration: 200
+    }
+	// TODO Pesquisar um meio viável de acrescentar scroll ao diálogo
+});</xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Dialog</h2>
+			<xmp class="brush: js">
+$.confirmacao = function(mensagem, callbackSim, callbackNao) {
+	$('div.dialogo_confirmacao').remove();
+	$('#conteudo').append('<div class="dialogo_confirmacao" title="Confirmação">'+mensagem+'</div>');
+	$('div.dialogo_confirmacao').dialog({
+		closeOnEscape: true,
+		buttons: {
+			'Sim': function() {
+				if (callbackSim != undefined) {
+					callbackSim();
+				}
+				$(this).dialog('close');
+			}, // Continua...</xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Dialog</h2>
+			<xmp class="brush: js">
+			'Não' : function() {
+				if (callbackNao != undefined) {
+					callbackNao();
+				}
+				$(this).dialog('close');
+			}
+		}
+	}).dialog('open');</xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Dialog</h2>
+			<xmp class="brush: js">
+$('#editor_de_contato').dialog({
+    create: function() {
+    	// Função chamada quando o dialog é criado
+    	// Adiciona ícones aos botões Cancelar e Salvar
+    	// [...]
+    },
+    open: function() {
+    	// Função chamada toda vez que o dialog é aberto
+    	// [...]
+    },
+    buttons: {
+    	// [...]
+    }
+});</xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Datepicker</h2>
+			<img class="center" src="imagens/screenshots/jquery-ui-datepicker.png" />
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Datepicker</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<input type="text" class="data" /></xmp>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$(document).ready(function() {
+	$("input.data").datepicker();
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Datepicker</h2>
+			<xmp class="brush: js">
+$("input.data").datepicker({
+	changeMonth: true,
+	changeYear: true,
+	yearRange: '1920:+10',
+	showButtonPanel: true 
+});				
+</xmp>
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Sortable</h2>
+			<img class="center" src="imagens/screenshots/jquery-ui-sortable.png" />
+		</section>
+		
+		<section class="logo_jquery-ui">
+			<h2>jQuery UI - Sortable</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<ul id="sortable">
+	<li class="ui-state-default">Item 1</li>
+	<li class="ui-state-default">Item 2</li>
+	<!-- [...] -->
+	<li class="ui-state-default">Item 7</li>
+</ul></xmp>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$(document).ready(function() {
+	$("#sortable").sortable({
+    	placeholder: "ui-state-highlight"
+    });
+});</xmp>
+			</ul>
+		</section>
+		
+		<!-------------------------------- Tooltipster -------------------------------->
+		
 		<section class="logo_tooltipster">
 			<h2>Tooltipster</h2>
 			<img class="center screenshot" src="imagens/screenshots/tooltipster.png" />
@@ -85,30 +704,29 @@ $(document).ready(function() {
 		
 		<section class="logo_tooltipster">
 			<h2>Tooltipster</h2>
-			<p>Para usar o Tooltipster, adicionar ao elemento head:</p>
-			<pre class="brush: html">
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
 <!-- CSS -->				
 <link rel="stylesheet" type="text/css" href="tooltipster/css/tooltipster.css" />
 <!-- Scripts -->
-<script type="text/javascript" src="tooltipster/js/jquery.tooltipster.min.js"></script></pre>
+<script type="text/javascript" src="tooltipster/js/jquery.tooltipster.min.js"></script></xmp>
 			<p>O tooltip se baseia no atributo title:</p>
-			<pre class="brush: html">
-<a class="tooltipster" title="Aqui vem o texto do tooltip.">Exemplo</a></pre>
+			<xmp class="brush: html">
+<a class="tooltipster" title="Aqui vem o texto do tooltip.">Exemplo</a></xmp>
 		</section>
 		
 		<section class="logo_tooltipster">
 			<h2>Tooltipster</h2>
 			<p>Por fim, inicializar o tooltip via jQuery:</p>
-			<pre class="brush: js">
+			<xmp class="brush: js">
 $(document).ready(function() {
 	$(".tooltipster").tooltipster();
-});</pre>
+});</xmp>
 		</section>
 		
 		<section class="logo_tooltipster">
 			<h2>Tooltipster</h2>
-			<p>Função conveniente (arquivo comum.js):</p>
-			<pre class="brush: js">
+			<xmp class="brush: js">
 $.fn.extend({
 	tooltip: function(options) {
 		$(this).tooltipster(options);
@@ -121,8 +739,10 @@ $.fn.extend({
 		});
 		return $(this);
 	}
-});</pre>
+});</xmp>
 		</section>
+		
+		<!-------------------------------- DataTables -------------------------------->
 		
 		<section class="logo_datatables">
 			<h2>DataTables</h2>
@@ -133,6 +753,150 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://datatables.net/" target="_blank">http://datatables.net/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="datatables/css/demo_table_jui.css" />				
+<!-- Scripts -->
+<script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script></xmp>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<table id="tabela_exemplo" class="display">
+	<thead>
+		<tr>
+			<th>Coluna 1</th>
+			<th>Coluna 2</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- Aqui vêm as linhas da tabela -->
+	</tbody>
+</table></xmp>
+				</ul>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$(document).ready(function() {
+	$("#tabela_exemplo").dataTable();
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<p>Configurações padrão:</p>
+			<xmp class="brush: js">
+$.extend($.fn.dataTable.defaults, {
+	"bJQueryUI": true,
+	"aLengthMenu": [10, 20, 50, 100],
+	"iDisplayLength": 10,
+	"bPaginate" : true,
+	"sPaginationType" : "full_numbers",
+	"bServerSide": true,
+	"bDeferRender": true,
+	"sServerMethod": "POST", // Continua...</xmp>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<xmp class="brush: js">
+	"fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+		oSettings.jqXHR = $.ajax({
+			async: false,
+			dataType: 'json',
+		    type: 'POST',
+		    url: sSource,
+		    data: aoData,
+		    success: fnCallback
+	    });
+    },
+	"fnDrawCallback": function() {
+		$('.tooltipster').tooltip();
+	}, // Continua...</xmp>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<xmp class="brush: js">
+	"oLanguage": {
+	    "sProcessing":   "Processando...",
+	    "sLengthMenu":   "Mostrar _MENU_ registros",
+	    "sZeroRecords":  "Não foram encontrados resultados",
+	    "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+	    "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
+	    "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
+	    "sInfoPostFix":  "",
+	    "sSearch":       "Buscar:",
+	    // [...]
+	        "sLast":     "Último"
+	    }
+	}
+}); // Fim! :)</xmp>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<p>Listagem de categorias via AJAX:</p>
+			<xmp class="brush: js">
+$('#table_categoria').dataTable({
+	"sAjaxSource": "ajax/listar.php",
+	"aoColumns": [
+	    null,
+	    {"sWidth": "100px"},
+	    {"bSortable": false, "sWidth": "70px"}
+	],
+	"aoColumnDefs": [{
+		aTargets: [2],
+		mRender: function(data, type, full) {
+			var html = "<div class='acoes_wrapper'>";
+			// [...]
+			return html;
+		}
+	}], // Continua...</xmp>
+		</section>
+		
+		<section class="logo_datatables">
+			<h2>DataTables</h2>
+			<xmp class="brush: js">
+	"aaSorting": [
+		[0, "asc"],
+	],
+	"fnDrawCallback": function() {
+		// Estiliza as colunas Contatos e Ações
+		$('#table_categoria tr:not([role=row])').each(function(){
+			$(this).find('td:eq(1)').
+				addClass('table_categoria_contatos');
+			$(this).find('td:eq(2)').
+				addClass('table_categoria_acoes');
+		});
+		
+		// [...]
+		// Aplica ações aos ícones editar e excluir
+		// Aplica os tooltips
+	},
+}); // Fim</xmp>
+		</section>
+		
+		<!-------------------------------- jQuery Validation Plugin -------------------------------->
+		
 		<section class="logo_jquery-validate">
 			<h2>jQuery Validation Plugin</h2>
 			<img class="center screenshot" src="imagens/screenshots/jquery-validate.png" />
@@ -142,15 +906,122 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://jqueryvalidation.org/" target="_blank">http://jqueryvalidation.org/</a></li>
 			</ul>
 		</section>
-		<section class="logo_jquery-mask">
-			<h2>jQuery Mask Plugin</h2>
-			<img class="center screenshot" src="imagens/screenshots/jquery-mask.png" />
-			<ul>
-				<li><b>Desenvolvedor:</b> Igor Escobar</li>
-				<li><b>Versão:</b> 1.4.1</li>
-				<li><b>Página oficial:</b> <a href="http://igorescobar.github.io/jQuery-Mask-Plugin/" target="_blank">http://igorescobar.github.io/jQuery-Mask-Plugin/</a></li>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- Scripts -->
+<script type="text/javascript" src="jquery-validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="jquery-validate/messages_pt_BR.js"></script></xmp>
+		</section>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<xmp class="brush: html">
+<form id="form_cadastro"><!-- Modo de uso 1 - HTML -->
+<p>
+	<input placeholder="Nome" id="nome" name="nome" minlength="2" type="text" required />
+</p>
+<p>
+	<input placeholder="E-mail" id="email" name="email" minlength="2" type="text" class="email" required />
+</p>
+<p>
+	<input placeholder="Site (opcional)" id="site" name="site" type="text" class="url" />
+</p>
+<p>
+	<input id="btn_enviar" type="submit" value="Enviar"/>
+</p>
+</form></xmp>
 			</ul>
 		</section>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<xmp class="brush: js">
+// Modo de uso 1 - Javascript 				
+				
+$('#btn_enviar').click(function(event) {
+	event.preventDefault();
+	event.stopPropagation();
+	if ($('#form_cadastro').valid()) {
+		$('#form_cadastro').submit();
+	}
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<xmp class="brush: html">
+<form id="form_cadastro"><!-- Modo de uso 2 - HTML -->
+<p>
+	<input placeholder="Nome" id="nome" name="nome" type="text" />
+</p>
+<p>
+	<input placeholder="E-mail" id="email" name="email" type="text" />
+</p>
+<p>
+	<input placeholder="Site (opcional)" id="site" name="site" type="text" />
+</p>
+<p>
+	<input id="btn_enviar" type="submit" value="Enviar"/>
+</p>
+</form></xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<xmp class="brush: js">
+// Modo de uso 2 - Javascript 				
+				
+$('#form_cadastro').validate({
+	rules : {
+		nome : {
+			minlength : 2
+			required : true,
+		},
+		email : {
+			email : true,
+			minlength : 2,
+			required : true
+		},
+		site : {
+			url : true
+		}
+	}, // Continua...</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<xmp class="brush: js">
+	submitHandler : function(form) {
+		form.submit();
+	} // Fim
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-validate">
+			<h2>jQuery Validation Plugin</h2>
+			<p>É possível definir regras personalizadas:</p>
+			<xmp class="brush: js">
+$.validator.addMethod("peloMenosUmDestinatario", function(value, element) {
+	return ($('li.tagit-choice').length > 0);
+}, "Informe ao menos um destinatário.");
+
+$('#form_email').validate();
+
+$('#ul_destinatarios input').rules("add", {
+	peloMenosUmDestinatario: true
+});</xmp>
+			</ul>
+		</section>
+		
+		<!-------------------------------- jQuery Timepicker -------------------------------->
+		
 		<section class="logo_jquery-timepicker">
 			<h2>jQuery Timepicker</h2>
 			<img class="center screenshot" src="imagens/screenshots/jquery-timepicker.png" />
@@ -160,6 +1031,90 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://jonthornton.github.io/jquery-timepicker/" target="_blank">http://jonthornton.github.io/jquery-timepicker/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_jquery-timepicker">
+			<h2>jQuery Timepicker</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="jquery-timepicker/jquery.timepicker.css" />				
+<!-- Scripts -->
+<script type="text/javascript" src="jquery-timepicker/jquery.timepicker.min.js"></script></xmp>
+			<p>Inicializar o componente via jQuery:</p>
+			<xmp class="brush: js">
+$(document).ready(function() {
+	$('input.hora').timepicker({
+		scrollDefaultNow: true,
+		timeFormat: 'H:i'
+	});
+});</xmp>
+		</section>
+		
+		<!-------------------------------- jQuery Mask Plugin -------------------------------->
+		
+		<section class="logo_jquery-mask">
+			<h2>jQuery Mask Plugin</h2>
+			<img class="center screenshot" src="imagens/screenshots/jquery-mask.png" />
+			<ul>
+				<li><b>Desenvolvedor:</b> Igor Escobar</li>
+				<li><b>Versão:</b> 1.4.1</li>
+				<li><b>Página oficial:</b> <a href="http://igorescobar.github.io/jQuery-Mask-Plugin/" target="_blank">http://igorescobar.github.io/jQuery-Mask-Plugin/</a></li>
+			</ul>
+		</section>
+		
+		<section class="logo_jquery-mask">
+			<h2>jQuery Mask Plugin</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- Scripts -->
+<script type="text/javascript" src="jquery.mask.min.js"></script></xmp>
+			<p>Uso básico:</p>
+			<xmp class="brush: js">
+$(document).ready(function() {
+	$('input.data').mask("00/00/0000");
+	$('input.hora').mask("00:00");
+	$('input.numero').mask('#', {maxlength: false});
+	$('input.telefone').mask("(00) 0000-0000");
+});</xmp>
+		</section>
+		
+		<section class="logo_jquery-mask">
+			<h2>jQuery Mask Plugin</h2>
+			<xmp class="brush: js">
+/* Máscaras e validação */
+
+$.fn.extend({
+	// Data
+	mascaraDeData: function() {
+		$(this).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: '1920:+10',
+			showButtonPanel: true 
+		});
+		$(this).mask("00/00/0000");
+		return $(this);
+	},
+	
+	//[...]</xmp>
+		</section>
+		
+		<section class="logo_jquery-mask">
+			<h2>jQuery Mask Plugin</h2>
+			<xmp class="brush: js">
+$(document).ready(function() {
+	$('input.data').mascaraDeData();
+	$('input.hora').mascaraDeHora();
+	$('input.numero').mascaraDeNumero();
+	$('input.telefone').mascaraDeTelefone();
+});</xmp>
+			<p>No código da página basta fazer:</p>
+			<xmp class="brush: html">
+<input class="telefone" name="telefone[]" type="text" placeholder="Telefone" maxlength="15" /></xmp>
+		</section>
+		
+		<!-------------------------------- Notify.js -------------------------------->
+		
 		<section class="logo_notify">
 			<h2>Notify.js</h2>
 			<img class="center screenshot" src="imagens/screenshots/notify.png" />
@@ -169,6 +1124,39 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://notifyjs.com/" target="_blank">http://notifyjs.com/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_notify">
+			<h2>Notify.js</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- Scripts -->
+<script type="text/javascript" src="notifyjs/notify.min.js"></script>
+<script type="text/javascript" src="notifyjs/styles/notify-bootstrap.js"></script>
+<!-- ou -->
+<script type="text/javascript" src="notifyjs/notify-combined.min.js"></script></xmp>
+			<p>Uso básico:</p>
+			<xmp class="brush: js">
+$.notify("Hello World");</xmp>
+		</section>
+		
+		<section class="logo_notify">
+			<h2>Notify.js</h2>
+			<p>Diferentes tipos de notificação:</p>
+			<xmp class="brush: js">
+$.notify('Contato excluído com sucesso!', 'success');
+$.notify(
+	'Houve um erro ao tentar excluir o contato.',
+	'error'
+);
+$.notify(
+	'Experimente executar estes comandos no console.',
+	'info'
+);
+$.notify('Advertência!', 'warn');</xmp>
+		</section>
+		
+		<!-------------------------------- jCarousel -------------------------------->
+		
 		<section class="logo_jcarousel">
 			<h2>jCarousel</h2>
 			<img class="center screenshot" src="imagens/screenshots/jcarousel.png" />
@@ -178,6 +1166,84 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://sorgalla.com/jcarousel/" target="_blank">http://sorgalla.com/jcarousel/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_jcarousel">
+			<h2>jCarousel</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="jcarousel/jcarousel.responsive.css">				
+<!-- Scripts -->
+<script type="text/javascript" src="jcarousel/jquery.jcarousel.min.js"></script></xmp>
+		</section>
+		
+		<section class="logo_jcarousel">
+			<h2>jCarousel</h2>
+			<p>Onde o carrossel será exibido:</p>
+			<xmp class="brush: html">
+<div class="jcarousel-wrapper">
+    <div class="jcarousel">
+        <ul id="info_contato_fotos">
+        	<!--<li><img src="imagem1.jpg"></li>
+            <li><img src="imagem2.jpg"></li>-->
+        </ul>
+    </div>
+    <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+    <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+    <p class="jcarousel-pagination"></p>
+</div></xmp>
+		</section>
+		
+		<section class="logo_jcarousel">
+			<h2>jCarousel</h2>
+			<xmp class="brush: js">
+// Fotos
+$('#info_contato_fotos').html('');
+if ((data.fotos) && (data.fotos.length > 0)) {
+	// Insere cada uma das fotos
+	for (var f = 0; f < data.fotos.length; f++) {
+		var li = '<li class="info_contato_foto tooltipster" title="Clique para ver a foto ampliada">';
+		li += '<a rel="info_contato_fotos" href="' + data.fotos[f].caminho_arquivo + '"';
+		if (data.fotos[f].descricao) {
+			li += ' data-descricao="'+data.fotos[f].descricao+'"';
+		}
+		if (data.fotos[f].data) {
+			li += ' data-data="'+data.fotos[f].data+'"';
+			li += ' data-hora="'+data.fotos[f].hora+'"';
+		}
+		li += '>';
+		li += '<img src="' + data.fotos[f].caminho_arquivo + '" />';
+		li += '</a></li>';
+		$('#info_contato_fotos').append(li);
+	}
+	// Configura os componentes
+	aplicarCarrossel(); // [...]</xmp>
+		</section>
+		
+		<section class="logo_jcarousel">
+			<h2>jCarousel</h2>
+			<xmp class="brush: js">
+var jcarousel = null;
+
+function aplicarCarrossel() {
+	if (jcarousel != null) {
+		jcarousel.jcarousel('destroy');
+	}
+	
+	jcarousel = $('.jcarousel')
+        .on('jcarousel:reload jcarousel:create', function () {
+            var width = $(this).innerWidth();
+
+            if (width >= 600) {
+                width = width / 3;
+            } else if (width >= 150) { // [...]
+            
+// Obtido no site oficial
+// (ver o exemplo Responsive Carousel)</xmp>
+		</section>
+		
+		<!-------------------------------- Fancybox -------------------------------->
+		
 		<section class="logo_fancybox">
 			<h2>fancyBox</h2>
 			<img class="center screenshot" src="imagens/screenshots/fancybox.jpg" />
@@ -187,15 +1253,172 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://fancyapps.com/fancybox/" target="_blank">http://fancyapps.com/fancybox/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_fancybox">
+			<h2>fancyBox</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox.css" />				
+<!-- Scripts -->
+<script type="text/javascript" src="fancybox/jquery.fancybox.pack.js"></script></xmp>
+		</section>
+		
+		<section class="logo_fancybox">
+			<h2>fancyBox</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<a class="fancybox" rel="group" href="imagem1.jpg" title="legenda1"><img src="imagem1.jpg" /></a>
+<a class="fancybox" rel="group" href="imagem2.jpg" title="legenda2"><img src="imagem2.jpg" /></a></xmp>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$(document).ready(function() {
+	$(".fancybox").fancybox();
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_fancybox">
+			<h2>fancyBox</h2>
+			<xmp class="brush: js">
+$("ul#info_contato_fotos a").fancybox({
+	beforeLoad: function() {
+		var title = '';
+		if ($(this.element).data('descricao')) {
+			title += '<p>' + $(this.element).data('descricao') + '</p>';
+		}
+		// [...]
+        this.title = title;
+    },
+	helpers : {
+        title: {
+            type: 'inside'
+        }
+    }
+});</xmp>
+		</section>
+		
+		<!-------------------------------- jQuery Tag-it! -------------------------------->
+		
 		<section class="logo_tag-it">
 			<h2>jQuery Tag-it!</h2>
 			<img class="center screenshot" src="imagens/screenshots/tag-it.png" />
 			<ul>
-				<li><b>Desenvolvedor:</b> Levy Carneiro Jr., Alex Ehlke e outros</li>
+				<li><b>Desenvolvedores:</b> Levy Carneiro Jr., Alex Ehlke e outros</li>
 				<li><b>Versão:</b> 2.0</li>
 				<li><b>Página oficial:</b> <a href="http://aehlke.github.io/tag-it/" target="_blank">http://aehlke.github.io/tag-it/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_tag-it">
+			<h2>jQuery Tag-it!</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="tag-it/css/jquery.tagit.css" />		
+<!-- Scripts -->
+<script type="text/javascript" src="tag-it/js/tag-it.min.js"></script></xmp>
+		</section>
+		
+		<section class="logo_tag-it">
+			<h2>jQuery Tag-it!</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<ul id="ul_tags">
+    <!-- Tags pré-existentes -->
+    <li>Tag1</li>
+    <li>Tag2</li>
+</ul></xmp>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$(document).ready(function() {
+    $("#ul_tags").tagit();
+});</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_tag-it">
+			<h2>jQuery Tag-it!</h2>
+			<xmp class="brush: js">
+/* Destinatários */
+	
+function extractLast(term) {
+	return term.split( /,\s*/ ).pop();
+}
+
+$('#ul_destinatarios').tagit({
+	allowSpaces: true,
+	autocomplete: {
+		delay: 500, // Continua...</xmp>
+		</section>
+		
+		<section class="logo_tag-it">
+			<h2>jQuery Tag-it!</h2>
+			<xmp class="brush: js">
+		// Executa a busca pelos termos digitados no servidor
+		source: function(request, response) {
+		    $.ajax({
+				dataType: "json",
+				url: "ajax/consultar_destinatarios.php",
+				data: {
+		        	typed: extractLast(request.term)
+		        },
+		        type: "POST",
+				success: response
+			});
+		}, // Continua...</xmp>
+		</section>
+		
+		<section class="logo_tag-it">
+			<h2>jQuery Tag-it!</h2>
+			<xmp class="brush: js">
+		// Determina quando a busca deve ser feita no servidor
+		search: function() {
+			var term = extractLast(this.value);
+			if (term.length < 2) {
+				return false;
+			}
+		},
+		// Previne que uma nova tag seja criada quando o componente recebe foco
+		focus: function() {
+			return false;
+		}, // Continua...</xmp>
+		</section>
+		
+		<section class="logo_tag-it">
+			<h2>jQuery Tag-it!</h2>
+			<xmp class="brush: js">
+    	// Insere o contato escolhido pelo usuário como uma nova tag
+    	select: function(event, ui) {
+      		this.value = '';
+      		adicionarDestinatario(ui.item.value, ui.item.contato_ou_categoria, ui.item.email, ui.item.id);
+      		return false;
+    	}
+	},
+	beforeTagRemoved: function(event, ui) {
+		removerDestinatario(ui.tag.data('contato_ou_categoria'), ui.tag.data('email'), ui.tag.data('categoria_id'));
+	},
+	placeholderText: 'Destinatário(s)',
+	singleField: true,
+    singleFieldNode: $('#ipt_destinatarios'),
+    tagLimit: null
+}); // Fim! :)</xmp>
+		</section>
+		
+		<!-------------------------------- CKEditor -------------------------------->
+		
 		<section class="logo_ckeditor">
 			<h2>CKEditor</h2>
 			<img class="center screenshot" src="imagens/screenshots/ckeditor.png" />
@@ -205,15 +1428,127 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://ckeditor.com" target="_blank">http://ckeditor.com</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_ckeditor">
+			<h2>CKEditor</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- Scripts -->
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/adapters/jquery.js"></script></xmp>
+		</section>
+		
+		<section class="logo_ckeditor">
+			<h2>CKEditor</h2>
+			<p>Uso básico:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<textarea id="mensagem" name="mensagem"></textarea></xmp>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+$('textarea#mensagem').ckeditor();</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_ckeditor">
+			<h2>CKEditor</h2>
+			<xmp class="brush: js">
+// comum.js
+$.fn.extend({
+	editor: function(options) {
+		options = $.extend({
+			language: 'pt-br',
+			skin: 'moono_blue',
+			toolbar: [
+				['Font'],['FontSize'],['Bold','Italic','Underline','Strike', // [...]
+			]
+		}, options);
+		$(this).ckeditor(options);
+		return $(this);
+	}
+});
+
+// email.js
+$('#mensagem').editor();</xmp>
+		</section>
+		
+		<!-------------------------------- Uploadify -------------------------------->
+		
 		<section class="logo_uploadify">
 			<h2>Uploadify</h2>
-			<img class="center screenshot" src="imagens/screenshots/blockui.jpg" />
+			<img class="center screenshot" src="imagens/screenshots/uploadify.png" />
 			<ul>
 				<li><b>Desenvolvedor:</b> Reactive Apps</li>
 				<li><b>Versão:</b> 3.2.1</li>
 				<li><b>Página oficial:</b> <a href="http://www.uploadify.com/" target="_blank">http://www.uploadify.com/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_uploadify">
+			<h2>Uploadify</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="uploadify/uploadify.css" />				
+<!-- Scripts -->
+<script type="text/javascript" src="uploadify/jquery.uploadify.min.js"></script></xmp>
+			<p>Uso na aplicação de exemplo:</p>
+			<ul>
+				<li>
+					HTML:
+				</li>
+				<xmp class="brush: html">
+<input type="file" id="btn_enviar_foto" /></xmp>
+			</ul>
+		</section>
+				
+		<section class="logo_uploadify">
+			<h2>Uploadify</h2>
+			<p>Uso na aplicação de exemplo:</p>
+			<ul>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+var extensoesDeImagemPermitidas = "*.jpg; *.gif; *.png; *.jpeg; *.JPG; *.GIF; *.PNG; *.JPEG";
+	
+$('#btn_enviar_foto').uploadify({
+	'auto'				: true,
+	'buttonText'		: 'Enviar',
+	'fileSizeLimit' 	: '8MB',
+	'fileTypeDesc'		: 'Somente imagens',
+	'fileTypeExts'		: extensoesDeImagemPermitidas,
+	'multi'	 			: true, // Continua...</xmp>
+			</ul>
+		</section>
+		
+		<section class="logo_uploadify">
+			<h2>Uploadify</h2>
+			<p>Uso na aplicação de exemplo:</p>
+			<ul>
+				<li>
+					Javascript:
+				</li>
+				<xmp class="brush: js">
+	'onUploadError' 	: function(file, errorCode, errorMsg, errorString) {
+		$.notify('Erro ao enviar a foto. Por favor, tente novamente.', 'error');
+    },
+	'onUploadSuccess'	: function(file, data, response) {
+        adicionarFoto(file.name, data, '', '', '');
+    },
+	'swf'				: '../../lib/uploadify/uploadify.swf',
+	'uploader'			: 'ajax/enviar_fotos.php'
+});</xmp>
+			</ul>
+		</section>
+		
+		<!-------------------------------- jQuery BlockUI Plugin -------------------------------->
+		
 		<section class="logo_blockui">
 			<h2>jQuery BlockUI Plugin</h2>
 			<img class="center screenshot" src="imagens/screenshots/blockui.jpg" />
@@ -223,25 +1558,138 @@ $.fn.extend({
 				<li><b>Página oficial:</b> <a href="http://www.malsup.com/jquery/block/" target="_blank">http://www.malsup.com/jquery/block/</a></li>
 			</ul>
 		</section>
+		
+		<section class="logo_blockui">
+			<h2>jQuery BlockUI Plugin</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- Scripts -->
+<script type="text/javascript" src="jquery.blockUI.js"></script></xmp>
+			<p>Uso básico:</p>
+			<xmp class="brush: js">
+// Bloqueia a tela				
+$.blockUI({message: 'Carregando...'});
+
+// Desbloqueia a tela
+$.unblockUI();</xmp>
+		</section>
+		
+		<section class="logo_blockui">
+			<h2>jQuery BlockUI Plugin</h2>
+			<xmp class="brush: js">
+$.showLoading = function() {
+	$.blockUI({
+		message : '<img id="loading" src="../comum/imagens/loading.gif" />',
+		css : {
+			background : 'transparent',
+			border : '0',
+			top : ($(window).height() - 55) / 2 + 'px',
+			left : ($(window).width() - 55) / 2 + 'px',
+			width : '55px'
+		}
+	});
+}
+
+$.hideLoading = function() {
+	$.unblockUI();
+}</xmp>
+		</section>
+		
+		<section class="logo_blockui">
+			<h2>jQuery BlockUI Plugin</h2>
+			<xmp class="brush: js">
+$.redirecionar = function(url) {
+	$.showLoading();
+	window.top.location = url;
+}
+
+$(document).ajaxSend(function() {
+	$.showLoading();
+});
+
+$(document).ajaxComplete(function() {
+	$.hideLoading();
+});
+
+$('a').click(function() {
+	$.showLoading();
+});</xmp>
+		</section>
+		
+		<!-------------------------------- formee -------------------------------->
+		
 		<section class="logo_formee">
 			<h2>formee</h2>
 			<img class="center screenshot" src="imagens/screenshots/formee.png" />
 			<ul>
-				<li><b>Desenvolvedor:</b> Bernard De Luna, Daniel Araujo e Marcello Manso</li>
+				<li><b>Desenvolvedores:</b> Bernard De Luna, Daniel Araujo e Marcello Manso</li>
 				<li><b>Versão:</b> 3.1</li>
 				<li><b>Página oficial:</b> <a href="http://www.formee.org/" target="_blank">http://www.formee.org/</a></li>
 			</ul>
 		</section>
-
-		<section>
-			<h2>title os slide 4</h2>
-			Some content here, for slide 4
+		
+		<section class="logo_formee">
+			<h2>formee</h2>
+			<p>Arquivos importados:</p>
+			<xmp class="brush: html">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="formee/css/formee-structure.css" />	
+<!-- Scripts -->
+<script type="text/javascript" src="formee/js/formee.js"></script></xmp>
 		</section>
-
-		<section>
-			<h2>The last slide</h2>
-			This is the last slide, thanks!
+		
+		<section class="logo_formee">
+			<h2>formee</h2>
+			<xmp class="brush: html">
+<form class="formee" id="form_contato"><!-- [...] -->
+	<div class="tab" id="tab-informacoes-pessoais">
+		<div class="grid-12-12">
+			<label for="nome">Nome</label>
+			<input id="nome" name="nome" type="text" placeholder="Nome" class="required" />
+		</div>
+		<div class="grid-6-12">
+			<label for="apelido">Apelido</label>
+			<input id="apelido" name="apelido" type="text" placeholder="Apelido" />
+		</div>
+		<div class="grid-6-12">
+			<label for="data_nascimento">Data de nascimento</label>
+			<input id="data_nascimento" class="data" name="data_nascimento" type="text" />
+		</div><!-- [...] --></xmp>
 		</section>
+		
+		<section class="logo_formee">
+			<h2>formee</h2>
+			<xmp class="brush: html">
+<div class="grid-12-12">
+	<h2 id="info_contato_nome_apelido"></h2>
+</div>
+<div class="grid-6-12">
+	<label for="info_contato_idade">Idade</label>
+	<span id="info_contato_idade"></span>
+</div>
+<div class="grid-6-12">
+	<label for="info_contato_aniversario">Aniversário</label>
+	<span id="info_contato_aniversario"></span>
+</div></xmp>
+		</section>
+		
+		<!-------------------------------- Fim -------------------------------->
+
+		<section class="ppw-slide-type-opening">
+			<div id="central">
+				<h1>Desenvolvimento de sites para a web 2.0 com</h1>
+				<h2><a href="http://minicursodejquery.sf.net/" target="_blank">http://minicursodejquery.sf.net</a></h2>
+			</div>
+			<div id="footer">
+				<div id="autor">
+					<p>Antônio Vinícius Menezes Medeiros</p>
+					<p><a href="mailto:vinyanalista@gmail.com" target="_blank">vinyanalista@gmail.com</a></p>
+				</div>
+				<a id="ufs" href="http://www.ufs.br/" target="_blank"></a>
+				<a id="moobi" href="http://moobitech.com.br/" target="_blank"></a>
+			</div>
+		</section>
+		
 		<script type="text/javascript" src="js/apresentacao.js"></script>
 	</body>
 </html>

@@ -170,7 +170,6 @@ label.error {
 	color: red;
 }
 #loading {
-	display: none;
 	height: 55px;
 	width: 55px;
 }
