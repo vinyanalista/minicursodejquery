@@ -20,7 +20,7 @@ Ao invés de instalar e configurar isoladamente o Apache, o PHP e o MySQL, você
 Instruções para baixar o minicurso
 ==================
 
-Clicando aqui você baixa um único arquivo compactado ZIP contendo todo o minicurso (apresentação + aplicação de exemplo) em sua última versão. Para extrair o conteúdo desse arquivo ZIP, no Windows, você pode utilizar um programa como o [7-Zip](http://www.7-zip.org/) ou o próprio mecanismo de extração de arquivos compactados do sistema. No Linux, a maioria das distribuições já vem com um utilitário, seja de linha de comando, seja de interface gráfica, próprio para a extração do conteúdo de arquivos ZIP.
+Clicando [aqui](https://github.com/vinyanalista/minicursodejquery/archive/master.zip) você baixa um único arquivo compactado ZIP contendo todo o minicurso (apresentação + aplicação de exemplo) em sua última versão. Para extrair o conteúdo desse arquivo ZIP, no Windows, você pode utilizar um programa como o [7-Zip](http://www.7-zip.org/) ou o próprio mecanismo de extração de arquivos compactados do sistema. No Linux, a maioria das distribuições já vem com um utilitário, seja de linha de comando, seja de interface gráfica, próprio para a extração do conteúdo de arquivos ZIP.
 
 Se você possui o [Git](http://git-scm.com/) instalado no seu computador, pode baixar o minicurso através dos seguintes comandos:
 
